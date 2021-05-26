@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The Monero Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -37,7 +37,7 @@
 
 #include <vector>
 
-namespace Monero {
+namespace MKEcoin {
   
 AddressBook::~AddressBook() {}
   
@@ -167,4 +167,4 @@ AddressBookImpl::~AddressBookImpl()
 
 } // namespace
 
-namespace Bitmonero = Monero;
+namespace BitMKEcoin = MKEcoin;

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The Monero Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -31,7 +31,7 @@
 #include "wallet/api/wallet2_api.h"
 #include "wallet/wallet2.h"
 
-namespace Monero {
+namespace MKEcoin {
 
 class WalletImpl;
 
@@ -67,5 +67,5 @@ private:
 
 }
 
-namespace Bitmonero = Monero;
+namespace BitMKEcoin = MKEcoin;
 
