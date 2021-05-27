@@ -34,26 +34,26 @@ try:
 except:
   tests = DEFAULT_TESTS
 
-# a main offline monerod, does most of the tests
-# a restricted RPC monerod setup with RPC payment
-# two local online monerods connected to each other
-N_MONERODS = 4
+# a main offline MKEcoind, does most of the tests
+# a restricted RPC MKEcoind setup with RPC payment
+# two local online MKEcoinds connected to each other
+N_MKEcoinDS = 4
 
-# 4 wallets connected to the main offline monerod
-# a wallet connected to the first local online monerod
+# 4 wallets connected to the main offline MKEcoind
+# a wallet connected to the first local online MKEcoind
 N_WALLETS = 5
 
 WALLET_DIRECTORY = builddir + "/functional-tests-directory"
 DIFFICULTY = 10
 
-monerod_base = [builddir + "/bin/monerod", "--regtest", "--fixed-difficulty", str(DIFFICULTY), "--no-igd", "--p2p-bind-port", "monerod_p2p_port", "--rpc-bind-port", "monerod_rpc_port", "--zmq-rpc-bind-port", "monerod_zmq_port", "--non-interactive", "--disable-dns-checkpoints", "--check-updates", "disabled", "--rpc-ssl", "disabled", "--data-dir", "monerod_data_dir", "--log-level", "1"]
-monerod_extra = [
+MKEcoind_base = [builddir + "/bin/MKEcoind", "--regtest", "--fixed-difficulty", str(DIFFICULTY), "--no-igd", "--p2p-bind-port", "MKEcoind_p2p_port", "--rpc-bind-port", "MKEcoind_rpc_port", "--zmq-rpc-bind-port", "MKEcoind_zmq_port", "--non-interactive", "--disable-dns-checkpoints", "--check-updates", "disabled", "--rpc-ssl", "disabled", "--data-dir", "MKEcoind_data_dir", "--log-level", "1"]
+MKEcoind_extra = [
   ["--offline"],
   ["--rpc-payment-address", "44SKxxLQw929wRF6BA9paQ1EWFshNnKhXM3qz6Mo3JGDE2YG3xyzVutMStEicxbQGRfrYvAAYxH6Fe8rnD56EaNwUiqhcwR", "--rpc-payment-difficulty", str(DIFFICULTY), "--rpc-payment-credits", "5000", "--offline"],
   ["--add-exclusive-node", "127.0.0.1:18283"],
   ["--add-exclusive-node", "127.0.0.1:18282"],
 ]
-wallet_base = [builddir + "/bin/monero-wallet-rpc", "--wallet-dir", WALLET_DIRECTORY, "--rpc-bind-port", "wallet_port", "--disable-rpc-login", "--rpc-ssl", "disabled", "--daemon-ssl", "disabled", "--log-level", "1"]
+wallet_base = [builddir + "/bin/MKEcoin-wallet-rpc", "--wallet-dir", WALLET_DIRECTORY, "--rpc-bind-port", "wallet_port", "--disable-rpc-login", "--rpc-ssl", "disabled", "--daemon-ssl", "disabled", "--log-level", "1"]
 wallet_extra = [
   ["--daemon-port", "18180"],
   ["--daemon-port", "18180"],
@@ -67,11 +67,11 @@ processes = []
 outputs = []
 ports = []
 
-for i in range(N_MONERODS):
-  command_lines.append([str(18180+i) if x == "monerod_rpc_port" else str(18280+i) if x == "monerod_p2p_port" else str(18380+i) if x == "monerod_zmq_port" else builddir + "/functional-tests-directory/monerod" + str(i) if x == "monerod_data_dir" else x for x in monerod_base])
-  if i < len(monerod_extra):
-    command_lines[-1] += monerod_extra[i]
-  outputs.append(open(builddir + '/tests/functional_tests/monerod' + str(i) + '.log', 'a+'))
+for i in range(N_MKEcoinDS):
+  command_lines.append([str(18180+i) if x == "MKEcoind_rpc_port" else str(18280+i) if x == "MKEcoind_p2p_port" else str(18380+i) if x == "MKEcoind_zmq_port" else builddir + "/functional-tests-directory/MKEcoind" + str(i) if x == "MKEcoind_data_dir" else x for x in MKEcoind_base])
+  if i < len(MKEcoind_extra):
+    command_lines[-1] += MKEcoind_extra[i]
+  outputs.append(open(builddir + '/tests/functional_tests/MKEcoind' + str(i) + '.log', 'a+'))
   ports.append(18180+i)
 
 for i in range(N_WALLETS):

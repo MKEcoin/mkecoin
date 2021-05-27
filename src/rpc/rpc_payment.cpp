@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2020, The Monero Project
+// Copyright (c) 2018-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -40,8 +40,8 @@
 #include "core_rpc_server_error_codes.h"
 #include "rpc_payment.h"
 
-#undef MONERO_DEFAULT_LOG_CATEGORY
-#define MONERO_DEFAULT_LOG_CATEGORY "daemon.rpc.payment"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "daemon.rpc.payment"
 
 #define STALE_THRESHOLD 15 /* seconds */
 

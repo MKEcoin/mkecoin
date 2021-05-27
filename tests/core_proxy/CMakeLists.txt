@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The Monero Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -32,7 +32,7 @@ set(core_proxy_sources
 set(core_proxy_headers
   core_proxy.h)
 
-monero_add_minimal_executable(core_proxy
+MKEcoin_add_minimal_executable(core_proxy
   ${core_proxy_sources}
   ${core_proxy_headers})
 target_link_libraries(core_proxy

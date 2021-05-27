@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The Monero Project
+// Copyright (c) 2018, The MKEcoin Project
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -43,7 +43,7 @@ namespace lmdb
             {
                 const int rc = mdb_cursor_count(cur, &out);
                 if (rc)
-                    MONERO_THROW(lmdb::error(rc), "mdb_cursor_count");
+                    MKEcoin_THROW(lmdb::error(rc), "mdb_cursor_count");
             }
             return out;
         }
@@ -58,14 +58,14 @@ namespace lmdb
             {
                 if (rc == MDB_NOTFOUND)
                     return {};
-                MONERO_THROW(lmdb::error(rc), "mdb_cursor_get");
+                MKEcoin_THROW(lmdb::error(rc), "mdb_cursor_get");
             }
 
             if (key && key != key_bytes.mv_size)
-                MONERO_THROW(lmdb::error(MDB_BAD_VALSIZE), "mdb_cursor_get key");
+                MKEcoin_THROW(lmdb::error(MDB_BAD_VALSIZE), "mdb_cursor_get key");
 
             if (value && (value_bytes.mv_size % value != 0 || value_bytes.mv_size == 0))
-                MONERO_THROW(lmdb::error(MDB_BAD_VALSIZE), "mdb_cursor_get value");
+                MKEcoin_THROW(lmdb::error(MDB_BAD_VALSIZE), "mdb_cursor_get value");
 
             return {lmdb::to_byte_span(key_bytes), lmdb::to_byte_span(value_bytes)};
         }

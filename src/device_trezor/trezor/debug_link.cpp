@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, The Monero Project
+// Copyright (c) 2017-2018, The MKEcoin Project
 //
 // All rights reserved.
 //

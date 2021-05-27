@@ -1,5 +1,5 @@
 //#define DBG
-// Copyright (c) 2016, Monero Research Labs
+// Copyright (c) 2016, MKEcoin Research Labs
 //
 // Author: Shen Noether <shen.noether@gmx.com>
 //

@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The Monero Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -31,7 +31,7 @@ set(difficulty_sources
 
 set(difficulty_headers)
 
-monero_add_minimal_executable(difficulty-tests
+MKEcoin_add_minimal_executable(difficulty-tests
   ${difficulty_sources}
   ${difficulty_headers})
 target_link_libraries(difficulty-tests

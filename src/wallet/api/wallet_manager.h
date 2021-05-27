@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The Monero Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -33,7 +33,7 @@
 #include "net/http.h"
 #include <string>
 
-namespace Monero {
+namespace MKEcoin {
 
 class WalletManagerImpl : public WalletManager
 {
@@ -103,4 +103,4 @@ private:
 
 } // namespace
 
-namespace Bitmonero = Monero;
+namespace BitMKEcoin = MKEcoin;
