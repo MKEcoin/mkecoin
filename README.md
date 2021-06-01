@@ -1,8 +1,8 @@
 # MKEcoin
 
-Copyright (c) 2018-2020 The MKEcoin Project.   
-Portions Copyright (c) 2014-2019 The Monero Project.   
-Portions Copyright (c) 2012-2013 The Cryptonote developers.
+Copyright (c) 2018-2021 The MKEcoin Project.   
+Portions Copyright (c) 2018-2021 The MKEcoin Project.   
+Portions Copyright (c) 2018-2021 The Cryptonote developers.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ Portions Copyright (c) 2012-2013 The Cryptonote developers.
   - [Contributing](#contributing)
   - [Scheduled software upgrades](#scheduled-software-upgrades)
   - [Release staging schedule and protocol](#release-staging-schedule-and-protocol)
-  - [Compiling Monero from source](#compiling-monero-from-source)
+  - [Compiling MKEcoin from source](#compiling-MKEcoin-from-source)
     - [Dependencies](#dependencies)
   - [Internationalization](#Internationalization)
   - [Using Tor](#using-tor)
@@ -29,83 +29,55 @@ Portions Copyright (c) 2012-2013 The Cryptonote developers.
 
 ## Development resources
 
-- Web: [getmonero.org](https://getmonero.org)
-- Forum: [forum.getmonero.org](https://forum.getmonero.org)
-- Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
-- GitHub: [https://github.com/monero-project/monero](https://github.com/monero-project/monero)
-- IRC: [#monero-dev on Freenode](https://webchat.freenode.net/?randomnick=1&channels=%23monero-dev&prompt=1&uio=d4)
-- It is HIGHLY recommended that you join the #monero-dev IRC channel if you are developing software that uses Monero. Due to the nature of this open source software project, joining this channel and idling is the best way to stay updated on best practices and new developments in the Monero ecosystem. All you need to do is join the IRC channel and idle to stay updated with the latest in Monero development. If you do not, you risk wasting resources on developing integrations that are not compatible with the Monero network. The Monero core team and community continuously make efforts to communicate updates, developments, and documentation via other platforms – but for the best information, you need to talk to other Monero developers, and they are on IRC. #monero-dev is about Monero development, not getting help about using Monero, or help about development of other software, including yours, unless it also pertains to Monero code itself. For these cases, checkout #monero. 
+- Web: [getMKEcoin.org](http://cn.mkecoin.io/)
+- Mail: [dev@getMKEcoin.org](mailto:mke.technology@yahoo.com)
+- GitHub: [https://github.com/MKEcoin-project/MKEcoin](https://github.com/MKEcoin/mkecoin.git)
+- It is HIGHLY recommended that you join the #MKEcoin-dev IRC channel if you are developing software that uses MKEcoin. Due to the nature of this open source software project, joining this channel and idling is the best way to stay updated on best practices and new developments in the MKEcoin ecosystem. All you need to do is join the IRC channel and idle to stay updated with the latest in MKEcoin development. If you do not, you risk wasting resources on developing integrations that are not compatible with the MKEcoin network. The MKEcoin core team and community continuously make efforts to communicate updates, developments, and documentation via other platforms – but for the best information, you need to talk to other MKEcoin developers, and they are on IRC. #MKEcoin-dev is about MKEcoin development, not getting help about using MKEcoin, or help about development of other software, including yours, unless it also pertains to MKEcoin code itself. For these cases, checkout #MKEcoin. 
 
 ## Vulnerability response
 
-- Our [Vulnerability Response Process](https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md) encourages responsible disclosure
-- We are also available via [HackerOne](https://hackerone.com/monero)
+- Our [Vulnerability Response Process](https://github.com/MKEcoin/mkecoin) encourages responsible disclosure
+- We are also available via [HackerOne](https://www.mkecoin.io/index/Itemize/expand?act=%E6%8B%93%E5%B1%95%E5%AD%90%E9%93%BE)
 
 ## Research
 
-The [Monero Research Lab](https://src.getmonero.org/resources/research-lab/) is an open forum where the community coordinates research into Monero cryptography, protocols, fungibility, analysis, and more. We welcome collaboration and contributions from outside researchers! Because not all Lab work and publications are distributed as traditional preprints or articles, they may be easy to miss if you are conducting literature reviews for your own Monero research. You are encouraged to get in touch with our researchers if you have questions, wish to collaborate, or would like guidance to help avoid unnecessarily duplicating earlier or known work.
+The [MKEcoin Research Lab](https://www.mkecoin.io/index/Itemize/expand?act=%E6%8B%93%E5%B1%95%E5%AD%90%E9%93%BE) is an open forum where the community coordinates research into MKEcoin cryptography, protocols, fungibility, analysis, and more. We welcome collaboration and contributions from outside researchers! Because not all Lab work and publications are distributed as traditional preprints or articles, they may be easy to miss if you are conducting literature reviews for your own MKEcoin research. You are encouraged to get in touch with our researchers if you have questions, wish to collaborate, or would like guidance to help avoid unnecessarily duplicating earlier or known work.
 
-Our researchers are available on IRC in [#monero-research-lab on Freenode](https://webchat.freenode.net/?randomnick=1&channels=%23monero-research-lab&prompt=1&uio=d4) or by email:
-
-- Sarang Noether, Ph.D.: [sarang@getmonero.org](mailto:sarang@getmonero.org) or [sarang.noether@protonmail.com](mailto:sarang.noether@protonmail.com); [research repository](https://github.com/SarangNoether/research-lab)
-- Surae Noether (Brandon Goodell), Ph.D.: [surae@getmonero.org](mailto:surae@getmonero.org) or [surae.noether@protonmail.com](mailto:surae.noether@protonmail.com); [research repository](https://github.com/b-g-goodell/research-lab)
+- Sarang Noether, Ph.D.: [sarang@getMKEcoin.org](mailto:mke.technology@yahoo.com) 
 
 ## Announcements
 
-- You can subscribe to an [announcement listserv](https://lists.getmonero.org) to get critical announcements from the Monero core team. The announcement list can be very helpful for knowing when software updates are needed.
+- You can subscribe to an [announcement listserv](http://cn.mkecoin.io) to get critical announcements from the MKEcoin core team. The announcement list can be very helpful for knowing when software updates are needed.
 
-## Translations
-The CLI wallet is available in different languages. If you want to help translate it, see our self-hosted localization platform, Weblate, on [translate.getmonero.org]( https://translate.getmonero.org/projects/monero/cli-wallet/). Every translation *must* be uploaded on the platform, pull requests directly editing the code in this repository will be closed. If you need help with Weblate, you can find a guide with screenshots [here](https://github.com/monero-ecosystem/monero-translations/blob/master/weblate.md).
-&nbsp;
-
-If you need help/support/info about translations, contact the localization workgroup. You can find the complete list of contacts on the repository of the workgroup: [monero-translations](https://github.com/monero-ecosystem/monero-translations#contacts).
-
-## Coverage
-
-| Type      | Status |
-|-----------|--------|
-| Coverity  | [![Coverity Status](https://scan.coverity.com/projects/9657/badge.svg)](https://scan.coverity.com/projects/9657/)
-| OSS Fuzz  | [![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/monero.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:monero)
-| Coveralls | [![Coveralls Status](https://coveralls.io/repos/github/monero-project/monero/badge.svg?branch=master)](https://coveralls.io/github/monero-project/monero?branch=master)
-| License   | [![License](https://img.shields.io/badge/license-BSD3-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Introduction
 
-Monero is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
+MKEcoin is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
 
-**Privacy:** Monero uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain private by default.
+**Privacy:** MKEcoin uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain private by default.
 
 **Security:** Using the power of a distributed peer-to-peer consensus network, every transaction on the network is cryptographically secured. Individual wallets have a 25-word mnemonic seed that is only displayed once and can be written down to backup the wallet. Wallet files should be encrypted with a strong passphrase to ensure they are useless if ever stolen.
 
-**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, Monero is able to ensure that transactions are not only untraceable but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
+**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, MKEcoin is able to ensure that transactions are not only untraceable but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
 
-**Decentralization:** The utility of Monero depends on its decentralised peer-to-peer consensus network - anyone should be able to run the monero software, validate the integrity of the blockchain, and participate in all aspects of the monero network using consumer-grade commodity hardware. Decentralization of the monero network is maintained by software development that minimizes the costs of running the monero software and inhibits the proliferation of specialized, non-commodity hardware.  
+**Decentralization:** The utility of MKEcoin depends on its decentralised peer-to-peer consensus network - anyone should be able to run the MKEcoin software, validate the integrity of the blockchain, and participate in all aspects of the MKEcoin network using consumer-grade commodity hardware. Decentralization of the MKEcoin network is maintained by software development that minimizes the costs of running the MKEcoin software and inhibits the proliferation of specialized, non-commodity hardware.  
 
 ## About this project
 
-This is the core implementation of Monero. It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Monero that uses the protocol and network in a compatible manner.
+This is the core implementation of MKEcoin. It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of MKEcoin that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
 
-**Anyone is welcome to contribute to Monero's codebase!** If you have a fix or code change, feel free to submit it as a pull request directly to the "master" branch. In cases where the change is relatively small or does not affect other parts of the codebase, it may be merged in immediately by any one of the collaborators. On the other hand, if the change is particularly large or complex, it is expected that it will be discussed at length either well in advance of the pull request being submitted, or even directly on the pull request.
+**Anyone is welcome to contribute to MKEcoin's codebase!** If you have a fix or code change, feel free to submit it as a pull request directly to the "master" branch. In cases where the change is relatively small or does not affect other parts of the codebase, it may be merged in immediately by any one of the collaborators. On the other hand, if the change is particularly large or complex, it is expected that it will be discussed at length either well in advance of the pull request being submitted, or even directly on the pull request.
 
 ## Supporting the project
 
-Monero is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both Monero and Bitcoin donations can be made to **donate.getmonero.org** if using a client that supports the [OpenAlias](https://openalias.org) standard. Alternatively, you can send XMR to the Monero donation address via the `donate` command (type `help` in the command-line wallet for details).
+MKEcoin is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both MKEcoin and Bitcoin donations can be made to **donate.getMKEcoin.org** if using a client that supports the [OpenAlias](https://openalias.org) standard. Alternatively, you can send XMR to the MKEcoin donation address via the `donate` command (type `help` in the command-line wallet for details).
 
-The Monero donation address is: `888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
+The MKEcoin donation address is: `888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
 
 The Bitcoin donation address is: `1KTexdemPdxSBcG55heUuTjDRYqbC5ZL8H`
 
-Core development funding and/or some supporting services are also graciously provided by [sponsors](https://www.getmonero.org/community/sponsorships/):
-
-[<img width="150" src="https://www.getmonero.org/img/sponsors/tarilabs.png"/>](https://tarilabs.com/)
-[<img width="150" src="https://www.getmonero.org/img/sponsors/globee.png"/>](https://globee.com/)
-[<img width="150" src="https://www.getmonero.org/img/sponsors/symas.png"/>](https://symas.com/)
-[<img width="150" src="https://www.getmonero.org/img/sponsors/forked_logo.png"/>](http://www.forked.net/)
-[<img width="150" src="https://www.getmonero.org/img/sponsors/macstadium.png"/>](https://www.macstadium.com/)
-
-There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
 
 ## License
 
@@ -117,11 +89,11 @@ If you want to help out, see [CONTRIBUTING](docs/CONTRIBUTING.md) for a set of g
 
 ## Scheduled software upgrades
 
-Monero uses a fixed-schedule software upgrade (hard fork) mechanism to implement new features. This means that users of Monero (end users and service providers) should run current versions and upgrade their software on a regular schedule. Software upgrades occur during the months of April and October. The required software for these upgrades will be available prior to the scheduled date. Please check the repository prior to this date for the proper Monero software version. Below is the historical schedule and the projected schedule for the next upgrade.
+MKEcoin uses a fixed-schedule software upgrade (hard fork) mechanism to implement new features. This means that users of MKEcoin (end users and service providers) should run current versions and upgrade their software on a regular schedule. Software upgrades occur during the months of April and October. The required software for these upgrades will be available prior to the scheduled date. Please check the repository prior to this date for the proper MKEcoin software version. Below is the historical schedule and the projected schedule for the next upgrade.
 Dates are provided in the format YYYY-MM-DD.
 
 
-| Software upgrade block height  | Date       | Fork version      | Minimum Monero version | Recommended Monero version | Details                                                                            |  
+| Software upgrade block height  | Date       | Fork version      | Minimum MKEcoin version | Recommended MKEcoin version | Details                                                                            |  
 | ------------------------------ | -----------| ----------------- | ---------------------- | -------------------------- | ---------------------------------------------------------------------------------- |
 | 1009827                        | 2016-03-22 | v2                | v0.9.4                 | v0.9.4                     | Allow only >= ringsize 3, blocktime = 120 seconds, fee-free blocksize 60 kb       |
 | 1141317                        | 2016-09-21 | v3                | v0.9.4                 | v0.10.0                    | Splits coinbase into denominations  |
@@ -146,7 +118,7 @@ X's indicate that these details have not been determined as of commit date.
 
 Approximately three months prior to a scheduled software upgrade, a branch from master will be created with the new release version tag. Pull requests that address bugs should then be made to both master and the new release branch. Pull requests that require extensive review and testing (generally, optimizations and new features) should *not* be made to the release branch.
 
-## Compiling Monero from source
+## Compiling MKEcoin from source
 
 ### Dependencies
 
@@ -209,11 +181,11 @@ FreeBSD 12.1 one-liner required to build dependencies:
 
 Clone recursively to pull-in needed submodule(s):
 
-`$ git clone --recursive https://github.com/monero-project/monero`
+`$ git clone --recursive https://github.com/MKEcoin-project/MKEcoin`
 
 If you already have a repo cloned, initialize and update:
 
-`$ cd monero && git submodule init && git submodule update`
+`$ cd MKEcoin && git submodule init && git submodule update`
 
 *Note*: If there are submodule differences between branches, you may need 
 to use ```git submodule sync && git submodule update``` after changing branches
@@ -221,7 +193,7 @@ to build successfully.
 
 ### Build instructions
 
-Monero uses the CMake build system and a top-level [Makefile](Makefile) that
+MKEcoin uses the CMake build system and a top-level [Makefile](Makefile) that
 invokes cmake commands as needed.
 
 #### On Linux and macOS
@@ -230,7 +202,7 @@ invokes cmake commands as needed.
 * Change to the root of the source code directory, change to the most recent release branch, and build:
 
     ```bash
-    cd monero
+    cd MKEcoin
     git checkout release-v0.17
     make
     ```
@@ -241,16 +213,16 @@ invokes cmake commands as needed.
     available per thread.
 
     *Note*: The instructions above will compile the most stable release of the
-    Monero software. If you would like to use and test the most recent software,
+    MKEcoin software. If you would like to use and test the most recent software,
     use ```git checkout master```. The master branch may contain updates that are
     both unstable and incompatible with release software, though testing is always
     encouraged.
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/monero/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/MKEcoin/build/release/bin"` to `.profile`
 
-* Run Monero with `monerod --detach`
+* Run MKEcoin with `MKEcoind --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -280,7 +252,7 @@ Dependencies need to be built with -fPIC. Static libraries usually aren't, so yo
     HAVE_DOT=YES doxygen Doxyfile
     ```
 
-* **Optional**: use ccache not to rebuild translation units, that haven't really changed. Monero's CMakeLists.txt file automatically handles it
+* **Optional**: use ccache not to rebuild translation units, that haven't really changed. MKEcoin's CMakeLists.txt file automatically handles it
 
     ```bash
     sudo apt install ccache
@@ -292,7 +264,7 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * `apt-get update && apt-get upgrade` to install all of the latest software
 
-* Install the dependencies for Monero from the 'Debian' column in the table above.
+* Install the dependencies for MKEcoin from the 'Debian' column in the table above.
 
 * Increase the system swap size:
 
@@ -305,11 +277,11 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * If using an external hard disk without an external power supply, ensure it gets enough power to avoid hardware issues when syncing, by adding the line "max_usb_current=1" to /boot/config.txt
 
-* Clone Monero and checkout the most recent release version:
+* Clone MKEcoin and checkout the most recent release version:
 
     ```bash
-    git clone https://github.com/monero-project/monero.git
-    cd monero
+    git clone https://github.com/MKEcoin-project/MKEcoin.git
+    cd MKEcoin
     git checkout tags/v0.17.1.0
     ```
 
@@ -323,17 +295,17 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `export PATH="$PATH:$HOME/monero/build/release/bin"` to `$HOME/.profile`
+* Add `export PATH="$PATH:$HOME/MKEcoin/build/release/bin"` to `$HOME/.profile`
 
 * Run `source $HOME/.profile`
 
-* Run Monero with `monerod --detach`
+* Run MKEcoin with `MKEcoind --detach`
 
 * You may wish to reduce the size of the swap file after the build has finished, and delete the boost directory from your home directory
 
 #### *Note for Raspbian Jessie users:*
 
-If you are using the older Raspbian Jessie image, compiling Monero is a bit more complicated. The version of Boost available in the Debian Jessie repositories is too old to use with Monero, and thus you must compile a newer version yourself. The following explains the extra steps and has been tested on a Raspberry Pi 2 with a clean install of minimal Raspbian Jessie.
+If you are using the older Raspbian Jessie image, compiling MKEcoin is a bit more complicated. The version of Boost available in the Debian Jessie repositories is too old to use with MKEcoin, and thus you must compile a newer version yourself. The following explains the extra steps and has been tested on a Raspberry Pi 2 with a clean install of minimal Raspbian Jessie.
 
 * As before, `apt-get update && apt-get upgrade` to install all of the latest software, and increase the system swap size
 
@@ -345,7 +317,7 @@ If you are using the older Raspbian Jessie image, compiling Monero is a bit more
     ```
 
 
-* Then, install the dependencies for Monero except for `libunwind` and `libboost-all-dev`
+* Then, install the dependencies for MKEcoin except for `libunwind` and `libboost-all-dev`
 
 * Install the latest version of boost (this may first require invoking `apt-get remove --purge libboost*-dev` to remove a previous version if you're not using a clean install):
 
@@ -366,7 +338,7 @@ If you are using the older Raspbian Jessie image, compiling Monero is a bit more
 
 * Wait ~4 hours
 
-* From here, follow the [general Raspberry Pi instructions](#on-the-raspberry-pi) from the "Clone Monero and checkout most recent release version" step.
+* From here, follow the [general Raspberry Pi instructions](#on-the-raspberry-pi) from the "Clone MKEcoin and checkout most recent release version" step.
 
 #### On Windows:
 
@@ -418,7 +390,7 @@ application.
 * To git clone, run:
 
     ```bash
-    git clone --recursive https://github.com/monero-project/monero.git
+    git clone --recursive https://github.com/MKEcoin-project/MKEcoin.git
     ```
 
 **Building**
@@ -426,10 +398,10 @@ application.
 * Change to the cloned directory, run:
 
     ```bash
-    cd monero
+    cd MKEcoin
     ```
 
-* If you would like a specific [version/tag](https://github.com/monero-project/monero/tags), do a git checkout for that version. eg. 'v0.17.1.0'. If you don't care about the version and just want binaries from master, skip this step:
+* If you would like a specific [version/tag](https://github.com/MKEcoin-project/MKEcoin/tags), do a git checkout for that version. eg. 'v0.17.1.0'. If you don't care about the version and just want binaries from master, skip this step:
 
     ```bash
     git checkout v0.17.1.0
@@ -466,9 +438,9 @@ application.
 ### On FreeBSD:
 
 The project can be built from scratch by following instructions for Linux above(but use `gmake` instead of `make`). 
-If you are running Monero in a jail, you need to add `sysvsem="new"` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
+If you are running MKEcoin in a jail, you need to add `sysvsem="new"` to your jail configuration, otherwise lmdb will throw the error message: `Failed to open lmdb environment: Function not implemented`.
 
-Monero is also available as a port or package as 'monero-cli`.
+MKEcoin is also available as a port or package as 'MKEcoin-cli`.
 
 ### On OpenBSD:
 
@@ -477,9 +449,9 @@ You will need to add a few packages to your system. `pkg_add cmake gmake zeromq 
 The `doxygen` and `graphviz` packages are optional and require the xbase set.
 Running the test suite also requires `py-requests` package.
 
-Build monero: `env DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/usr/local gmake release-static`
+Build MKEcoin: `env DEVELOPER_LOCAL_TOOLS=1 BOOST_ROOT=/usr/local gmake release-static`
 
-Note: you may encounter the following error when compiling the latest version of Monero as a normal user:
+Note: you may encounter the following error when compiling the latest version of MKEcoin as a normal user:
 
 ```
 LLVM ERROR: out of memory
@@ -494,7 +466,7 @@ Check that the dependencies are present: `pkg_info -c libexecinfo boost-headers 
 
 Third-party dependencies are usually under `/usr/pkg/`, but if you have a custom setup, adjust the "/usr/pkg" (below) accordingly.
 
-Clone the monero repository recursively and checkout the most recent release as described above. Then build monero: `gmake BOOST_ROOT=/usr/pkg LDFLAGS="-Wl,-R/usr/pkg/lib" release`.  The resulting executables can be found in `build/NetBSD/[Release version]/Release/bin/`.
+Clone the MKEcoin repository recursively and checkout the most recent release as described above. Then build MKEcoin: `gmake BOOST_ROOT=/usr/pkg LDFLAGS="-Wl,-R/usr/pkg/lib" release`.  The resulting executables can be found in `build/NetBSD/[Release version]/Release/bin/`.
 
 ### On Solaris:
 
@@ -513,13 +485,13 @@ Then you can run make as usual.
 
 ```bash
 # Build image (for ARM 32-bit)
-docker build -f utils/build_scripts/android32.Dockerfile -t monero-android .
+docker build -f utils/build_scripts/android32.Dockerfile -t MKEcoin-android .
 # Build image (for ARM 64-bit)
-docker build -f utils/build_scripts/android64.Dockerfile -t monero-android .
+docker build -f utils/build_scripts/android64.Dockerfile -t MKEcoin-android .
 # Create container
-docker create -it --name monero-android monero-android bash
+docker create -it --name MKEcoin-android MKEcoin-android bash
 # Get binaries
-docker cp monero-android:/src/build/release/bin .
+docker cp MKEcoin-android:/src/build/release/bin .
 ```
 
 ### Building portable statically linked binaries
@@ -561,11 +533,11 @@ You can also cross-compile static binaries on Linux for Windows and macOS with t
 
 The required packages are the names for each toolchain on apt. Depending on your distro, they may have different names.
 
-Using `depends` might also be easier to compile Monero on Windows than using MSYS. Activate Windows Subsystem for Linux (WSL) with a distro (for example Ubuntu), install the apt build-essentials and follow the `depends` steps as depicted above.
+Using `depends` might also be easier to compile MKEcoin on Windows than using MSYS. Activate Windows Subsystem for Linux (WSL) with a distro (for example Ubuntu), install the apt build-essentials and follow the `depends` steps as depicted above.
 
 The produced binaries still link libc dynamically. If the binary is compiled on a current distribution, it might not run on an older distribution with an older installation of libc. Passing `-DBACKCOMPAT=ON` to cmake will make sure that the binary will run on systems having at least libc version 2.17.
 
-## Installing Monero from a package
+## Installing MKEcoin from a package
 
 **DISCLAIMER: These packages are not part of this repository or maintained by this project's contributors, and as such, do not go through the same review process to ensure their trustworthiness and security.**
 
@@ -573,59 +545,59 @@ Packages are available for
 
 * Debian Buster
 
-    See the [instructions in the whonix/monero-gui repository](https://gitlab.com/whonix/monero-gui#how-to-install-monero-using-apt-get)
+    See the [instructions in the whonix/MKEcoin-gui repository](https://gitlab.com/whonix/MKEcoin-gui#how-to-install-MKEcoin-using-apt-get)
 
 * Debian Bullseye and Sid
 
     ```bash
-    sudo apt install monero
+    sudo apt install MKEcoin
     ```
-More info and versions in the [Debian package tracker](https://tracker.debian.org/pkg/monero).
+More info and versions in the [Debian package tracker](https://tracker.debian.org/pkg/MKEcoin).
 
 * Arch Linux (via Community packages):
-    [`monero`](https://www.archlinux.org/packages/community/x86_64/monero/)
+    [`MKEcoin`](https://www.archlinux.org/packages/community/x86_64/MKEcoin/)
 
 * Void Linux:
 
     ```bash
-    xbps-install -S monero
+    xbps-install -S MKEcoin
     ```
 
 * GuixSD
 
     ```bash
-    guix package -i monero
+    guix package -i MKEcoin
     ```
 
-* Gentoo [Monero overlay](https://github.com/gentoo-monero/gentoo-monero)
+* Gentoo [MKEcoin overlay](https://github.com/gentoo-MKEcoin/gentoo-MKEcoin)
 
     ```bash
     emerge --noreplace eselect-repository
-    eselect repository enable monero
-    emaint sync -r monero
-    echo '*/*::monero ~amd64' >> /etc/portage/package.accept_keywords
-    emerge net-p2p/monero
+    eselect repository enable MKEcoin
+    emaint sync -r MKEcoin
+    echo '*/*::MKEcoin ~amd64' >> /etc/portage/package.accept_keywords
+    emerge net-p2p/MKEcoin
     ```
 
 * macOS (homebrew)
     ```bash
-    brew install monero
+    brew install MKEcoin
     ```
 
 * Docker
 
     ```bash
     # Build using all available cores
-    docker build -t monero .
+    docker build -t MKEcoin .
 
     # or build using a specific number of cores (reduce RAM requirement)
-    docker build --build-arg NPROC=1 -t monero .
+    docker build --build-arg NPROC=1 -t MKEcoin .
 
     # either run in foreground
-    docker run -it -v /monero/chain:/root/.bitmonero -v /monero/wallet:/wallet -p 18080:18080 monero
+    docker run -it -v /MKEcoin/chain:/root/.bitMKEcoin -v /MKEcoin/wallet:/wallet -p 18080:18080 MKEcoin
 
     # or in background
-    docker run -it -d -v /monero/chain:/root/.bitmonero -v /monero/wallet:/wallet -p 18080:18080 monero
+    docker run -it -d -v /MKEcoin/chain:/root/.bitMKEcoin -v /MKEcoin/wallet:/wallet -p 18080:18080 MKEcoin
     ```
 
 * The build needs 3 GB space.
@@ -633,17 +605,17 @@ More info and versions in the [Debian package tracker](https://tracker.debian.or
 
 Packaging for your favorite distribution would be a welcome contribution!
 
-## Running monerod
+## Running MKEcoind
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in the
 foreground:
 
 ```bash
-./bin/monerod
+./bin/MKEcoind
 ```
 
-To list all available options, run `./bin/monerod --help`.  Options can be
+To list all available options, run `./bin/MKEcoind --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -652,18 +624,18 @@ of the argument without the leading dashes, for example, `log-level=1`.
 To run in background:
 
 ```bash
-./bin/monerod --log-file monerod.log --detach
+./bin/MKEcoind --log-file MKEcoind.log --detach
 ```
 
 To run as a systemd service, copy
-[monerod.service](utils/systemd/monerod.service) to `/etc/systemd/system/` and
-[monerod.conf](utils/conf/monerod.conf) to `/etc/`. The [example
-service](utils/systemd/monerod.service) assumes that the user `monero` exists
+[MKEcoind.service](utils/systemd/MKEcoind.service) to `/etc/systemd/system/` and
+[MKEcoind.conf](utils/conf/MKEcoind.conf) to `/etc/`. The [example
+service](utils/systemd/MKEcoind.service) assumes that the user `MKEcoin` exists
 and its home is the data directory specified in the [example
-config](utils/conf/monerod.conf).
+config](utils/conf/MKEcoind.conf).
 
 If you're on Mac, you may need to add the `--max-concurrency 1` option to
-monero-wallet-cli, and possibly monerod, if you get crashes refreshing.
+MKEcoin-wallet-cli, and possibly MKEcoind, if you get crashes refreshing.
 
 ## Internationalization
 
@@ -677,36 +649,36 @@ See [README.i18n.md](docs/README.i18n.md).
 > used solely for relaying transactions received over local RPC. This provides
 > privacy and better protection against surrounding node (sybil) attacks.
 
-While Monero isn't made to integrate with Tor, it can be used wrapped with torsocks, by
+While MKEcoin isn't made to integrate with Tor, it can be used wrapped with torsocks, by
 setting the following configuration parameters and environment variables:
 
 * `--p2p-bind-ip 127.0.0.1` on the command line or `p2p-bind-ip=127.0.0.1` in
-  monerod.conf to disable listening for connections on external interfaces.
-* `--no-igd` on the command line or `no-igd=1` in monerod.conf to disable IGD
+  MKEcoind.conf to disable listening for connections on external interfaces.
+* `--no-igd` on the command line or `no-igd=1` in MKEcoind.conf to disable IGD
   (UPnP port forwarding negotiation), which is pointless with Tor.
 * `DNS_PUBLIC=tcp` or `DNS_PUBLIC=tcp://x.x.x.x` where x.x.x.x is the IP of the
   desired DNS server, for DNS requests to go over TCP, so that they are routed
-  through Tor. When IP is not specified, monerod uses the default list of
+  through Tor. When IP is not specified, MKEcoind uses the default list of
   servers defined in [src/common/dns_utils.cpp](src/common/dns_utils.cpp).
-* `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow monerod to bind to interfaces
+* `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow MKEcoind to bind to interfaces
    to accept connections from the wallet. On some Linux systems, torsocks
    allows binding to localhost by default, so setting this variable is only
    necessary to allow binding to local LAN/VPN interfaces to allow wallets to
    connect from remote hosts. On other systems, it may be needed for local wallets
    as well.
 * Do NOT pass `--detach` when running through torsocks with systemd, (see
-  [utils/systemd/monerod.service](utils/systemd/monerod.service) for details).
+  [utils/systemd/MKEcoind.service](utils/systemd/MKEcoind.service) for details).
 * If you use the wallet with a Tor daemon via the loopback IP (eg, 127.0.0.1:9050),
   then use `--untrusted-daemon` unless it is your own hidden service.
 
-Example command line to start monerod through Tor:
+Example command line to start MKEcoind through Tor:
 
 ```bash
-DNS_PUBLIC=tcp torsocks monerod --p2p-bind-ip 127.0.0.1 --no-igd
+DNS_PUBLIC=tcp torsocks MKEcoind --p2p-bind-ip 127.0.0.1 --no-igd
 ```
 
-A helper script is in contrib/tor/monero-over-tor.sh. It assumes Tor is installed
-already, and runs Tor and Monero with the right configuration.
+A helper script is in contrib/tor/MKEcoin-over-tor.sh. It assumes Tor is installed
+already, and runs Tor and MKEcoin with the right configuration.
 
 ### Using Tor on Tails
 
@@ -716,25 +688,25 @@ allow inbound connections. Full example:
 
 ```bash
 sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT
-DNS_PUBLIC=tcp torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
+DNS_PUBLIC=tcp torsocks ./MKEcoind --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
     --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain
 ```
 
 ## Pruning
 
-As of May 2020, the full Monero blockchain file is about 100 GB. One can store a pruned blockchain, which is about 30 GB.
+As of May 2020, the full MKEcoin blockchain file is about 100 GB. One can store a pruned blockchain, which is about 30 GB.
 A pruned blockchain can only serve part of the historical chain data to other peers, but is otherwise identical in
 functionality to the full blockchain.
 To use a pruned blockchain, it is best to start the initial sync with `--prune-blockchain`. However, it is also possible
-to prune an existing blockchain using the `monero-blockchain-prune` tool or using the `--prune-blockchain` `monerod` option
+to prune an existing blockchain using the `MKEcoin-blockchain-prune` tool or using the `--prune-blockchain` `MKEcoind` option
 with an existing chain. If an existing chain exists, pruning will temporarily require disk space to store both the full
 and pruned blockchains.
 
-For more detailed information see the ['Pruning' entry in the Moneropedia](https://www.getmonero.org/resources/moneropedia/pruning.html)
+For more detailed information see the ['Pruning' entry in the MKEcoinpedia](https://www.getMKEcoin.org/resources/MKEcoinpedia/pruning.html)
 
 ## Debugging
 
-This section contains general instructions for debugging failed installs or problems encountered with Monero. First, ensure you are running the latest version built from the Github repo.
+This section contains general instructions for debugging failed installs or problems encountered with MKEcoin. First, ensure you are running the latest version built from the Github repo.
 
 ### Obtaining stack traces and core dumps on Unix systems
 
@@ -747,7 +719,7 @@ Run the build.
 Once it stalls, enter the following command:
 
 ```bash
-gdb /path/to/monerod `pidof monerod`
+gdb /path/to/MKEcoind `pidof MKEcoind`
 ```
 
 Type `thread apply all bt` within gdb in order to obtain the stack trace
@@ -760,12 +732,12 @@ Enter `echo core | sudo tee /proc/sys/kernel/core_pattern` to stop cores from be
 
 Run the build.
 
-When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as monerod. It may be named just `core`, or `core.xxxx` with numbers appended.
+When it terminates with an output along the lines of "Segmentation fault (core dumped)", there should be a core dump file in the same directory as MKEcoind. It may be named just `core`, or `core.xxxx` with numbers appended.
 
 You can now analyse this core dump with `gdb` as follows:
 
 ```bash
-gdb /path/to/monerod /path/to/dumpfile`
+gdb /path/to/MKEcoind /path/to/dumpfile`
 ```
 
 Print the stack trace with `bt`
@@ -776,13 +748,13 @@ Print the stack trace with `bt`
 coredumpctl -1 gdb
 ```
 
-#### To run Monero within gdb:
+#### To run MKEcoin within gdb:
 
-Type `gdb /path/to/monerod`
+Type `gdb /path/to/MKEcoind`
 
 Pass command-line options with `--args` followed by the relevant arguments
 
-Type `run` to run monerod
+Type `run` to run MKEcoind
 
 ### Analysing memory corruption
 
@@ -790,17 +762,17 @@ There are two tools available:
 
 #### ASAN
 
-Configure Monero with the -D SANITIZE=ON cmake flag, eg:
+Configure MKEcoin with the -D SANITIZE=ON cmake flag, eg:
 
 ```bash
 cd build/debug && cmake -D SANITIZE=ON -D CMAKE_BUILD_TYPE=Debug ../..
 ```
 
-You can then run the monero tools normally. Performance will typically halve.
+You can then run the MKEcoin tools normally. Performance will typically halve.
 
 #### valgrind
 
-Install valgrind and run as `valgrind /path/to/monerod`. It will be very slow.
+Install valgrind and run as `valgrind /path/to/MKEcoind`. It will be very slow.
 
 ### LMDB
 
@@ -809,7 +781,7 @@ Instructions for debugging suspected blockchain corruption as per @HYC
 There is an `mdb_stat` command in the LMDB source that can print statistics about the database but it's not routinely built. This can be built with the following command:
 
 ```bash
-cd ~/monero/external/db_drivers/liblmdb && make
+cd ~/MKEcoin/external/db_drivers/liblmdb && make
 ```
 
 The output of `mdb_stat -ea <path to blockchain dir>` will indicate inconsistencies in the blocks, block_heights and block_info table.
@@ -824,13 +796,13 @@ These records are dumped as hex data, where the first line is the key and the se
 
 ### Socket-based
 
-Because of the nature of the socket-based protocols that drive monero, certain protocol weaknesses are somewhat unavoidable at this time. While these weaknesses can theoretically be fully mitigated, the effort required (the means) may not justify the ends. As such, please consider taking the following precautions if you are a monero node operator:
+Because of the nature of the socket-based protocols that drive MKEcoin, certain protocol weaknesses are somewhat unavoidable at this time. While these weaknesses can theoretically be fully mitigated, the effort required (the means) may not justify the ends. As such, please consider taking the following precautions if you are a MKEcoin node operator:
 
-- Run `monerod` on a "secured" machine. If operational security is not your forte, at a very minimum, have a dedicated a computer running `monerod` and **do not** browse the web, use email clients, or use any other potentially harmful apps on your `monerod` machine. **Do not click links or load URL/MUA content on the same machine**. Doing so may potentially exploit weaknesses in commands which accept "localhost" and "127.0.0.1".
-- If you plan on hosting a public "remote" node, start `monerod` with `--restricted-rpc`. This is a must.
+- Run `MKEcoind` on a "secured" machine. If operational security is not your forte, at a very minimum, have a dedicated a computer running `MKEcoind` and **do not** browse the web, use email clients, or use any other potentially harmful apps on your `MKEcoind` machine. **Do not click links or load URL/MUA content on the same machine**. Doing so may potentially exploit weaknesses in commands which accept "localhost" and "127.0.0.1".
+- If you plan on hosting a public "remote" node, start `MKEcoind` with `--restricted-rpc`. This is a must.
 
 ### Blockchain-based
 
 Certain blockchain "features" can be considered "bugs" if misused correctly. Consequently, please consider the following:
 
-- When receiving monero, be aware that it may be locked for an arbitrary time if the sender elected to, preventing you from spending that monero until the lock time expires. You may want to hold off acting upon such a transaction until the unlock time lapses. To get a sense of that time, you can consider the remaining blocktime until unlock as seen in the `show_transfers` command.
+- When receiving MKEcoin, be aware that it may be locked for an arbitrary time if the sender elected to, preventing you from spending that MKEcoin until the lock time expires. You may want to hold off acting upon such a transaction until the unlock time lapses. To get a sense of that time, you can consider the remaining blocktime until unlock as seen in the `show_transfers` command.
