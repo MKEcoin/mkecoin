@@ -2,7 +2,7 @@
 /// @author rfree (current maintainer in MKEcoin.cc project)
 /// @brief This is the place to implement our handlers for protocol network actions, e.g. for ratelimit for download-requests
 
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2018-2021, The MKEcoin Project
 // 
 // All rights reserved.
 // 

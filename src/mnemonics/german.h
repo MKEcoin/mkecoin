@@ -1,6 +1,6 @@
 // Word list created by MKEcoin contributor Shrikez
 // 
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2018-2021, The MKEcoin Project
 // 
 // All rights reserved.
 // 
