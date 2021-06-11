@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -32,8 +32,8 @@
 #include "string_tools.h"
 #include "daemon/command_server.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "daemon"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 
@@ -412,7 +412,7 @@ bool t_command_server::apropos(const std::vector<std::string>& args)
 std::string t_command_server::get_commands_str()
 {
   std::stringstream ss;
-  ss << "MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL << ")" << std::endl;
+  ss << "mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL << ")" << std::endl;
   ss << "Commands: " << std::endl;
   std::string usage = m_command_lookup.get_usage();
   boost::replace_all(usage, "\n", "\n  ");

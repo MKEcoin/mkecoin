@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020, The MKEcoin Project
+// Copyright (c) 2019-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -44,8 +44,8 @@
 
 namespace po = boost::program_options;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "gen_ssl_cert"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "gen_ssl_cert"
 
 namespace gencert
 {
@@ -121,13 +121,13 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 0;
   }
   if (command_line::get_arg(vm, command_line::arg_version))
   {
-    std::cout << "MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL << ")" << ENDL;
+    std::cout << "mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL << ")" << ENDL;
     return 0;
   }
 

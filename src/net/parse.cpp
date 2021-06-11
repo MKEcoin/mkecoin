@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The MKEcoin Project
+// Copyright (c) 2018, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -31,6 +31,7 @@
 #include "net/tor_address.h"
 #include "net/i2p_address.h"
 #include "string_tools.h"
+#include "string_tools_lexical.h"
 
 namespace net
 {

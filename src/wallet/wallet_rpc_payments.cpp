@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2020, The MKEcoin Project
+// Copyright (c) 2018-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -44,8 +44,8 @@
 #include "common/util.h"
 #include "common/threadpool.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.wallet2.rpc_payments"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.wallet2.rpc_payments"
 
 #define RPC_PAYMENT_POLL_PERIOD 10 /* seconds*/
 

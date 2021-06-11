@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -33,7 +33,7 @@
 
 using namespace std;
 
-namespace MKEcoin {
+namespace mkecoin {
 
 TransactionInfo::~TransactionInfo() {}
 
@@ -151,4 +151,4 @@ uint64_t TransactionInfoImpl::unlockTime() const
 
 } // namespace
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;

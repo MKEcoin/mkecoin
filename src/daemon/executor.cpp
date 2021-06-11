@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -35,12 +35,12 @@
 
 #include <string>
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "daemon"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize
 {
-  std::string const t_executor::NAME = "MKEcoin Daemon";
+  std::string const t_executor::NAME = "mkecoin Daemon";
 
   void t_executor::init_options(
       boost::program_options::options_description & configurable_options
@@ -58,7 +58,7 @@ namespace daemonize
       boost::program_options::variables_map const & vm
     )
   {
-    LOG_PRINT_L0("MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL << ") Daemonised");
+    LOG_PRINT_L0("mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL << ") Daemonised");
     return t_daemon{vm, public_rpc_port};
   }
 

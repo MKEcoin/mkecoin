@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#ifndef MKEcoin_TREZOR_HPP
-#define MKEcoin_TREZOR_HPP
+#ifndef mkecoin_TREZOR_HPP
+#define mkecoin_TREZOR_HPP
 
 #include "trezor/trezor_defs.hpp"
 
@@ -37,8 +37,8 @@
 #include "trezor/messages/messages.pb.h"
 #include "trezor/messages/messages-common.pb.h"
 #include "trezor/messages/messages-management.pb.h"
-#include "trezor/messages/messages-MKEcoin.pb.h"
+#include "trezor/messages/messages-mkecoin.pb.h"
 #include "trezor/protocol.hpp"
 #endif
 
-#endif //MKEcoin_TREZOR_HPP
+#endif //mkecoin_TREZOR_HPP

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020, The MKEcoin Project
+// Copyright (c) 2016-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -365,7 +365,7 @@ inline typename std::enable_if<sfinae::is_vector_like<Vec>::value, void>::type t
   static_assert(!std::is_same<value_type, unsigned char>::value, "encoding an array of unsigned char is faster as hex");
 
   dest.StartArray();
-  for (const auto& t : vec)
+  for (auto t : vec)
     toJsonValue(dest, t);
   dest.EndArray();
 }

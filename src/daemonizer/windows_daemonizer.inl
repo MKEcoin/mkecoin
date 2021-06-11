@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -181,7 +181,7 @@ namespace daemonizer
     }
     else // interactive
     {
-      //LOG_PRINT_L0("MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL);
+      //LOG_PRINT_L0("mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL);
       if (command_line::has_arg(vm, arg_non_interactive))
         return executor.run_non_interactive(vm);
       else

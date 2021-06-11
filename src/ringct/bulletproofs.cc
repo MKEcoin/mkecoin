@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -44,8 +44,8 @@ extern "C"
 #include "multiexp.h"
 #include "bulletproofs.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "bulletproofs"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "bulletproofs"
 
 //#define DEBUG_BP
 

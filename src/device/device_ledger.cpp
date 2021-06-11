@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -43,8 +43,8 @@ namespace hw {
 
   #ifdef WITH_DEVICE_LEDGER
 
-    #undef MKEcoin_DEFAULT_LOG_CATEGORY
-    #define MKEcoin_DEFAULT_LOG_CATEGORY "device.ledger"
+    #undef mkecoin_DEFAULT_LOG_CATEGORY
+    #define mkecoin_DEFAULT_LOG_CATEGORY "device.ledger"
 
     /* ===================================================================== */
     /* ===                           Debug                              ==== */
@@ -441,10 +441,10 @@ namespace hw {
     bool device_ledger::reset() {
       reset_buffer();
       int offset = set_command_header_noopt(INS_RESET);
-      const size_t verlen = strlen(MKEcoin_VERSION);
-      ASSERT_X(offset + verlen <= BUFFER_SEND_SIZE, "MKEcoin_VERSION is too long")
-      memmove(this->buffer_send+offset, MKEcoin_VERSION, verlen);
-      offset += strlen(MKEcoin_VERSION);
+      const size_t verlen = strlen(mkecoin_VERSION);
+      ASSERT_X(offset + verlen <= BUFFER_SEND_SIZE, "mkecoin_VERSION is too long")
+      memmove(this->buffer_send+offset, mkecoin_VERSION, verlen);
+      offset += strlen(mkecoin_VERSION);
       this->buffer_send[4] = offset-5;
       this->length_send = offset;
       this->exchange();

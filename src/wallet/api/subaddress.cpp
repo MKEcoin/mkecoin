@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -34,7 +34,7 @@
 
 #include <vector>
 
-namespace MKEcoin {
+namespace mkecoin {
   
 Subaddress::~Subaddress() {}
   

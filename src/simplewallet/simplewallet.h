@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -50,10 +50,10 @@
 #include "common/password.h"
 #include "crypto/crypto.h"  // for definition of crypto::secret_key
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.simplewallet"
-// Hardcode MKEcoin's donation address (see #1447)
-constexpr const char MKEcoin_DONATION_ADDR[] = "888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H";
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.simplewallet"
+// Hardcode mkecoin's donation address (see #1447)
+constexpr const char mkecoin_DONATION_ADDR[] = "888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H";
 
 /*!
  * \namespace cryptonote

@@ -1,4 +1,4 @@
-// Copyright (c) 2016, MKEcoin Research Labs
+// Copyright (c) 2016, mkecoin Research Labs
 //
 // Author: Shen Noether <shen.noether@gmx.com>
 // 
@@ -35,8 +35,8 @@
 using namespace crypto;
 using namespace std;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "ringct"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "ringct"
 
 namespace rct {
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020, The MKEcoin Project
+// Copyright (c) 2016-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -46,14 +46,14 @@
 #include "common/stack_trace.h"
 #include "misc_log_ex.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "stacktrace"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "stacktrace"
 
 #define ST_LOG(x) \
   do { \
     auto elpp = ELPP; \
     if (elpp) { \
-      CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,MKEcoin_DEFAULT_LOG_CATEGORY) << x; \
+      CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,mkecoin_DEFAULT_LOG_CATEGORY) << x; \
     } \
     else { \
       std::cout << x << std::endl; \

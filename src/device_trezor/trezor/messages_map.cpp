@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -31,7 +31,7 @@
 #include "messages/messages.pb.h"
 #include "messages/messages-common.pb.h"
 #include "messages/messages-management.pb.h"
-#include "messages/messages-MKEcoin.pb.h"
+#include "messages/messages-mkecoin.pb.h"
 
 #ifdef WITH_TREZOR_DEBUGGING
 #include "messages/messages-debug.pb.h"
@@ -52,7 +52,7 @@ namespace trezor
 #ifdef WITH_TREZOR_DEBUGGING
       "hw.trezor.messages.debug.",
 #endif
-      "hw.trezor.messages.MKEcoin."
+      "hw.trezor.messages.mkecoin."
   };
 
   google::protobuf::Message * MessageMapper::get_message(int wire_number) {
@@ -73,7 +73,7 @@ namespace trezor
     // Each package instantiation so lookup works
     hw::trezor::messages::common::Success::default_instance();
     hw::trezor::messages::management::Cancel::default_instance();
-    hw::trezor::messages::MKEcoin::MKEcoinGetAddress::default_instance();
+    hw::trezor::messages::mkecoin::mkecoinGetAddress::default_instance();
 
 #ifdef WITH_TREZOR_DEBUGGING
     hw::trezor::messages::debug::DebugLinkDecision::default_instance();
@@ -101,13 +101,13 @@ namespace trezor
 //    // CODEGEN way, fast
 //    switch(wire_number){
 //      case 501:
-//        return new messages::MKEcoin::MKEcoinTransactionSignRequest();
+//        return new messages::mkecoin::mkecoinTransactionSignRequest();
 //      default:
 //        throw std::runtime_error("not implemented");
 //    }
 //
 //    // CODEGEN message -> number: specification
-//    //    messages::MessageType get_message_wire_number(const messages::MKEcoin::MKEcoinTransactionSignRequest * msg) { return 501; }
+//    //    messages::MessageType get_message_wire_number(const messages::mkecoin::mkecoinTransactionSignRequest * msg) { return 501; }
 //    //    messages::MessageType get_message_wire_number(const messages::management::ping * msg)
 //
   }

@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -30,7 +30,7 @@ set(cn_deserialize_sources
   cn_deserialize.cpp
   )
 
-MKEcoin_add_executable(cn_deserialize
+mkecoin_add_executable(cn_deserialize
   ${cn_deserialize_sources}
   ${cn_deserialize_private_headers})
 
@@ -46,14 +46,14 @@ target_link_libraries(cn_deserialize
 
 set_property(TARGET cn_deserialize
 	PROPERTY
-	OUTPUT_NAME "MKEcoin-utils-deserialize")
+	OUTPUT_NAME "mkecoin-utils-deserialize")
 
 
 set(object_sizes_sources
   object_sizes.cpp
   )
 
-MKEcoin_add_executable(object_sizes
+mkecoin_add_executable(object_sizes
   ${object_sizes_sources}
   ${object_sizes_private_headers})
 
@@ -67,14 +67,14 @@ target_link_libraries(object_sizes
 
 set_property(TARGET object_sizes
 	PROPERTY
-	OUTPUT_NAME "MKEcoin-utils-object-sizes")
+	OUTPUT_NAME "mkecoin-utils-object-sizes")
 
 
 set(dns_checks_sources
   dns_checks.cpp
   )
 
-MKEcoin_add_executable(dns_checks
+mkecoin_add_executable(dns_checks
   ${dns_checks_sources}
   ${dns_checks_private_headers})
 
@@ -89,5 +89,5 @@ target_link_libraries(dns_checks
 
 set_property(TARGET dns_checks
 	PROPERTY
-	OUTPUT_NAME "MKEcoin-utils-dns-checks")
+	OUTPUT_NAME "mkecoin-utils-dns-checks")
 

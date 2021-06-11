@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020, The MKEcoin Project
+// Copyright (c) 2019-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -36,7 +36,7 @@ namespace cryptonote
 namespace rpc
 {
 
-// Expected format of MKEcoin software version string:
+// Expected format of mkecoin software version string:
 // 1) Four numbers, one to two digits each, separated by periods
 // 2) Optionally, one of the following suffixes:
 //      a) -release

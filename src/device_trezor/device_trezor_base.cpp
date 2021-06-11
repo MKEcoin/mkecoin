@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -31,6 +31,7 @@
 #include "memwipe.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/regex.hpp>
 
 namespace hw {
@@ -38,8 +39,8 @@ namespace trezor {
 
 #ifdef WITH_DEVICE_TREZOR
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "device.trezor"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "device.trezor"
 #define TREZOR_BIP44_HARDENED_ZERO 0x80000000
 
     const uint32_t device_trezor_base::DEFAULT_BIP44_PATH[] = {0x8000002c, 0x80000080};

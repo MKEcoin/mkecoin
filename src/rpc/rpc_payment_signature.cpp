@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2020, The MKEcoin Project
+// Copyright (c) 2018-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -33,8 +33,8 @@
 #include "string_tools.h"
 #include "rpc_payment_signature.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "daemon.rpc.payment"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "daemon.rpc.payment"
 
 #define TIMESTAMP_LEEWAY (60 * 1000000) /* 60 seconds, in microseconds */
 

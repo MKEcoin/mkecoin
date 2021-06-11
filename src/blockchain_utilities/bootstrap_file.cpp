@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -32,8 +32,8 @@
 
 #include "bootstrap_file.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "bcutil"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "bcutil"
 
 namespace po = boost::program_options;
 
@@ -43,7 +43,7 @@ using namespace epee;
 namespace
 {
   // This number was picked by taking the leading 4 bytes from this output:
-  // echo MKEcoin bootstrap file | sha1sum
+  // echo mkecoin bootstrap file | sha1sum
   const uint32_t blockchain_raw_magic = 0x28721586;
   const uint32_t header_size = 1024;
 

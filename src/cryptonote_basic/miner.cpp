@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -44,6 +44,7 @@
 #include "string_tools.h"
 #include "storages/portable_storage_template_helper.h"
 #include "boost/logic/tribool.hpp"
+#include <boost/filesystem.hpp>
 
 #ifdef __APPLE__
   #include <sys/times.h>
@@ -73,8 +74,8 @@
   #include <unistd.h>
 #endif
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "miner"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "miner"
 
 #define AUTODETECT_WINDOW 10 // seconds
 #define AUTODETECT_GAIN_THRESHOLD 1.02f  // 2%

@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 # 
 # All rights reserved.
 # 
@@ -45,4 +45,4 @@ foreach(BLOB_NAME checkpoints testnet_blocks stagenet_blocks)
     )
 endforeach()
 
-MKEcoin_add_library(blocks blocks.cpp ${GENERATED_SOURCES})
+mkecoin_add_library(blocks blocks.cpp ${GENERATED_SOURCES})

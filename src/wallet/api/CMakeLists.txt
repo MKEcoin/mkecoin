@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -57,9 +57,9 @@ set(wallet_api_private_headers
   subaddress_account.h
   unsigned_transaction.h)
 
-MKEcoin_private_headers(wallet_api
+mkecoin_private_headers(wallet_api
   ${wallet_api_private_headers})
-MKEcoin_add_library(wallet_api
+mkecoin_add_library(wallet_api
   ${wallet_api_sources}
   ${wallet_api_headers}
   ${wallet_api_private_headers})

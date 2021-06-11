@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -45,18 +45,16 @@
 #include <sstream>
 #include <unordered_map>
 
-#ifdef WIN32
 #include <boost/locale.hpp>
 #include <boost/filesystem.hpp>
-#endif
 
 using namespace std;
 using namespace cryptonote;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "WalletAPI"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "WalletAPI"
 
-namespace MKEcoin {
+namespace mkecoin {
 
 namespace {
     // copy-pasted from simplewallet
@@ -72,7 +70,7 @@ namespace {
     std::string get_default_ringdb_path(cryptonote::network_type nettype)
     {
       boost::filesystem::path dir = tools::get_default_data_dir();
-      // remove .bitMKEcoin, replace with .shared-ringdb
+      // remove .bitmkecoin, replace with .shared-ringdb
       dir = dir.remove_filename();
       dir /= ".shared-ringdb";
       if (nettype == cryptonote::TESTNET)
@@ -401,19 +399,19 @@ void Wallet::init(const char *argv0, const char *default_log_base_name, const st
 }
 
 void Wallet::debug(const std::string &category, const std::string &str) {
-    MCDEBUG(category.empty() ? MKEcoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
+    MCDEBUG(category.empty() ? mkecoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
 }
 
 void Wallet::info(const std::string &category, const std::string &str) {
-    MCINFO(category.empty() ? MKEcoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
+    MCINFO(category.empty() ? mkecoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
 }
 
 void Wallet::warning(const std::string &category, const std::string &str) {
-    MCWARNING(category.empty() ? MKEcoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
+    MCWARNING(category.empty() ? mkecoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
 }
 
 void Wallet::error(const std::string &category, const std::string &str) {
-    MCERROR(category.empty() ? MKEcoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
+    MCERROR(category.empty() ? mkecoin_DEFAULT_LOG_CATEGORY : category.c_str(), str);
 }
 
 ///////////////////////// WalletImpl implementation ////////////////////////
@@ -1216,6 +1214,68 @@ bool WalletImpl::importKeyImages(const string &filename)
   return true;
 }
 
+bool WalletImpl::exportOutputs(const string &filename, bool all)
+{
+    if (m_wallet->key_on_device())
+    {
+        setStatusError(string(tr("Not supported on HW wallets.")) + filename);
+        return false;
+    }
+
+    try
+    {
+        std::string data = m_wallet->export_outputs_to_str(all);
+        bool r = m_wallet->save_to_file(filename, data);
+        if (!r)
+        {
+            LOG_ERROR("Failed to save file " << filename);
+            setStatusError(string(tr("Failed to save file: ")) + filename);
+            return false;
+        }
+    }
+    catch (const std::exception &e)
+    {
+        LOG_ERROR("Error exporting outputs: " << e.what());
+        setStatusError(string(tr("Error exporting outputs: ")) + e.what());
+        return false;
+    }
+
+    LOG_PRINT_L2("Outputs exported to " << filename);
+    return true;
+}
+
+bool WalletImpl::importOutputs(const string &filename)
+{
+    if (m_wallet->key_on_device())
+    {
+        setStatusError(string(tr("Not supported on HW wallets.")) + filename);
+        return false;
+    }
+
+    std::string data;
+    bool r = m_wallet->load_from_file(filename, data);
+    if (!r)
+    {
+        LOG_ERROR("Failed to read file: " << filename);
+        setStatusError(string(tr("Failed to read file: ")) + filename);
+        return false;
+    }
+
+    try
+    {
+        size_t n_outputs = m_wallet->import_outputs_from_str(data);
+        LOG_PRINT_L2(std::to_string(n_outputs) << " outputs imported");
+    }
+    catch (const std::exception &e)
+    {
+        LOG_ERROR("Failed to import outputs: " << e.what());
+        setStatusError(string(tr("Failed to import outputs: ")) + e.what());
+        return false;
+    }
+
+    return true;
+}
+
 void WalletImpl::addSubaddressAccount(const std::string& label)
 {
     m_wallet->add_subaddress_account(label);
@@ -1567,8 +1627,10 @@ PendingTransaction *WalletImpl::createTransactionMultDest(const std::vector<stri
             setStatusError(writer.str());
         } catch (const tools::error::tx_sum_overflow& e) {
             setStatusError(e.what());
+        } catch (const tools::error::zero_amount&) {
+            setStatusError(tr("destination amount is zero"));
         } catch (const tools::error::zero_destination&) {
-            setStatusError(tr("one of destinations is zero"));
+            setStatusError(tr("transaction has no destination"));
         } catch (const tools::error::tx_too_big& e) {
             setStatusError(tr("failed to find a suitable way to split transactions"));
         } catch (const tools::error::transfer_error& e) {
@@ -2310,6 +2372,10 @@ bool WalletImpl::rescanSpent()
   return true;
 }
 
+void WalletImpl::setOffline(bool offline)
+{
+    m_wallet->set_offline(offline);
+}
 
 void WalletImpl::hardForkInfo(uint8_t &version, uint64_t &earliest_height) const
 {
@@ -2512,4 +2578,4 @@ void WalletImpl::deviceShowAddress(uint32_t accountIndex, uint32_t addressIndex,
 }
 } // namespace
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;

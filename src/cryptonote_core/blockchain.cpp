@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -57,9 +57,10 @@
 #include "common/notify.h"
 #include "common/varint.h"
 #include "common/pruning.h"
+#include "time_helper.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "blockchain"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "blockchain"
 
 #define FIND_BLOCKCHAIN_SUPPLEMENT_MAX_SIZE (100*1024*1024) // 100 MB
 
@@ -565,6 +566,8 @@ void Blockchain::pop_blocks(uint64_t nblocks)
     return;
   }
 
+  CHECK_AND_ASSERT_THROW_MES(update_next_cumulative_weight_limit(), "Error updating next cumulative weight limit");
+
   if (stop_batch)
     m_db->batch_stop();
 }
@@ -642,7 +645,6 @@ block Blockchain::pop_block_from_blockchain()
   m_scan_table.clear();
   m_blocks_txs_check.clear();
 
-  CHECK_AND_ASSERT_THROW_MES(update_next_cumulative_weight_limit(), "Error updating next cumulative weight limit");
   uint64_t top_block_height;
   crypto::hash top_block_hash = get_tail_id(top_block_height);
   m_tx_pool.on_blockchain_dec(top_block_height, top_block_hash);
@@ -965,7 +967,7 @@ start:
     MGINFO("START DUMP");
     MGINFO(ss.str());
     MGINFO("END DUMP");
-    MGINFO("Please send MKEcoinmooo on Freenode the contents of this log, from a couple dozen lines before START DUMP to END DUMP");
+    MGINFO("Please send mkecoinmooo on Freenode the contents of this log, from a couple dozen lines before START DUMP to END DUMP");
   }
   return diff;
 }
@@ -1109,6 +1111,7 @@ bool Blockchain::rollback_blockchain_switching(std::list<block>& original_chain,
   {
     pop_block_from_blockchain();
   }
+  CHECK_AND_ASSERT_THROW_MES(update_next_cumulative_weight_limit(), "Error updating next cumulative weight limit");
 
   // make sure the hard fork object updates its current version
   m_hardfork->reorganize_from_chain_height(rollback_height);
@@ -1159,6 +1162,7 @@ bool Blockchain::switch_to_alternative_blockchain(std::list<block_extended_info>
     block b = pop_block_from_blockchain();
     disconnected_chain.push_front(b);
   }
+  CHECK_AND_ASSERT_THROW_MES(update_next_cumulative_weight_limit(), "Error updating next cumulative weight limit");
 
   auto split_height = m_db->height();
 
@@ -4555,7 +4559,7 @@ void Blockchain::check_against_checkpoints(const checkpoints& points, bool enfor
       }
       else
       {
-        LOG_ERROR("WARNING: local blockchain failed to pass a MKEcoinPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option");
+        LOG_ERROR("WARNING: local blockchain failed to pass a mkecoinPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option");
       }
     }
   }
@@ -5149,7 +5153,7 @@ bool Blockchain::prepare_handle_incoming_blocks(const std::vector<block_complete
     if (m_cancel)
       return false;
 
-    for (const auto &tx_blob : entry.txs)
+    for (size_t i = 0; i < entry.txs.size(); ++i)
     {
       if (tx_index >= txes.size())
         SCAN_TABLE_QUIT("tx_index is out of sync");

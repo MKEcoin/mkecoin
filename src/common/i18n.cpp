@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -35,8 +35,12 @@
 #include "common/i18n.h"
 #include "translation_files.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "i18n"
+#include <boost/system/error_code.hpp>
+#include <boost/filesystem.hpp>
+#include <algorithm>
+
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "i18n"
 
 #define MAX_LANGUAGE_SIZE 16
 

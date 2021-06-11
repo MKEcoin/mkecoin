@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -38,12 +38,13 @@
 #include <boost/asio/ip/udp.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "common/apply_permutation.h"
 #include "transport.hpp"
 #include "messages/messages-common.pb.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "device.trezor.transport"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "device.trezor.transport"
 
 using namespace std;
 using json = rapidjson::Document;
@@ -156,7 +157,7 @@ namespace trezor{
 #define PROTO_HEADER_SIZE 6
 
   static size_t message_size(const google::protobuf::Message &req){
-    return static_cast<size_t>(req.ByteSize());
+    return req.ByteSizeLong();
   }
 
   static size_t serialize_message_buffer_size(size_t msg_size) {
@@ -817,11 +818,11 @@ namespace trezor{
 #  define TREZOR_LIBUSB_SET_DEBUG(ctx, level) libusb_set_debug(ctx, level)
 #endif
 
-    if (ELPP->vRegistry()->allowed(el::Level::Debug, MKEcoin_DEFAULT_LOG_CATEGORY))
+    if (ELPP->vRegistry()->allowed(el::Level::Debug, mkecoin_DEFAULT_LOG_CATEGORY))
       TREZOR_LIBUSB_SET_DEBUG(ctx, 3);
-    else if (ELPP->vRegistry()->allowed(el::Level::Warning, MKEcoin_DEFAULT_LOG_CATEGORY))
+    else if (ELPP->vRegistry()->allowed(el::Level::Warning, mkecoin_DEFAULT_LOG_CATEGORY))
       TREZOR_LIBUSB_SET_DEBUG(ctx, 2);
-    else if (ELPP->vRegistry()->allowed(el::Level::Error, MKEcoin_DEFAULT_LOG_CATEGORY))
+    else if (ELPP->vRegistry()->allowed(el::Level::Error, mkecoin_DEFAULT_LOG_CATEGORY))
       TREZOR_LIBUSB_SET_DEBUG(ctx, 1);
 
 #undef TREZOR_LIBUSB_SET_DEBUG

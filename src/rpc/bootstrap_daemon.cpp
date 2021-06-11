@@ -9,8 +9,8 @@
 #include "misc_log_ex.h"
 #include "net/parse.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "daemon.rpc.bootstrap_daemon"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "daemon.rpc.bootstrap_daemon"
 
 namespace cryptonote
 {

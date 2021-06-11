@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -35,7 +35,7 @@
 
 namespace daemon_args
 {
-  std::string const WINDOWS_SERVICE_NAME = "MKEcoin Daemon";
+  std::string const WINDOWS_SERVICE_NAME = "mkecoin Daemon";
 
   const command_line::arg_descriptor<std::string, false, true, 2> arg_config_file = {
     "config-file"

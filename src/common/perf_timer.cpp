@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020, The MKEcoin Project
+// Copyright (c) 2016-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -30,8 +30,8 @@
 #include "misc_os_dependent.h"
 #include "perf_timer.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "perf"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "perf"
 
 #define PERF_LOG_ALWAYS(level, cat, x) \
   el::base::Writer(level, el::Color::Default, __FILE__, __LINE__, ELPP_FUNC, el::base::DispatchAction::FileOnlyLog).construct(cat) << x

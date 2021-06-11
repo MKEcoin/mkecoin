@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -38,6 +38,7 @@ struct debug_archive : public json_archive<W> {
   typedef typename json_archive<W>::stream_type stream_type;
 
   debug_archive(stream_type &s) : json_archive<W>(s) { }
+  stream_type& stream() { return this->stream_; }
 };
 
 template <class T>

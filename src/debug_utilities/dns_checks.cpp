@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020, The MKEcoin Project
+// Copyright (c) 2019-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -37,8 +37,8 @@
 #include "common/dns_utils.h"
 #include "version.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "debugtools.dnschecks"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "debugtools.dnschecks"
 
 namespace po = boost::program_options;
 
@@ -121,28 +121,28 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 1;
   }
 
   mlog_configure("", true);
-  mlog_set_categories("+" MKEcoin_DEFAULT_LOG_CATEGORY ":INFO");
+  mlog_set_categories("+" mkecoin_DEFAULT_LOG_CATEGORY ":INFO");
 
-  lookup(LOOKUP_A, {"seeds.MKEcoinseeds.se", "seeds.MKEcoinseeds.ae.org", "seeds.MKEcoinseeds.ch", "seeds.MKEcoinseeds.li"});
+  lookup(LOOKUP_A, {"seeds.mkecoinseeds.se", "seeds.mkecoinseeds.ae.org", "seeds.mkecoinseeds.ch", "seeds.mkecoinseeds.li"});
 
-  lookup(LOOKUP_TXT, {"updates.MKEcoinpulse.org", "updates.MKEcoinpulse.net", "updates.MKEcoinpulse.co", "updates.MKEcoinpulse.se", "updates.MKEcoinpulse.fr", "updates.MKEcoinpulse.de", "updates.MKEcoinpulse.no", "updates.MKEcoinpulse.ch"});
+  lookup(LOOKUP_TXT, {"updates.mkecoinpulse.org", "updates.mkecoinpulse.net", "updates.mkecoinpulse.co", "updates.mkecoinpulse.se", "updates.mkecoinpulse.fr", "updates.mkecoinpulse.de", "updates.mkecoinpulse.no", "updates.mkecoinpulse.ch"});
 
-  lookup(LOOKUP_TXT, {"checkpoints.MKEcoinpulse.org", "checkpoints.MKEcoinpulse.net", "checkpoints.MKEcoinpulse.co", "checkpoints.MKEcoinpulse.se"});
+  lookup(LOOKUP_TXT, {"checkpoints.mkecoinpulse.org", "checkpoints.mkecoinpulse.net", "checkpoints.mkecoinpulse.co", "checkpoints.mkecoinpulse.se"});
 
   // those are in the code, but don't seem to actually exist
 #if 0
-  lookup(LOOKUP_TXT, {"testpoints.MKEcoinpulse.org", "testpoints.MKEcoinpulse.net", "testpoints.MKEcoinpulse.co", "testpoints.MKEcoinpulse.se");
+  lookup(LOOKUP_TXT, {"testpoints.mkecoinpulse.org", "testpoints.mkecoinpulse.net", "testpoints.mkecoinpulse.co", "testpoints.mkecoinpulse.se");
 
-  lookup(LOOKUP_TXT, {"stagenetpoints.MKEcoinpulse.org", "stagenetpoints.MKEcoinpulse.net", "stagenetpoints.MKEcoinpulse.co", "stagenetpoints.MKEcoinpulse.se"});
+  lookup(LOOKUP_TXT, {"stagenetpoints.mkecoinpulse.org", "stagenetpoints.mkecoinpulse.net", "stagenetpoints.mkecoinpulse.co", "stagenetpoints.mkecoinpulse.se"});
 #endif
 
-  lookup(LOOKUP_TXT, {"segheights.MKEcoinpulse.org", "segheights.MKEcoinpulse.net", "segheights.MKEcoinpulse.co", "segheights.MKEcoinpulse.se"});
+  lookup(LOOKUP_TXT, {"segheights.mkecoinpulse.org", "segheights.mkecoinpulse.net", "segheights.mkecoinpulse.co", "segheights.mkecoinpulse.se"});
 
   return 0;
   CATCH_ENTRY_L0("main", 1);

@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The MKEcoin Project
+// Copyright (c) 2018, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -37,8 +37,8 @@
 #include "ringdb.h"
 #include "cryptonote_config.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.ringdb"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.ringdb"
 
 #define V1TAG ((uint64_t)798237759845202)
 

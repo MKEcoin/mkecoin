@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -33,7 +33,7 @@
 #include "net/http.h"
 #include <string>
 
-namespace MKEcoin {
+namespace mkecoin {
 
 class WalletManagerImpl : public WalletManager
 {
@@ -103,4 +103,4 @@ private:
 
 } // namespace
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;

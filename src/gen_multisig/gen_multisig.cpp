@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -53,8 +53,8 @@ using namespace cryptonote;
 using boost::lexical_cast;
 namespace po = boost::program_options;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.gen_multisig"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.gen_multisig"
 
 namespace genms
 {
@@ -176,12 +176,12 @@ int main(int argc, char* argv[])
   bool should_terminate = false;
   std::tie(vm, should_terminate) = wallet_args::main(
    argc, argv,
-   "MKEcoin-gen-multisig [(--testnet|--stagenet)] [--filename-base=<filename>] [--scheme=M/N] [--threshold=M] [--participants=N]",
+   "mkecoin-gen-multisig [(--testnet|--stagenet)] [--filename-base=<filename>] [--scheme=M/N] [--threshold=M] [--participants=N]",
     genms::tr("This program generates a set of multisig wallets - use this simpler scheme only if all the participants trust each other"),
     desc_params,
     boost::program_options::positional_options_description(),
     [](const std::string &s, bool emphasis){ tools::scoped_message_writer(emphasis ? epee::console_color_white : epee::console_color_default, true) << s; },
-    "MKEcoin-gen-multisig.log"
+    "mkecoin-gen-multisig.log"
   );
   if (!vm)
     return 1;

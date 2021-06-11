@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2018, The MKEcoin Project
+# Copyright (c) 2014-2018, The mkecoin Project
 # 
 # All rights reserved.
 # 
@@ -29,5 +29,5 @@
 set(lmdb_sources database.cpp error.cpp table.cpp value_stream.cpp)
 set(lmdb_headers database.h error.h key_stream.h table.h transaction.h util.h value_stream.h)
 
-MKEcoin_add_library(lmdb_lib ${lmdb_sources} ${lmdb_headers})
+mkecoin_add_library(lmdb_lib ${lmdb_sources} ${lmdb_headers})
 target_link_libraries(lmdb_lib common ${LMDB_LIBRARY})

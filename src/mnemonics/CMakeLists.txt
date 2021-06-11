@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -49,9 +49,9 @@ set(mnemonics_private_headers
   esperanto.h
   lojban.h)
 
-MKEcoin_private_headers(mnemonics
+mkecoin_private_headers(mnemonics
   ${mnemonics_private_headers})
-MKEcoin_add_library(mnemonics
+mkecoin_add_library(mnemonics
   ${mnemonics_sources}
   ${mnemonics_headers}
   ${mnemonics_private_headers})

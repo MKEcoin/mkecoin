@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 #include "common/command_line.h"
 #include "common/varint.h"
 #include "cryptonote_basic/cryptonote_boost_serialization.h"
@@ -36,8 +37,8 @@
 #include "blockchain_db/blockchain_db.h"
 #include "version.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "bcutil"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "bcutil"
 
 namespace po = boost::program_options;
 using namespace epee;
@@ -103,12 +104,12 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "MKEcoin '" << MKEcoin_RELEASE_NAME << "' (v" << MKEcoin_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "mkecoin '" << mkecoin_RELEASE_NAME << "' (v" << mkecoin_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 1;
   }
 
-  mlog_configure(mlog_get_default_log_path("MKEcoin-blockchain-stats.log"), true);
+  mlog_configure(mlog_get_default_log_path("mkecoin-blockchain-stats.log"), true);
   if (!command_line::is_arg_defaulted(vm, arg_log_level))
     mlog_set_log(command_line::get_arg(vm, arg_log_level).c_str());
   else
@@ -170,7 +171,7 @@ int main(int argc, char* argv[])
 /*
  * The default output can be plotted with GnuPlot using these commands:
 set key autotitle columnhead
-set title "MKEcoin Blockchain Growth"
+set title "mkecoin Blockchain Growth"
 set timefmt "%Y-%m-%d"
 set xdata time
 set xrange ["2014-04-17":*]

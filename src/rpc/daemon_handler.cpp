@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -540,7 +540,7 @@ namespace rpc
     res.info.block_size_median = res.info.block_weight_median = m_core.get_blockchain_storage().get_current_cumulative_block_weight_median();
     res.info.adjusted_time = m_core.get_blockchain_storage().get_adjusted_time(res.info.height);
     res.info.start_time = (uint64_t)m_core.get_start_time();
-    res.info.version = MKEcoin_VERSION;
+    res.info.version = mkecoin_VERSION;
 
     res.status = Message::STATUS_OK;
     res.error_details = "";

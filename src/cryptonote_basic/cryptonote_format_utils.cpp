@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -32,6 +32,7 @@
 #include <boost/algorithm/string.hpp>
 #include "wipeable_string.h"
 #include "string_tools.h"
+#include "string_tools_lexical.h"
 #include "serialization/string.h"
 #include "cryptonote_format_utils.h"
 #include "cryptonote_config.h"
@@ -41,8 +42,8 @@
 
 using namespace epee;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "cn"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "cn"
 
 // #define ENABLE_HASH_CASH_INTEGRITY_CHECK
 
@@ -61,7 +62,7 @@ static const uint64_t valid_decomposed_outputs[] = {
   (uint64_t)1000000000, (uint64_t)2000000000, (uint64_t)3000000000, (uint64_t)4000000000, (uint64_t)5000000000, (uint64_t)6000000000, (uint64_t)7000000000, (uint64_t)8000000000, (uint64_t)9000000000,
   (uint64_t)10000000000, (uint64_t)20000000000, (uint64_t)30000000000, (uint64_t)40000000000, (uint64_t)50000000000, (uint64_t)60000000000, (uint64_t)70000000000, (uint64_t)80000000000, (uint64_t)90000000000,
   (uint64_t)100000000000, (uint64_t)200000000000, (uint64_t)300000000000, (uint64_t)400000000000, (uint64_t)500000000000, (uint64_t)600000000000, (uint64_t)700000000000, (uint64_t)800000000000, (uint64_t)900000000000,
-  (uint64_t)1000000000000, (uint64_t)2000000000000, (uint64_t)3000000000000, (uint64_t)4000000000000, (uint64_t)5000000000000, (uint64_t)6000000000000, (uint64_t)7000000000000, (uint64_t)8000000000000, (uint64_t)9000000000000, // 1 MKEcoin
+  (uint64_t)1000000000000, (uint64_t)2000000000000, (uint64_t)3000000000000, (uint64_t)4000000000000, (uint64_t)5000000000000, (uint64_t)6000000000000, (uint64_t)7000000000000, (uint64_t)8000000000000, (uint64_t)9000000000000, // 1 mkecoin
   (uint64_t)10000000000000, (uint64_t)20000000000000, (uint64_t)30000000000000, (uint64_t)40000000000000, (uint64_t)50000000000000, (uint64_t)60000000000000, (uint64_t)70000000000000, (uint64_t)80000000000000, (uint64_t)90000000000000,
   (uint64_t)100000000000000, (uint64_t)200000000000000, (uint64_t)300000000000000, (uint64_t)400000000000000, (uint64_t)500000000000000, (uint64_t)600000000000000, (uint64_t)700000000000000, (uint64_t)800000000000000, (uint64_t)900000000000000,
   (uint64_t)1000000000000000, (uint64_t)2000000000000000, (uint64_t)3000000000000000, (uint64_t)4000000000000000, (uint64_t)5000000000000000, (uint64_t)6000000000000000, (uint64_t)7000000000000000, (uint64_t)8000000000000000, (uint64_t)9000000000000000,
@@ -210,9 +211,7 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool parse_and_validate_tx_from_blob(const blobdata_ref& tx_blob, transaction& tx)
   {
-    std::stringstream ss;
-    ss << tx_blob;
-    binary_archive<false> ba(ss);
+    binary_archive<false> ba{epee::strspan<std::uint8_t>(tx_blob)};
     bool r = ::serialization::serialize(ba, tx);
     CHECK_AND_ASSERT_MES(r, false, "Failed to parse transaction from blob");
     CHECK_AND_ASSERT_MES(expand_transaction_1(tx, false), false, "Failed to expand transaction data");
@@ -223,9 +222,7 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool parse_and_validate_tx_base_from_blob(const blobdata_ref& tx_blob, transaction& tx)
   {
-    std::stringstream ss;
-    ss << tx_blob;
-    binary_archive<false> ba(ss);
+    binary_archive<false> ba{epee::strspan<std::uint8_t>(tx_blob)};
     bool r = tx.serialize_base(ba);
     CHECK_AND_ASSERT_MES(r, false, "Failed to parse transaction from blob");
     CHECK_AND_ASSERT_MES(expand_transaction_1(tx, true), false, "Failed to expand transaction data");
@@ -235,9 +232,7 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool parse_and_validate_tx_prefix_from_blob(const blobdata_ref& tx_blob, transaction_prefix& tx)
   {
-    std::stringstream ss;
-    ss << tx_blob;
-    binary_archive<false> ba(ss);
+    binary_archive<false> ba{epee::strspan<std::uint8_t>(tx_blob)};
     bool r = ::serialization::serialize_noeof(ba, tx);
     CHECK_AND_ASSERT_MES(r, false, "Failed to parse transaction prefix from blob");
     return true;
@@ -245,9 +240,7 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool parse_and_validate_tx_from_blob(const blobdata_ref& tx_blob, transaction& tx, crypto::hash& tx_hash)
   {
-    std::stringstream ss;
-    ss << tx_blob;
-    binary_archive<false> ba(ss);
+    binary_archive<false> ba{epee::strspan<std::uint8_t>(tx_blob)};
     bool r = ::serialization::serialize(ba, tx);
     CHECK_AND_ASSERT_MES(r, false, "Failed to parse transaction from blob");
     CHECK_AND_ASSERT_MES(expand_transaction_1(tx, false), false, "Failed to expand transaction data");
@@ -531,22 +524,15 @@ namespace cryptonote
     if(tx_extra.empty())
       return true;
 
-    std::string extra_str(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size());
-    std::istringstream iss(extra_str);
-    binary_archive<false> ar(iss);
+    binary_archive<false> ar{epee::to_span(tx_extra)};
 
-    bool eof = false;
-    while (!eof)
+    do
     {
       tx_extra_field field;
       bool r = ::do_serialize(ar, field);
       CHECK_AND_NO_ASSERT_MES_L1(r, false, "failed to deserialize extra field. extra = " << string_tools::buff_to_hex_nodelimer(std::string(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size())));
       tx_extra_fields.push_back(field);
-
-      std::ios_base::iostate state = iss.rdstate();
-      eof = (EOF == iss.peek());
-      iss.clear(state);
-    }
+    } while (!ar.eof());
     CHECK_AND_NO_ASSERT_MES_L1(::serialization::check_stream_state(ar), false, "failed to deserialize extra field. extra = " << string_tools::buff_to_hex_nodelimer(std::string(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size())));
 
     return true;
@@ -577,13 +563,10 @@ namespace cryptonote
       return true;
     }
 
-    std::string extra_str(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size());
-    std::istringstream iss(extra_str);
-    binary_archive<false> ar(iss);
+    binary_archive<false> ar{epee::to_span(tx_extra)};
 
-    bool eof = false;
     size_t processed = 0;
-    while (!eof)
+    do
     {
       tx_extra_field field;
       bool r = ::do_serialize(ar, field);
@@ -595,12 +578,8 @@ namespace cryptonote
         break;
       }
       tx_extra_fields.push_back(field);
-      processed = iss.tellg();
-
-      std::ios_base::iostate state = iss.rdstate();
-      eof = (EOF == iss.peek());
-      iss.clear(state);
-    }
+      processed = ar.getpos();
+    } while (!ar.eof());
     if (!::serialization::check_stream_state(ar))
     {
       MWARNING("failed to deserialize extra field. extra = " << string_tools::buff_to_hex_nodelimer(std::string(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size())));
@@ -751,24 +730,18 @@ namespace cryptonote
     if (tx_extra.empty())
       return true;
     std::string extra_str(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size());
-    std::istringstream iss(extra_str);
-    binary_archive<false> ar(iss);
+    binary_archive<false> ar{epee::strspan<std::uint8_t>(extra_str)};
     std::ostringstream oss;
     binary_archive<true> newar(oss);
 
-    bool eof = false;
-    while (!eof)
+    do
     {
       tx_extra_field field;
       bool r = ::do_serialize(ar, field);
       CHECK_AND_NO_ASSERT_MES_L1(r, false, "failed to deserialize extra field. extra = " << string_tools::buff_to_hex_nodelimer(std::string(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size())));
       if (field.type() != type)
         ::do_serialize(newar, field);
-
-      std::ios_base::iostate state = iss.rdstate();
-      eof = (EOF == iss.peek());
-      iss.clear(state);
-    }
+    } while (!ar.eof());
     CHECK_AND_NO_ASSERT_MES_L1(::serialization::check_stream_state(ar), false, "failed to deserialize extra field. extra = " << string_tools::buff_to_hex_nodelimer(std::string(reinterpret_cast<const char*>(tx_extra.data()), tx_extra.size())));
     tx_extra.clear();
     std::string s = oss.str();
@@ -1017,7 +990,7 @@ namespace cryptonote
     switch (decimal_point)
     {
       case 12:
-        return "MKEcoin";
+        return "mkecoin";
       case 9:
         return "millinero";
       case 6:
@@ -1356,9 +1329,7 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool parse_and_validate_block_from_blob(const blobdata_ref& b_blob, block& b, crypto::hash *block_hash)
   {
-    std::stringstream ss;
-    ss << b_blob;
-    binary_archive<false> ba(ss);
+    binary_archive<false> ba{epee::strspan<std::uint8_t>(b_blob)};
     bool r = ::serialization::serialize(ba, b);
     CHECK_AND_ASSERT_MES(r, false, "Failed to parse block from blob");
     b.invalidate_hashes();

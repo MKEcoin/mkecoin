@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -43,9 +43,9 @@ set(cryptonote_core_private_headers
   tx_sanity_check.h
   cryptonote_tx_utils.h)
 
-MKEcoin_private_headers(cryptonote_core
+mkecoin_private_headers(cryptonote_core
   ${cryptonote_core_private_headers})
-MKEcoin_add_library(cryptonote_core
+mkecoin_add_library(cryptonote_core
   ${cryptonote_core_sources}
   ${cryptonote_core_headers}
   ${cryptonote_core_private_headers})

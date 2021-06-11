@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -622,8 +622,10 @@ namespace cryptonote
       if (need_additional_txkeys)
       {
         additional_tx_keys.clear();
-        for (const auto &d: destinations)
+        for (size_t i = 0; i < destinations.size(); ++i)
+        {
           additional_tx_keys.push_back(keypair::generate(sender_account_keys.get_device()).sec);
+        }
       }
 
       bool r = construct_tx_with_tx_key(sender_account_keys, subaddresses, sources, destinations, change_addr, extra, tx, unlock_time, tx_key, additional_tx_keys, rct, rct_config, msout);

@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -34,9 +34,9 @@ set(hardforks_headers
 
 set(hardforks_private_headers)
 
-MKEcoin_private_headers(hardforks
+mkecoin_private_headers(hardforks
   ${hardforks_private_headers})
-MKEcoin_add_library(hardforks
+mkecoin_add_library(hardforks
   ${hardforks_sources}
   ${hardforks_headers}
   ${hardforks_private_headers})

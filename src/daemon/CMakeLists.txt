@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -62,9 +62,9 @@ set(daemon_private_headers
   ../p2p/p2p_protocol_defs.h
   ../p2p/stdafx.h)
 
-MKEcoin_private_headers(daemon
+mkecoin_private_headers(daemon
   ${daemon_private_headers})
-MKEcoin_add_executable(daemon
+mkecoin_add_executable(daemon
   ${daemon_sources}
   ${daemon_headers}
   ${daemon_private_headers})
@@ -94,5 +94,5 @@ target_link_libraries(daemon
     ${Blocks})
 set_property(TARGET daemon
   PROPERTY
-    OUTPUT_NAME "MKEcoind")
+    OUTPUT_NAME "mkecoind")
 install(TARGETS daemon DESTINATION bin)

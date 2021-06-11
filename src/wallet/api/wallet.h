@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -40,7 +40,7 @@
 #include <boost/thread/condition_variable.hpp>
 
 
-namespace MKEcoin {
+namespace mkecoin {
 class TransactionHistoryImpl;
 class PendingTransactionImpl;
 class UnsignedTransactionImpl;
@@ -167,6 +167,8 @@ public:
     virtual UnsignedTransaction * loadUnsignedTx(const std::string &unsigned_filename) override;
     bool exportKeyImages(const std::string &filename, bool all = false) override;
     bool importKeyImages(const std::string &filename) override;
+    bool exportOutputs(const std::string &filename, bool all = false) override;
+    bool importOutputs(const std::string &filename) override;
 
     virtual void disposeTransaction(PendingTransaction * t) override;
     virtual uint64_t estimateTransactionFee(const std::vector<std::pair<std::string, uint64_t>> &destinations,
@@ -181,6 +183,8 @@ public:
 
     virtual bool setCacheAttribute(const std::string &key, const std::string &val) override;
     virtual std::string getCacheAttribute(const std::string &key) const override;
+
+    virtual void setOffline(bool offline) override;
 
     virtual bool setUserNote(const std::string &txid, const std::string &note) override;
     virtual std::string getUserNote(const std::string &txid) const override;
@@ -277,7 +281,7 @@ private:
 
 } // namespace
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;
 
 #endif
 

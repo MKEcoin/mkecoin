@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -65,8 +65,8 @@
 #include <miniupnp/miniupnpc/upnpcommands.h>
 #include <miniupnp/miniupnpc/upnperrors.h>
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "net.p2p"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "net.p2p"
 
 #define NET_MAKE_IP(b1,b2,b3,b4)  ((LPARAM)(((DWORD)(b1)<<24)+((DWORD)(b2)<<16)+((DWORD)(b3)<<8)+((DWORD)(b4))))
 
@@ -682,11 +682,13 @@ namespace nodetool
       full_addrs.insert("212.83.175.67:28080");
       full_addrs.insert("212.83.172.165:28080");
       full_addrs.insert("192.110.160.146:28080");
+      full_addrs.insert("88.99.173.38:28080");
     }
     else if (m_nettype == cryptonote::STAGENET)
     {
       full_addrs.insert("162.210.173.150:38080");
       full_addrs.insert("192.110.160.146:38080");
+      full_addrs.insert("88.99.173.38:38080");
     }
     else if (m_nettype == cryptonote::FAKECHAIN)
     {
@@ -701,6 +703,7 @@ namespace nodetool
       full_addrs.insert("209.250.243.248:18080");
       full_addrs.insert("104.238.221.81:18080");
       full_addrs.insert("66.85.74.134:18080");
+      full_addrs.insert("88.99.173.38:18080");
     }
     return full_addrs;
   }
@@ -1229,8 +1232,8 @@ namespace nodetool
     if(!max_index)
       return 0;
 
-    size_t x = crypto::rand<size_t>()%(max_index+1);
-    size_t res = (x*x*x)/(max_index*max_index); //parabola \/
+    size_t x = crypto::rand<size_t>()%(16*max_index+1);
+    size_t res = (x*x*x)/(max_index*max_index*16*16*16); //parabola \/
     MDEBUG("Random connection index=" << res << "(x="<< x << ", max_index=" << max_index << ")");
     return res;
   }
@@ -1696,7 +1699,7 @@ namespace nodetool
         {
           // seeds should have hostname converted to IP already
           MDEBUG("Seed node: " << full_addr);
-          server.m_seed_nodes.push_back(MKEcoin_UNWRAP(net::get_network_address(full_addr, default_port)));
+          server.m_seed_nodes.push_back(mkecoin_UNWRAP(net::get_network_address(full_addr, default_port)));
         }
         MDEBUG("Number of seed nodes: " << server.m_seed_nodes.size());
       }
@@ -1980,13 +1983,13 @@ namespace nodetool
       return true;
 
     static const std::vector<std::string> dns_urls = {
-      "blocklist.MKEcoinpulse.se"
-    , "blocklist.MKEcoinpulse.org"
-    , "blocklist.MKEcoinpulse.net"
-    , "blocklist.MKEcoinpulse.no"
-    , "blocklist.MKEcoinpulse.fr"
-    , "blocklist.MKEcoinpulse.de"
-    , "blocklist.MKEcoinpulse.ch"
+      "blocklist.mkecoinpulse.se"
+    , "blocklist.mkecoinpulse.org"
+    , "blocklist.mkecoinpulse.net"
+    , "blocklist.mkecoinpulse.no"
+    , "blocklist.mkecoinpulse.fr"
+    , "blocklist.mkecoinpulse.de"
+    , "blocklist.mkecoinpulse.ch"
     };
 
     std::vector<std::string> records;
@@ -2175,8 +2178,9 @@ namespace nodetool
   }
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>
-  bool node_server<t_payload_net_handler>::relay_notify_to_list(int command, const epee::span<const uint8_t> data_buff, std::vector<std::pair<epee::net_utils::zone, boost::uuids::uuid>> connections)
+  bool node_server<t_payload_net_handler>::relay_notify_to_list(int command, epee::levin::message_writer data_buff, std::vector<std::pair<epee::net_utils::zone, boost::uuids::uuid>> connections)
   {
+    epee::byte_slice message = data_buff.finalize_notify(command);
     std::sort(connections.begin(), connections.end());
     auto zone = m_network_zones.begin();
     for(const auto& c_id: connections)
@@ -2194,7 +2198,7 @@ namespace nodetool
         ++zone;
       }
       if (zone->first == c_id.first)
-        zone->second.m_net_server.get_config_object().notify(command, data_buff, c_id.second);
+        zone->second.m_net_server.get_config_object().send(message.clone(), c_id.second);
     }
     return true;
   }
@@ -2261,24 +2265,13 @@ namespace nodetool
   }
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>
-  bool node_server<t_payload_net_handler>::invoke_notify_to_peer(int command, const epee::span<const uint8_t> req_buff, const epee::net_utils::connection_context_base& context)
+  bool node_server<t_payload_net_handler>::invoke_notify_to_peer(const int command, epee::levin::message_writer message, const epee::net_utils::connection_context_base& context)
   {
     if(is_filtered_command(context.m_remote_address, command))
       return false;
 
     network_zone& zone = m_network_zones.at(context.m_remote_address.get_zone());
-    int res = zone.m_net_server.get_config_object().notify(command, req_buff, context.m_connection_id);
-    return res > 0;
-  }
-  //-----------------------------------------------------------------------------------
-  template<class t_payload_net_handler>
-  bool node_server<t_payload_net_handler>::invoke_command_to_peer(int command, const epee::span<const uint8_t> req_buff, std::string& resp_buff, const epee::net_utils::connection_context_base& context)
-  {
-    if(is_filtered_command(context.m_remote_address, command))
-      return false;
-
-    network_zone& zone = m_network_zones.at(context.m_remote_address.get_zone());
-    int res = zone.m_net_server.get_config_object().invoke(command, req_buff, resp_buff, context.m_connection_id);
+    int res = zone.m_net_server.get_config_object().send(message.finalize_notify(command), context.m_connection_id);
     return res > 0;
   }
   //-----------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 //#define DBG
-// Copyright (c) 2016, MKEcoin Research Labs
+// Copyright (c) 2016, mkecoin Research Labs
 //
 // Author: Shen Noether <shen.noether@gmx.com>
 //

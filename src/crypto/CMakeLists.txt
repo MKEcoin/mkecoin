@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -80,9 +80,9 @@ set(crypto_private_headers
   CryptonightR_JIT.h
   CryptonightR_template.h)
 
-MKEcoin_private_headers(cncrypto
+mkecoin_private_headers(cncrypto
   ${crypto_private_headers})
-MKEcoin_add_library(cncrypto
+mkecoin_add_library(cncrypto
   ${crypto_sources}
   ${crypto_headers}
   ${crypto_private_headers})
@@ -116,6 +116,7 @@ endif()
 
 # cheat because cmake and ccache hate each other
 set_property(SOURCE CryptonightR_template.S PROPERTY LANGUAGE C)
+set_property(SOURCE CryptonightR_template.S PROPERTY XCODE_EXPLICIT_FILE_TYPE sourcecode.asm)
 
 # Must be done last, because it references libraries in this directory
 add_subdirectory(wallet)

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -122,7 +122,7 @@ public:
    * @brief Gets a DNS address from OpenAlias format
    *
    * If the address looks good, but contains one @ symbol, replace that with a .
-   * e.g. donate@getMKEcoin.org becomes donate.getMKEcoin.org
+   * e.g. donate@getmkecoin.org becomes donate.getmkecoin.org
    *
    * @param oa_addr  OpenAlias address
    *

@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -89,9 +89,9 @@ set(common_private_headers
   combinator.h
   utf8.h)
 
-MKEcoin_private_headers(common
+mkecoin_private_headers(common
   ${common_private_headers})
-MKEcoin_add_library(common
+mkecoin_add_library(common
   ${common_sources}
   ${common_headers}
   ${common_private_headers}
@@ -111,5 +111,5 @@ target_link_libraries(common
     ${OPENSSL_LIBRARIES}
     ${EXTRA_LIBRARIES})
 
-#MKEcoin_install_headers(common
+#mkecoin_install_headers(common
 #  ${common_headers})

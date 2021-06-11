@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -40,10 +40,11 @@
 #include <vector>
 #include <sstream>
 #include <boost/format.hpp>
+#include <boost/filesystem.hpp>
 
 using namespace std;
 
-namespace MKEcoin {
+namespace mkecoin {
 
 PendingTransaction::~PendingTransaction() {}
 
@@ -264,5 +265,5 @@ std::vector<std::string> PendingTransactionImpl::signersKeys() const {
 
 }
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;
 

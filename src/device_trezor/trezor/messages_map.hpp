@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#ifndef MKEcoin_MESSAGES_MAP_H
-#define MKEcoin_MESSAGES_MAP_H
+#ifndef mkecoin_MESSAGES_MAP_H
+#define mkecoin_MESSAGES_MAP_H
 
 #include <string>
 #include <type_traits>
@@ -91,4 +91,4 @@ namespace trezor {
 
 }}
 
-#endif //MKEcoin_MESSAGES_MAP_H
+#endif //mkecoin_MESSAGES_MAP_H

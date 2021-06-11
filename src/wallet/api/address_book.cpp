@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -37,7 +37,7 @@
 
 #include <vector>
 
-namespace MKEcoin {
+namespace mkecoin {
   
 AddressBook::~AddressBook() {}
   
@@ -167,4 +167,4 @@ AddressBookImpl::~AddressBookImpl()
 
 } // namespace
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;

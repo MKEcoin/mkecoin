@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -39,7 +39,7 @@ inline bool do_serialize(Archive<false>& ar, std::string& str)
   ar.serialize_varint(size);
   if (ar.remaining_bytes() < size)
   {
-    ar.stream().setstate(std::ios::failbit);
+    ar.set_fail();
     return false;
   }
 

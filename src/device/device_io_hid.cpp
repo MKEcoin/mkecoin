@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -35,8 +35,8 @@
 namespace hw {
   namespace io {
  
-    #undef MKEcoin_DEFAULT_LOG_CATEGORY
-    #define MKEcoin_DEFAULT_LOG_CATEGORY "device.io"
+    #undef mkecoin_DEFAULT_LOG_CATEGORY
+    #define mkecoin_DEFAULT_LOG_CATEGORY "device.io"
  
     #define ASSERT_X(exp,msg)    CHECK_AND_ASSERT_THROW_MES(exp, msg); 
 

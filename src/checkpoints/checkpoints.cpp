@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -34,13 +34,15 @@
 #include "string_tools.h"
 #include "storages/portable_storage_template_helper.h" // epee json include
 #include "serialization/keyvalue_serialization.h"
+#include <boost/system/error_code.hpp>
+#include <boost/filesystem.hpp>
 #include <functional>
 #include <vector>
 
 using namespace epee;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "checkpoints"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "checkpoints"
 
 namespace cryptonote
 {
@@ -280,23 +282,23 @@ namespace cryptonote
   {
     std::vector<std::string> records;
 
-    // All four MKEcoinPulse domains have DNSSEC on and valid
-    static const std::vector<std::string> dns_urls = { "checkpoints.MKEcoinpulse.se"
-						     , "checkpoints.MKEcoinpulse.org"
-						     , "checkpoints.MKEcoinpulse.net"
-						     , "checkpoints.MKEcoinpulse.co"
+    // All four mkecoinPulse domains have DNSSEC on and valid
+    static const std::vector<std::string> dns_urls = { "checkpoints.mkecoinpulse.se"
+						     , "checkpoints.mkecoinpulse.org"
+						     , "checkpoints.mkecoinpulse.net"
+						     , "checkpoints.mkecoinpulse.co"
     };
 
-    static const std::vector<std::string> testnet_dns_urls = { "testpoints.MKEcoinpulse.se"
-							     , "testpoints.MKEcoinpulse.org"
-							     , "testpoints.MKEcoinpulse.net"
-							     , "testpoints.MKEcoinpulse.co"
+    static const std::vector<std::string> testnet_dns_urls = { "testpoints.mkecoinpulse.se"
+							     , "testpoints.mkecoinpulse.org"
+							     , "testpoints.mkecoinpulse.net"
+							     , "testpoints.mkecoinpulse.co"
     };
 
-    static const std::vector<std::string> stagenet_dns_urls = { "stagenetpoints.MKEcoinpulse.se"
-                   , "stagenetpoints.MKEcoinpulse.org"
-                   , "stagenetpoints.MKEcoinpulse.net"
-                   , "stagenetpoints.MKEcoinpulse.co"
+    static const std::vector<std::string> stagenet_dns_urls = { "stagenetpoints.mkecoinpulse.se"
+                   , "stagenetpoints.mkecoinpulse.org"
+                   , "stagenetpoints.mkecoinpulse.net"
+                   , "stagenetpoints.mkecoinpulse.co"
     };
 
     if (!tools::dns_utils::load_txt_records_from_dns(records, nettype == TESTNET ? testnet_dns_urls : nettype == STAGENET ? stagenet_dns_urls : dns_urls))

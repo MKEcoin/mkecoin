@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#ifndef MKEcoin_DEVICE_COLD_H
-#define MKEcoin_DEVICE_COLD_H
+#ifndef mkecoin_DEVICE_COLD_H
+#define mkecoin_DEVICE_COLD_H
 
 #include "wallet/wallet2.h"
 #include <boost/optional/optional.hpp>
@@ -165,4 +165,4 @@ namespace hw {
   };
 }
 
-#endif //MKEcoin_DEVICE_COLD_H
+#endif //mkecoin_DEVICE_COLD_H

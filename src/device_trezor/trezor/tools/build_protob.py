@@ -28,7 +28,7 @@ try:
         "messages.proto",
         "messages-common.proto",
         "messages-management.proto",
-        "messages-MKEcoin.proto",
+        "messages-mkecoin.proto",
     ]
 
     if args.debug_msg:

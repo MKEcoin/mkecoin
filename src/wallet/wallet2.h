@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -72,8 +72,8 @@
 #include "wallet_light_rpc.h"
 #include "wallet_rpc_helpers.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.wallet2"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.wallet2"
 
 #define THROW_ON_RPC_RESPONSE_ERROR(r, error, res, method, ...) \
   do { \
@@ -1139,7 +1139,7 @@ private:
     }
 
     BEGIN_SERIALIZE_OBJECT()
-      MAGIC_FIELD("MKEcoin wallet cache")
+      MAGIC_FIELD("mkecoin wallet cache")
       VERSION_FIELD(0)
       FIELD(m_blockchain)
       FIELD(m_transfers)
@@ -1547,7 +1547,7 @@ private:
 
     bool is_tx_spendtime_unlocked(uint64_t unlock_time, uint64_t block_height);
     void hash_m_transfer(const transfer_details & transfer, crypto::hash &hash) const;
-    uint64_t hash_m_transfers(int64_t transfer_height, crypto::hash &hash) const;
+    uint64_t hash_m_transfers(boost::optional<uint64_t> transfer_height, crypto::hash &hash) const;
     void finish_rescan_bc_keep_key_images(uint64_t transfer_height, const crypto::hash &hash);
     void enable_dns(bool enable) { m_use_dns = enable; }
     void set_offline(bool offline = true);

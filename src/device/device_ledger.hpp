@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The MKEcoin Project
+// Copyright (c) 2017-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -58,7 +58,7 @@ namespace hw {
 
     #ifdef WITH_DEVICE_LEDGER
 
-    // Origin: https://github.com/LedgerHQ/ledger-app-MKEcoin/blob/master/src/MKEcoin_types.h
+    // Origin: https://github.com/LedgerHQ/ledger-app-mkecoin/blob/master/src/mkecoin_types.h
     #define SW_OK                                   0x9000
     #define SW_WRONG_LENGTH                         0x6700
     #define SW_SECURITY_PIN_LOCKED                  0x6910

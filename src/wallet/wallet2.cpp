@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -37,6 +37,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/asio/ip/address.hpp>
 #include <boost/range/adaptor/transformed.hpp>
 #include <boost/preprocessor/stringize.hpp>
@@ -95,8 +96,8 @@ using namespace std;
 using namespace crypto;
 using namespace cryptonote;
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.wallet2"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.wallet2"
 
 // used to choose when to stop adding outputs to a tx
 #define APPROXIMATE_INPUT_BYTES 80
@@ -104,12 +105,12 @@ using namespace cryptonote;
 // used to target a given block weight (additional outputs may be added on top to build fee)
 #define TX_WEIGHT_TARGET(bytes) (bytes*2/3)
 
-#define UNSIGNED_TX_PREFIX "MKEcoin unsigned tx set\005"
-#define SIGNED_TX_PREFIX "MKEcoin signed tx set\005"
-#define MULTISIG_UNSIGNED_TX_PREFIX "MKEcoin multisig unsigned tx set\001"
+#define UNSIGNED_TX_PREFIX "mkecoin unsigned tx set\005"
+#define SIGNED_TX_PREFIX "mkecoin signed tx set\005"
+#define MULTISIG_UNSIGNED_TX_PREFIX "mkecoin multisig unsigned tx set\001"
 
 #define RECENT_OUTPUT_RATIO (0.5) // 50% of outputs are from the recent zone
-#define RECENT_OUTPUT_DAYS (1.8) // last 1.8 day makes up the recent zone (taken from MKEcoinlink.pdf, Miller et al)
+#define RECENT_OUTPUT_DAYS (1.8) // last 1.8 day makes up the recent zone (taken from mkecoinlink.pdf, Miller et al)
 #define RECENT_OUTPUT_ZONE ((time_t)(RECENT_OUTPUT_DAYS * 86400))
 #define RECENT_OUTPUT_BLOCKS (RECENT_OUTPUT_DAYS * 720)
 
@@ -120,11 +121,11 @@ using namespace cryptonote;
 #define SUBADDRESS_LOOKAHEAD_MAJOR 50
 #define SUBADDRESS_LOOKAHEAD_MINOR 200
 
-#define KEY_IMAGE_EXPORT_FILE_MAGIC "MKEcoin key image export\003"
+#define KEY_IMAGE_EXPORT_FILE_MAGIC "mkecoin key image export\003"
 
-#define MULTISIG_EXPORT_FILE_MAGIC "MKEcoin multisig export\001"
+#define MULTISIG_EXPORT_FILE_MAGIC "mkecoin multisig export\001"
 
-#define OUTPUT_EXPORT_FILE_MAGIC "MKEcoin output export\004"
+#define OUTPUT_EXPORT_FILE_MAGIC "mkecoin output export\004"
 
 #define SEGREGATION_FORK_HEIGHT 99999999
 #define TESTNET_SEGREGATION_FORK_HEIGHT 99999999
@@ -146,7 +147,7 @@ using namespace cryptonote;
 static const std::string MULTISIG_SIGNATURE_MAGIC = "SigMultisigPkV1";
 static const std::string MULTISIG_EXTRA_INFO_MAGIC = "MultisigxV1";
 
-static const std::string ASCII_OUTPUT_MAGIC = "MKEcoinAsciiDataV1";
+static const std::string ASCII_OUTPUT_MAGIC = "mkecoinAsciiDataV1";
 
 boost::mutex tools::wallet2::default_daemon_address_lock;
 std::string tools::wallet2::default_daemon_address = "";
@@ -156,7 +157,7 @@ namespace
   std::string get_default_ringdb_path()
   {
     boost::filesystem::path dir = tools::get_default_data_dir();
-    // remove .bitMKEcoin, replace with .shared-ringdb
+    // remove .bitmkecoin, replace with .shared-ringdb
     dir = dir.remove_filename();
     dir /= ".shared-ringdb";
     return dir.string();
@@ -1842,8 +1843,8 @@ void wallet2::scan_output(const cryptonote::transaction &tx, bool miner_tx, cons
     if (!m_encrypt_keys_after_refresh)
     {
       boost::optional<epee::wipeable_string> pwd = m_callback->on_get_password(pool ? "output found in pool" : "output received");
-      THROW_WALLET_EXCEPTION_IF(!pwd, error::password_needed, tr("Password is needed to compute key image for incoming MKEcoin"));
-      THROW_WALLET_EXCEPTION_IF(!verify_password(*pwd), error::password_needed, tr("Invalid password: password is needed to compute key image for incoming MKEcoin"));
+      THROW_WALLET_EXCEPTION_IF(!pwd, error::password_needed, tr("Password is needed to compute key image for incoming mkecoin"));
+      THROW_WALLET_EXCEPTION_IF(!verify_password(*pwd), error::password_needed, tr("Invalid password: password is needed to compute key image for incoming mkecoin"));
       decrypt_keys(*pwd);
       m_encrypt_keys_after_refresh = *pwd;
     }
@@ -3344,8 +3345,8 @@ void wallet2::refresh(bool trusted_daemon, uint64_t start_height, uint64_t & blo
 
   if(m_light_wallet) {
 
-    // MyMKEcoin get_address_info needs to be called occasionally to trigger wallet sync.
-    // This call is not really needed for other purposes and can be removed if myMKEcoin changes their backend.
+    // Mymkecoin get_address_info needs to be called occasionally to trigger wallet sync.
+    // This call is not really needed for other purposes and can be removed if mymkecoin changes their backend.
     tools::COMMAND_RPC_GET_ADDRESS_INFO::response res;
 
     // Get basic info
@@ -5700,17 +5701,13 @@ void wallet2::load(const std::string& wallet_, const epee::wipeable_string& pass
 
         try
         {
-          std::stringstream iss;
-          iss << cache_data;
-          binary_archive<false> ar(iss);
+          binary_archive<false> ar{epee::strspan<std::uint8_t>(cache_data)};
           if (::serialization::serialize(ar, *this))
             if (::serialization::check_stream_state(ar))
               loaded = true;
           if (!loaded)
           {
-            std::stringstream iss;
-            iss << cache_data;
-            binary_archive<false> ar(iss);
+            binary_archive<false> ar{epee::strspan<std::uint8_t>(cache_data)};
             ar.enable_varint_bug_backward_compatibility();
             if (::serialization::serialize(ar, *this))
               if (::serialization::check_stream_state(ar))
@@ -6586,7 +6583,7 @@ void wallet2::commit_tx(pending_tx& ptx)
       const boost::lock_guard<boost::recursive_mutex> lock{m_daemon_rpc_mutex};
       bool r = epee::net_utils::invoke_http_json("/submit_raw_tx", oreq, ores, *m_http_client, rpc_timeout, "POST");
       THROW_WALLET_EXCEPTION_IF(!r, error::no_connection_to_daemon, "submit_raw_tx");
-      // MyMKEcoin and OpenMKEcoin use different status strings
+      // Mymkecoin and Openmkecoin use different status strings
       THROW_WALLET_EXCEPTION_IF(ores.status != "OK" && ores.status != "success" , error::tx_rejected, ptx.tx, get_rpc_status(ores.status), ores.error);
     }
   }
@@ -6785,8 +6782,7 @@ bool wallet2::parse_unsigned_tx_from_str(const std::string &unsigned_tx_st, unsi
     catch(const std::exception &e) { LOG_PRINT_L0("Failed to decrypt unsigned tx: " << e.what()); return false; }
     try
     {
-      std::istringstream iss(s);
-      binary_archive<false> ar(iss);
+      binary_archive<false> ar{epee::strspan<std::uint8_t>(s)};
       if (!::serialization::serialize(ar, exported_txs))
       {
         LOG_PRINT_L0("Failed to parse data from unsigned tx");
@@ -7100,8 +7096,7 @@ bool wallet2::parse_tx_from_str(const std::string &signed_tx_st, std::vector<too
     catch (const std::exception &e) { LOG_PRINT_L0("Failed to decrypt signed transaction: " << e.what()); return false; }
     try
     {
-      std::istringstream iss(s);
-      binary_archive<false> ar(iss);
+      binary_archive<false> ar{epee::strspan<std::uint8_t>(s)};
       if (!::serialization::serialize(ar, signed_txs))
       {
         LOG_PRINT_L0("Failed to deserialize signed transaction");
@@ -7236,8 +7231,7 @@ bool wallet2::parse_multisig_tx_from_str(std::string multisig_tx_st, multisig_tx
   bool loaded = false;
   try
   {
-    std::istringstream iss(multisig_tx_st);
-    binary_archive<false> ar(iss);
+    binary_archive<false> ar{epee::strspan<std::uint8_t>(multisig_tx_st)};
     if (::serialization::serialize(ar, exported_txs))
       if (::serialization::check_stream_state(ar))
         loaded = true;
@@ -8018,7 +8012,7 @@ void wallet2::light_wallet_get_outs(std::vector<std::vector<tools::wallet2::get_
   size_t light_wallet_requested_outputs_count = (size_t)((fake_outputs_count + 1) * 1.5 + 1);
   
   // Amounts to ask for
-  // MyMKEcoin api handle amounts and fees as strings
+  // Mymkecoin api handle amounts and fees as strings
   for(size_t idx: selected_transfers) {
     const uint64_t ask_amount = m_transfers[idx].is_rct() ? 0 : m_transfers[idx].amount();
     std::ostringstream amount_ss;
@@ -8582,7 +8576,7 @@ void wallet2::get_outs(std::vector<std::vector<tools::wallet2::get_outs_entry>> 
           [](const get_outputs_out &a, const get_outputs_out &b) { return a.index < b.index; });
     }
 
-    if (ELPP->vRegistry()->allowed(el::Level::Debug, MKEcoin_DEFAULT_LOG_CATEGORY))
+    if (ELPP->vRegistry()->allowed(el::Level::Debug, mkecoin_DEFAULT_LOG_CATEGORY))
     {
       std::map<uint64_t, std::set<uint64_t>> outs;
       for (const auto &i: req.outputs)
@@ -8760,7 +8754,7 @@ void wallet2::transfer_selected(const std::vector<cryptonote::tx_destination_ent
   // throw if total amount overflows uint64_t
   for(auto& dt: dsts)
   {
-    THROW_WALLET_EXCEPTION_IF(0 == dt.amount, error::zero_destination);
+    THROW_WALLET_EXCEPTION_IF(0 == dt.amount, error::zero_amount);
     needed_money += dt.amount;
     LOG_PRINT_L2("transfer: adding " << print_money(dt.amount) << ", for a total of " << print_money (needed_money));
     THROW_WALLET_EXCEPTION_IF(needed_money < dt.amount, error::tx_sum_overflow, dsts, fee, m_nettype);
@@ -8919,7 +8913,7 @@ void wallet2::transfer_selected_rct(std::vector<cryptonote::tx_destination_entry
   // throw if total amount overflows uint64_t
   for(auto& dt: dsts)
   {
-    THROW_WALLET_EXCEPTION_IF(0 == dt.amount, error::zero_destination);
+    THROW_WALLET_EXCEPTION_IF(0 == dt.amount, error::zero_amount);
     needed_money += dt.amount;
     LOG_PRINT_L2("transfer: adding " << print_money(dt.amount) << ", for a total of " << print_money (needed_money));
     THROW_WALLET_EXCEPTION_IF(needed_money < dt.amount, error::tx_sum_overflow, dsts, fee, m_nettype);
@@ -9332,7 +9326,7 @@ bool wallet2::light_wallet_login(bool &new_address)
   m_daemon_rpc_mutex.lock();
   bool connected = invoke_http_json("/login", request, response, rpc_timeout, "POST");
   m_daemon_rpc_mutex.unlock();
-  // MyMKEcoin doesn't send any status message. OpenMKEcoin does. 
+  // Mymkecoin doesn't send any status message. Openmkecoin does. 
   m_light_wallet_connected  = connected && (response.status.empty() || response.status == "success");
   new_address = response.new_address;
   MDEBUG("Status: " << response.status);
@@ -9373,9 +9367,9 @@ void wallet2::light_wallet_get_unspent_outs()
   oreq.amount = "0";
   oreq.address = get_account().get_public_address_str(m_nettype);
   oreq.view_key = string_tools::pod_to_hex(get_account().get_keys().m_view_secret_key);
-  // openMKEcoin specific
+  // openmkecoin specific
   oreq.dust_threshold = boost::lexical_cast<std::string>(::config::DEFAULT_DUST_THRESHOLD);
-  // below are required by openMKEcoin api - but are not used.
+  // below are required by openmkecoin api - but are not used.
   oreq.mixin = 0;
   oreq.use_dust = true;
 
@@ -9546,7 +9540,7 @@ void wallet2::light_wallet_get_address_txs()
   bool r = invoke_http_json("/get_address_txs", ireq, ires, rpc_timeout, "POST");
   m_daemon_rpc_mutex.unlock();
   THROW_WALLET_EXCEPTION_IF(!r, error::no_connection_to_daemon, "get_address_txs");
-  //OpenMKEcoin sends status=success, MyMKEcoin doesn't. 
+  //Openmkecoin sends status=success, Mymkecoin doesn't. 
   THROW_WALLET_EXCEPTION_IF((!ires.status.empty() && ires.status != "success"), error::no_connection_to_daemon, "get_address_txs");
 
   
@@ -9714,7 +9708,7 @@ void wallet2::light_wallet_get_address_txs()
 
   // Calculate wallet balance
   m_light_wallet_balance = ires.total_received-wallet_total_sent;
-  // MyMKEcoin doesn't send unlocked balance
+  // Mymkecoin doesn't send unlocked balance
   if(ires.total_received_unlocked > 0)
     m_light_wallet_unlocked_balance = ires.total_received_unlocked-wallet_total_sent;
   else
@@ -9763,7 +9757,7 @@ bool wallet2::light_wallet_key_image_is_ours(const crypto::key_image& key_image,
   crypto::key_image calculated_key_image;
   cryptonote::keypair in_ephemeral;
   
-  // Subaddresses aren't supported in myMKEcoin/openMKEcoin yet. Roll out the original scheme:
+  // Subaddresses aren't supported in mymkecoin/openmkecoin yet. Roll out the original scheme:
   //   compute D = a*R
   //   compute P = Hs(D || i)*G + B
   //   compute x = Hs(D || i) + b      (and check if P==x*G)
@@ -9892,14 +9886,14 @@ std::vector<wallet2::pending_tx> wallet2::create_transactions_2(std::vector<cryp
   needed_money = 0;
   for(auto& dt: dsts)
   {
-    THROW_WALLET_EXCEPTION_IF(0 == dt.amount, error::zero_destination);
+    THROW_WALLET_EXCEPTION_IF(0 == dt.amount, error::zero_amount);
     needed_money += dt.amount;
     LOG_PRINT_L2("transfer: adding " << print_money(dt.amount) << ", for a total of " << print_money (needed_money));
     THROW_WALLET_EXCEPTION_IF(needed_money < dt.amount, error::tx_sum_overflow, dsts, 0, m_nettype);
   }
 
   // throw if attempting a transaction with no money
-  THROW_WALLET_EXCEPTION_IF(needed_money == 0, error::zero_destination);
+  THROW_WALLET_EXCEPTION_IF(needed_money == 0, error::zero_amount);
 
   std::map<uint32_t, std::pair<uint64_t, std::pair<uint64_t, uint64_t>>> unlocked_balance_per_subaddr = unlocked_balance_per_subaddress(subaddr_account, false);
   std::map<uint32_t, uint64_t> balance_per_subaddr = balance_per_subaddress(subaddr_account, false);
@@ -11515,6 +11509,9 @@ void wallet2::check_tx_key_helper(const cryptonote::transaction &tx, const crypt
 
 void wallet2::check_tx_key_helper(const crypto::hash &txid, const crypto::key_derivation &derivation, const std::vector<crypto::key_derivation> &additional_derivations, const cryptonote::account_public_address &address, uint64_t &received, bool &in_pool, uint64_t &confirmations)
 {
+  uint32_t rpc_version;
+  THROW_WALLET_EXCEPTION_IF(!check_connection(&rpc_version), error::wallet_internal_error, "Failed to connect to daemon: " + get_daemon_address());
+
   COMMAND_RPC_GET_TRANSACTIONS::request req;
   COMMAND_RPC_GET_TRANSACTIONS::response res;
   req.txs_hashes.push_back(epee::string_tools::pod_to_hex(txid));
@@ -11560,10 +11557,17 @@ void wallet2::check_tx_key_helper(const crypto::hash &txid, const crypto::key_de
   confirmations = 0;
   if (!in_pool)
   {
-    std::string err;
-    uint64_t bc_height = get_daemon_blockchain_height(err);
-    if (err.empty())
-      confirmations = bc_height - res.txs.front().block_height;
+    if (rpc_version < MAKE_CORE_RPC_VERSION(3, 7))
+    {
+      std::string err;
+      uint64_t bc_height = get_daemon_blockchain_height(err);
+      if (err.empty() && bc_height > res.txs.front().block_height)
+        confirmations = bc_height - res.txs.front().block_height;
+    }
+    else
+    {
+      confirmations = res.txs.front().confirmations;
+    }
   }
 }
 
@@ -12026,8 +12030,7 @@ bool wallet2::check_reserve_proof(const cryptonote::account_public_address &addr
   serializable_unordered_map<crypto::public_key, crypto::signature> subaddr_spendkeys;
   try
   {
-    std::istringstream iss(sig_decoded);
-    binary_archive<false> ar(iss);
+    binary_archive<false> ar{epee::strspan<std::uint8_t>(sig_decoded)};
     if (::serialization::serialize_noeof(ar, proofs))
       if (::serialization::serialize_noeof(ar, subaddr_spendkeys))
         if (::serialization::check_stream_state(ar))
@@ -12227,7 +12230,7 @@ uint64_t wallet2::get_approximate_blockchain_height() const
   // Calculated blockchain height
   uint64_t approx_blockchain_height = fork_block + (time(NULL) - fork_time)/seconds_per_block;
   // testnet got some huge rollbacks, so the estimation is way off
-  static const uint64_t approximate_testnet_rolled_back_blocks = 303967;
+  static const uint64_t approximate_testnet_rolled_back_blocks = 342100;
   if (m_nettype == TESTNET && approx_blockchain_height > approximate_testnet_rolled_back_blocks)
     approx_blockchain_height -= approximate_testnet_rolled_back_blocks;
   LOG_PRINT_L2("Calculated blockchain height: " << approx_blockchain_height);
@@ -13211,9 +13214,7 @@ size_t wallet2::import_outputs_from_str(const std::string &outputs_st)
     std::pair<uint64_t, std::vector<tools::wallet2::transfer_details>> outputs;
     try
     {
-      std::stringstream iss;
-      iss << body;
-      binary_archive<false> ar(iss);
+      binary_archive<false> ar{epee::strspan<std::uint8_t>(body)};
       if (::serialization::serialize(ar, outputs))
         if (::serialization::check_stream_state(ar))
           loaded = true;
@@ -13465,8 +13466,7 @@ size_t wallet2::import_multisig(std::vector<cryptonote::blobdata> blobs)
     bool loaded = false;
     try
     {
-      std::istringstream iss(body);
-      binary_archive<false> ar(iss);
+      binary_archive<false> ar{epee::strspan<std::uint8_t>(body)};
       if (::serialization::serialize(ar, i))
         if (::serialization::check_stream_state(ar))
           loaded = true;
@@ -13669,7 +13669,7 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
     }
   }
 
-  std::string uri = "MKEcoin:" + address;
+  std::string uri = "mkecoin:" + address;
   unsigned int n_fields = 0;
 
   if (!payment_id.empty())
@@ -13698,9 +13698,9 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
 //----------------------------------------------------------------------------------------------------
 bool wallet2::parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &amount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error)
 {
-  if (uri.substr(0, 7) != "MKEcoin:")
+  if (uri.substr(0, 7) != "mkecoin:")
   {
-    error = std::string("URI has wrong scheme (expected \"MKEcoin:\"): ") + uri;
+    error = std::string("URI has wrong scheme (expected \"mkecoin:\"): ") + uri;
     return false;
   }
 
@@ -13972,12 +13972,12 @@ uint64_t wallet2::get_segregation_fork_height() const
 
   if (m_use_dns && !m_offline)
   {
-    // All four MKEcoinPulse domains have DNSSEC on and valid
+    // All four mkecoinPulse domains have DNSSEC on and valid
     static const std::vector<std::string> dns_urls = {
-        "segheights.MKEcoinpulse.org",
-        "segheights.MKEcoinpulse.net",
-        "segheights.MKEcoinpulse.co",
-        "segheights.MKEcoinpulse.se"
+        "segheights.mkecoinpulse.org",
+        "segheights.mkecoinpulse.net",
+        "segheights.mkecoinpulse.co",
+        "segheights.mkecoinpulse.se"
     };
 
     const uint64_t current_height = get_blockchain_current_height();
@@ -14024,7 +14024,7 @@ mms::multisig_wallet_state wallet2::get_multisig_wallet_state() const
   state.num_transfer_details = m_transfers.size();
   if (state.multisig)
   {
-    THROW_WALLET_EXCEPTION_IF(!m_original_keys_available, error::wallet_internal_error, "MMS use not possible because own original MKEcoin address not available");
+    THROW_WALLET_EXCEPTION_IF(!m_original_keys_available, error::wallet_internal_error, "MMS use not possible because own original mkecoin address not available");
     state.address = m_original_address;
     state.view_secret_key = m_original_view_secret_key;
   }
@@ -14188,15 +14188,15 @@ void wallet2::hash_m_transfer(const transfer_details & transfer, crypto::hash &h
   KECCAK_CTX state;
   keccak_init(&state);
   keccak_update(&state, (const uint8_t *) transfer.m_txid.data, sizeof(transfer.m_txid.data));
-  keccak_update(&state, (const uint8_t *) transfer.m_internal_output_index, sizeof(transfer.m_internal_output_index));
-  keccak_update(&state, (const uint8_t *) transfer.m_global_output_index, sizeof(transfer.m_global_output_index));
-  keccak_update(&state, (const uint8_t *) transfer.m_amount, sizeof(transfer.m_amount));
+  keccak_update(&state, (const uint8_t *) &transfer.m_internal_output_index, sizeof(transfer.m_internal_output_index));
+  keccak_update(&state, (const uint8_t *) &transfer.m_global_output_index, sizeof(transfer.m_global_output_index));
+  keccak_update(&state, (const uint8_t *) &transfer.m_amount, sizeof(transfer.m_amount));
   keccak_finish(&state, (uint8_t *) hash.data);
 }
 //----------------------------------------------------------------------------------------------------
-uint64_t wallet2::hash_m_transfers(int64_t transfer_height, crypto::hash &hash) const
+uint64_t wallet2::hash_m_transfers(boost::optional<uint64_t> transfer_height, crypto::hash &hash) const
 {
-  CHECK_AND_ASSERT_THROW_MES(transfer_height > (int64_t)m_transfers.size(), "Hash height is greater than number of transfers");
+  CHECK_AND_ASSERT_THROW_MES(!transfer_height || *transfer_height <= m_transfers.size(), "Hash height is greater than number of transfers");
 
   KECCAK_CTX state;
   crypto::hash tmp_hash{};
@@ -14204,12 +14204,12 @@ uint64_t wallet2::hash_m_transfers(int64_t transfer_height, crypto::hash &hash) 
 
   keccak_init(&state);
   for(const transfer_details & transfer : m_transfers){
-    if (transfer_height >= 0 && current_height >= (uint64_t)transfer_height){
+    if (transfer_height && current_height >= *transfer_height){
       break;
     }
 
     hash_m_transfer(transfer, tmp_hash);
-    keccak_update(&state, (const uint8_t *) transfer.m_block_height, sizeof(transfer.m_block_height));
+    keccak_update(&state, (const uint8_t *) &transfer.m_block_height, sizeof(transfer.m_block_height));
     keccak_update(&state, (const uint8_t *) tmp_hash.data, sizeof(tmp_hash.data));
     current_height += 1;
   }
@@ -14221,23 +14221,28 @@ uint64_t wallet2::hash_m_transfers(int64_t transfer_height, crypto::hash &hash) 
 void wallet2::finish_rescan_bc_keep_key_images(uint64_t transfer_height, const crypto::hash &hash)
 {
   // Compute hash of m_transfers, if differs there had to be BC reorg.
-  crypto::hash new_transfers_hash{};
-  hash_m_transfers((int64_t) transfer_height, new_transfers_hash);
+  if (transfer_height <= m_transfers.size()) {
+    crypto::hash new_transfers_hash{};
+    hash_m_transfers(transfer_height, new_transfers_hash);
 
-  if (new_transfers_hash != hash)
-  {
-    // Soft-Reset to avoid inconsistency in case of BC reorg.
-    clear_soft(false);  // keep_key_images works only with soft reset.
-    THROW_WALLET_EXCEPTION_IF(true, error::wallet_internal_error, "Transfers changed during rescan, soft or hard rescan is needed");
+    if (new_transfers_hash == hash) {
+      // Restore key images in m_transfers from m_key_images
+      for(auto it = m_key_images.begin(); it != m_key_images.end(); it++)
+      {
+        THROW_WALLET_EXCEPTION_IF(it->second >= m_transfers.size(),
+                                  error::wallet_internal_error,
+                                  "Key images cache contains illegal transfer offset");
+        m_transfers[it->second].m_key_image = it->first;
+        m_transfers[it->second].m_key_image_known = true;
+      }
+
+      return;
+    }
   }
 
-  // Restore key images in m_transfers from m_key_images
-  for(auto it = m_key_images.begin(); it != m_key_images.end(); it++)
-  {
-    THROW_WALLET_EXCEPTION_IF(it->second >= m_transfers.size(), error::wallet_internal_error, "Key images cache contains illegal transfer offset");
-    m_transfers[it->second].m_key_image = it->first;
-    m_transfers[it->second].m_key_image_known = true;
-  }
+  // Soft-Reset to avoid inconsistency in case of BC reorg.
+  clear_soft(false);  // keep_key_images works only with soft reset.
+  THROW_WALLET_EXCEPTION_IF(true, error::wallet_internal_error, "Transfers changed during rescan, soft or hard rescan is needed");
 }
 //----------------------------------------------------------------------------------------------------
 uint64_t wallet2::get_bytes_sent() const

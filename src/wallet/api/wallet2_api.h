@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -40,7 +40,7 @@
 #include <stdexcept>
 
 //  Public interface for libwallet library
-namespace MKEcoin {
+namespace mkecoin {
 
 enum NetworkType : uint8_t {
     MAINNET = 0,
@@ -541,7 +541,7 @@ struct Wallet
      * \param upper_transaction_size_limit
      * \param daemon_username
      * \param daemon_password
-     * \param lightWallet - start wallet in light mode, connect to a openMKEcoin compatible server.
+     * \param lightWallet - start wallet in light mode, connect to a openmkecoin compatible server.
      * \param proxy_address - set proxy address, empty string to disable
      * \return  - true on success
      */
@@ -919,6 +919,19 @@ struct Wallet
     */
     virtual bool importKeyImages(const std::string &filename) = 0;
 
+    /*!
+     * \brief importOutputs - exports outputs to file
+     * \param filename
+     * \return                  - true on success
+     */
+    virtual bool exportOutputs(const std::string &filename, bool all = false) = 0;
+
+    /*!
+     * \brief importOutputs - imports outputs from file
+     * \param filename
+     * \return                  - true on success
+     */
+    virtual bool importOutputs(const std::string &filename) = 0;
 
     virtual TransactionHistory * history() = 0;
     virtual AddressBook * addressBook() = 0;
@@ -1014,6 +1027,12 @@ struct Wallet
     * \return true on success
     */
     virtual bool rescanSpent() = 0;
+
+   /*
+    * \brief setOffline - toggle set offline on/off
+    * \param offline - true/false
+    */
+    virtual void setOffline(bool offline) = 0;
     
     //! blackballs a set of outputs
     virtual bool blackballOutputs(const std::vector<std::string> &outputs, bool add) = 0;
@@ -1307,7 +1326,7 @@ struct WalletManager
     //! stops mining
     virtual bool stopMining() = 0;
 
-    //! resolves an OpenAlias address to a MKEcoin address
+    //! resolves an OpenAlias address to a mkecoin address
     virtual std::string resolveOpenAlias(const std::string &address, bool &dnssec_valid) const = 0;
 
     //! checks for an update and returns version, hash and url
@@ -1344,5 +1363,5 @@ struct WalletManagerFactory
 
 }
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;
 

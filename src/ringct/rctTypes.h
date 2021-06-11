@@ -1,4 +1,4 @@
-// Copyright (c) 2016, MKEcoin Research Labs
+// Copyright (c) 2016, mkecoin Research Labs
 //
 // Author: Shen Noether <shen.noether@gmx.com>
 //
@@ -62,7 +62,7 @@ extern "C" {
 #define DP(x)
 #endif
 
-//atomic units of MKEcoins
+//atomic units of mkecoins
 #define ATOMS 64
 
 //for printing large ints
@@ -284,7 +284,7 @@ namespace rct {
         {
           FIELD(type)
           if (type == RCTTypeNull)
-            return ar.stream().good();
+            return ar.good();
           if (type != RCTTypeFull && type != RCTTypeSimple && type != RCTTypeBulletproof && type != RCTTypeBulletproof2 && type != RCTTypeCLSAG)
             return false;
           VARINT_FIELD(txnFee)
@@ -344,7 +344,7 @@ namespace rct {
               ar.delimit_array();
           }
           ar.end_array();
-          return ar.stream().good();
+          return ar.good();
         }
 
         BEGIN_SERIALIZE_OBJECT()
@@ -375,7 +375,7 @@ namespace rct {
           if (mixin >= 0xffffffff)
             return false;
           if (type == RCTTypeNull)
-            return ar.stream().good();
+            return ar.good();
           if (type != RCTTypeFull && type != RCTTypeSimple && type != RCTTypeBulletproof && type != RCTTypeBulletproof2 && type != RCTTypeCLSAG)
             return false;
           if (type == RCTTypeBulletproof || type == RCTTypeBulletproof2 || type == RCTTypeCLSAG)
@@ -522,7 +522,7 @@ namespace rct {
             }
             ar.end_array();
           }
-          return ar.stream().good();
+          return ar.good();
         }
 
         BEGIN_SERIALIZE_OBJECT()

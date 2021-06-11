@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -30,14 +30,14 @@ set(TREZOR_PROTOB_H
         trezor/messages/messages.pb.h
         trezor/messages/messages-common.pb.h
         trezor/messages/messages-management.pb.h
-        trezor/messages/messages-MKEcoin.pb.h
+        trezor/messages/messages-mkecoin.pb.h
 )
 
 set(TREZOR_PROTOB_CPP
         trezor/messages/messages.pb.cc
         trezor/messages/messages-common.pb.cc
         trezor/messages/messages-management.pb.cc
-        trezor/messages/messages-MKEcoin.pb.cc
+        trezor/messages/messages-mkecoin.pb.cc
 )
 
 set(trezor_headers
@@ -73,10 +73,10 @@ if(DEVICE_TREZOR_READY)
         message(STATUS "Trezor debugging enabled")
     endif()
 
-    MKEcoin_private_headers(device_trezor
+    mkecoin_private_headers(device_trezor
             ${device_private_headers})
 
-    MKEcoin_add_library(device_trezor
+    mkecoin_add_library(device_trezor
             ${trezor_sources}
             ${trezor_headers}
             ${trezor_private_headers})
@@ -97,7 +97,7 @@ if(DEVICE_TREZOR_READY)
 
 else()
     message(STATUS "Trezor support disabled")
-    MKEcoin_private_headers(device_trezor)
-    MKEcoin_add_library(device_trezor device_trezor.cpp)
+    mkecoin_private_headers(device_trezor)
+    mkecoin_add_library(device_trezor device_trezor.cpp)
     target_link_libraries(device_trezor PUBLIC cncrypto)
 endif()

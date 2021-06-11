@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -31,7 +31,7 @@
 #include "wallet/api/wallet2_api.h"
 #include <boost/thread/shared_mutex.hpp>
 
-namespace MKEcoin {
+namespace mkecoin {
 
 class WalletImpl;
 
@@ -57,5 +57,5 @@ private:
 
 }
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;
 

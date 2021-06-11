@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -55,8 +55,8 @@ using namespace epee;
 #include "rpc/core_rpc_server_commands_defs.h"
 #include "daemonizer/daemonizer.h"
 
-#undef MKEcoin_DEFAULT_LOG_CATEGORY
-#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.rpc"
+#undef mkecoin_DEFAULT_LOG_CATEGORY
+#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.rpc"
 
 #define DEFAULT_AUTO_REFRESH_PERIOD 20 // seconds
 
@@ -68,7 +68,7 @@ namespace
   const command_line::arg_descriptor<std::string> arg_wallet_dir = {"wallet-dir", "Directory for newly created wallets"};
   const command_line::arg_descriptor<bool> arg_prompt_for_password = {"prompt-for-password", "Prompts for password when not provided", false};
 
-  constexpr const char default_rpc_username[] = "MKEcoin";
+  constexpr const char default_rpc_username[] = "mkecoin";
 
   boost::optional<tools::password_container> password_prompter(const char *prompt, bool verify)
   {
@@ -225,7 +225,7 @@ namespace tools
           string_encoding::base64_encode(rand_128bit.data(), rand_128bit.size())
         );
 
-        std::string temp = "MKEcoin-wallet-rpc." + bind_port + ".login";
+        std::string temp = "mkecoin-wallet-rpc." + bind_port + ".login";
         rpc_login_file = tools::private_file::create(temp);
         if (!rpc_login_file.handle())
         {
@@ -276,7 +276,7 @@ namespace tools
     tools::wallet2::BackgroundMiningSetupType setup = m_wallet->setup_background_mining();
     if (setup == tools::wallet2::BackgroundMiningNo)
     {
-      MLOG_RED(el::Level::Warning, "Background mining not enabled. Run \"set setup-background-mining 1\" in MKEcoin-wallet-cli to change.");
+      MLOG_RED(el::Level::Warning, "Background mining not enabled. Run \"set setup-background-mining 1\" in mkecoin-wallet-cli to change.");
       return;
     }
 
@@ -301,8 +301,8 @@ namespace tools
     {
       MINFO("The daemon is not set up to background mine.");
       MINFO("With background mining enabled, the daemon will mine when idle and not on battery.");
-      MINFO("Enabling this supports the network you are using, and makes you eligible for receiving new MKEcoin");
-      MINFO("Set setup-background-mining to 1 in MKEcoin-wallet-cli to change.");
+      MINFO("Enabling this supports the network you are using, and makes you eligible for receiving new mkecoin");
+      MINFO("Set setup-background-mining to 1 in mkecoin-wallet-cli to change.");
       return;
     }
 
@@ -762,6 +762,90 @@ namespace tools
     return true;
   }
   //------------------------------------------------------------------------------------------------------------------------------
+  bool wallet_rpc_server::on_freeze(const wallet_rpc::COMMAND_RPC_FREEZE::request& req, wallet_rpc::COMMAND_RPC_FREEZE::response& res, epee::json_rpc::error& er, const connection_context *ctx)
+  {
+    if (!m_wallet) return not_open(er);
+    try
+    {
+      if (req.key_image.empty())
+      {
+        er.code = WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR;
+        er.message = std::string("Must specify key image to freeze");
+        return false;
+      }
+      crypto::key_image ki;
+      if (!epee::string_tools::hex_to_pod(req.key_image, ki))
+      {
+        er.code = WALLET_RPC_ERROR_CODE_WRONG_KEY_IMAGE;
+        er.message = "failed to parse key image";
+        return false;
+      }
+      m_wallet->freeze(ki);
+    }
+    catch (const std::exception& e)
+    {
+      handle_rpc_exception(std::current_exception(), er, WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR);
+      return false;
+    }
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  bool wallet_rpc_server::on_thaw(const wallet_rpc::COMMAND_RPC_THAW::request& req, wallet_rpc::COMMAND_RPC_THAW::response& res, epee::json_rpc::error& er, const connection_context *ctx)
+  {
+    if (!m_wallet) return not_open(er);
+    try
+    {
+      if (req.key_image.empty())
+      {
+        er.code = WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR;
+        er.message = std::string("Must specify key image to thaw");
+        return false;
+      }
+      crypto::key_image ki;
+      if (!epee::string_tools::hex_to_pod(req.key_image, ki))
+      {
+        er.code = WALLET_RPC_ERROR_CODE_WRONG_KEY_IMAGE;
+        er.message = "failed to parse key image";
+        return false;
+      }
+      m_wallet->thaw(ki);
+    }
+    catch (const std::exception& e)
+    {
+      handle_rpc_exception(std::current_exception(), er, WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR);
+      return false;
+    }
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
+  bool wallet_rpc_server::on_frozen(const wallet_rpc::COMMAND_RPC_FROZEN::request& req, wallet_rpc::COMMAND_RPC_FROZEN::response& res, epee::json_rpc::error& er, const connection_context *ctx)
+  {
+    if (!m_wallet) return not_open(er);
+    try
+    {
+      if (req.key_image.empty())
+      {
+        er.code = WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR;
+        er.message = std::string("Must specify key image to check if frozen");
+        return false;
+      }
+      crypto::key_image ki;
+      if (!epee::string_tools::hex_to_pod(req.key_image, ki))
+      {
+        er.code = WALLET_RPC_ERROR_CODE_WRONG_KEY_IMAGE;
+        er.message = "failed to parse key image";
+        return false;
+      }
+      res.frozen = m_wallet->frozen(ki);
+    }
+    catch (const std::exception& e)
+    {
+      handle_rpc_exception(std::current_exception(), er, WALLET_RPC_ERROR_CODE_UNKNOWN_ERROR);
+      return false;
+    }
+    return true;
+  }
+  //------------------------------------------------------------------------------------------------------------------------------
   bool wallet_rpc_server::validate_transfer(const std::list<wallet_rpc::transfer_destination>& destinations, const std::string& payment_id, std::vector<cryptonote::tx_destination_entry>& dsts, std::vector<uint8_t>& extra, bool at_least_one_destination, epee::json_rpc::error& er)
   {
     crypto::hash8 integrated_payment_id = crypto::null_hash8;
@@ -780,7 +864,7 @@ namespace tools
           }
           if (addresses.empty())
           {
-            er.message = std::string("No MKEcoin address found at ") + url;
+            er.message = std::string("No mkecoin address found at ") + url;
             return {};
           }
           return addresses[0];
@@ -822,7 +906,7 @@ namespace tools
     if (at_least_one_destination && dsts.empty())
     {
       er.code = WALLET_RPC_ERROR_CODE_ZERO_DESTINATION;
-      er.message = "No destinations for this transfer";
+      er.message = "Transaction has no destination";
       return false;
     }
 
@@ -1555,8 +1639,7 @@ namespace tools
 
     try
     {
-      std::istringstream iss(blob);
-      binary_archive<false> ar(iss);
+      binary_archive<false> ar{epee::strspan<std::uint8_t>(blob)};
       if (::serialization::serialize(ar, ptx))
         loaded = true;
     }
@@ -2043,7 +2126,7 @@ namespace tools
         }
         if (addresses.empty())
         {
-          er.message = std::string("No MKEcoin address found at ") + url;
+          er.message = std::string("No mkecoin address found at ") + url;
           return {};
         }
         return addresses[0];
@@ -2861,7 +2944,7 @@ namespace tools
         }
         if (addresses.empty())
         {
-          er.message = std::string("No MKEcoin address found at ") + url;
+          er.message = std::string("No mkecoin address found at ") + url;
           return {};
         }
         return addresses[0];
@@ -2915,7 +2998,7 @@ namespace tools
           }
           if (addresses.empty())
           {
-            er.message = std::string("No MKEcoin address found at ") + url;
+            er.message = std::string("No mkecoin address found at ") + url;
             return {};
           }
           return addresses[0];
@@ -3357,6 +3440,11 @@ namespace tools
     catch (const tools::error::daemon_busy& e)
     {
       er.code = WALLET_RPC_ERROR_CODE_DAEMON_IS_BUSY;
+      er.message = e.what();
+    }
+    catch (const tools::error::zero_amount& e)
+    {
+      er.code = WALLET_RPC_ERROR_CODE_ZERO_AMOUNT;
       er.message = e.what();
     }
     catch (const tools::error::zero_destination& e)
@@ -4229,7 +4317,7 @@ namespace tools
             }
             if (addresses.empty())
             {
-              er.message = std::string("No MKEcoin address found at ") + url;
+              er.message = std::string("No mkecoin address found at ") + url;
               return {};
             }
             address = addresses[0];
@@ -4367,7 +4455,7 @@ namespace tools
   bool wallet_rpc_server::on_get_version(const wallet_rpc::COMMAND_RPC_GET_VERSION::request& req, wallet_rpc::COMMAND_RPC_GET_VERSION::response& res, epee::json_rpc::error& er, const connection_context *ctx)
   {
     res.version = WALLET_RPC_VERSION;
-    res.release = MKEcoin_VERSION_IS_RELEASE;
+    res.release = mkecoin_VERSION_IS_RELEASE;
     return true;
   }
   //------------------------------------------------------------------------------------------------------------------------------
@@ -4590,12 +4678,12 @@ int main(int argc, char** argv) {
   bool should_terminate = false;
   std::tie(vm, should_terminate) = wallet_args::main(
     argc, argv,
-    "MKEcoin-wallet-rpc [--wallet-file=<file>|--generate-from-json=<file>|--wallet-dir=<directory>] [--rpc-bind-port=<port>]",
-    tools::wallet_rpc_server::tr("This is the RPC MKEcoin wallet. It needs to connect to a MKEcoin\ndaemon to work correctly."),
+    "mkecoin-wallet-rpc [--wallet-file=<file>|--generate-from-json=<file>|--wallet-dir=<directory>] [--rpc-bind-port=<port>]",
+    tools::wallet_rpc_server::tr("This is the RPC mkecoin wallet. It needs to connect to a mkecoin\ndaemon to work correctly."),
     desc_params,
     po::positional_options_description(),
     [](const std::string &s, bool emphasis){ epee::set_console_color(emphasis ? epee::console_color_white : epee::console_color_default, true); std::cout << s << std::endl; if (emphasis) epee::reset_console_color(); },
-    "MKEcoin-wallet-rpc.log",
+    "mkecoin-wallet-rpc.log",
     true
   );
   if (!vm)

@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -34,9 +34,9 @@ set(simplewallet_headers)
 set(simplewallet_private_headers
   simplewallet.h)
 
-MKEcoin_private_headers(simplewallet
+mkecoin_private_headers(simplewallet
   ${simplewallet_private_headers})
-MKEcoin_add_executable(simplewallet
+mkecoin_add_executable(simplewallet
   ${simplewallet_sources}
   ${simplewallet_headers}
   ${simplewallet_private_headers})
@@ -62,5 +62,5 @@ target_link_libraries(simplewallet
     ${EXTRA_LIBRARIES})
 set_property(TARGET simplewallet
   PROPERTY
-    OUTPUT_NAME "MKEcoin-wallet-cli")
+    OUTPUT_NAME "mkecoin-wallet-cli")
 install(TARGETS simplewallet DESTINATION bin)

@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 // 
 // All rights reserved.
 // 
@@ -148,9 +148,7 @@ namespace cryptonote
   template<class t_object>
   bool t_serializable_object_from_blob(t_object& to, const blobdata& b_blob)
   {
-    std::stringstream ss;
-    ss << b_blob;
-    binary_archive<false> ba(ss);
+    binary_archive<false> ba{epee::strspan<std::uint8_t>(b_blob)};
     bool r = ::serialization::serialize(ba, to);
     return r;
   }

@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The mkecoin Project
 //
 // All rights reserved.
 //
@@ -42,7 +42,7 @@
 
 using namespace std;
 
-namespace MKEcoin {
+namespace mkecoin {
 
 UnsignedTransaction::~UnsignedTransaction() {}
 
@@ -317,5 +317,5 @@ uint64_t UnsignedTransactionImpl::minMixinCount() const
 
 } // namespace
 
-namespace BitMKEcoin = MKEcoin;
+namespace Bitmkecoin = mkecoin;
 

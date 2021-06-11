@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #
@@ -40,22 +40,11 @@ set(wallet_sources
   wallet_rpc_payments.cpp
 )
 
-set(wallet_private_headers
-  wallet2.h
-  wallet_args.h
-  wallet_errors.h
-  wallet_rpc_server.h
-  wallet_rpc_server_commands_defs.h
-  wallet_rpc_server_error_codes.h
-  ringdb.h
-  node_rpc_proxy.h
-  message_store.h
-  message_transporter.h
-  wallet_rpc_helpers.h)
+mkecoin_find_all_headers(wallet_private_headers "${CMAKE_CURRENT_SOURCE_DIR}")
 
-MKEcoin_private_headers(wallet
+mkecoin_private_headers(wallet
   ${wallet_private_headers})
-MKEcoin_add_library(wallet
+mkecoin_add_library(wallet
   ${wallet_sources}
   ${wallet_private_headers})
 target_link_libraries(wallet
@@ -86,9 +75,9 @@ if(NOT IOS)
   set(wallet_rpc_private_headers
     wallet_rpc_server.h)
 
-  MKEcoin_private_headers(wallet_rpc_server
+  mkecoin_private_headers(wallet_rpc_server
     ${wallet_rpc_private_headers})
-  MKEcoin_add_executable(wallet_rpc_server
+  mkecoin_add_executable(wallet_rpc_server
     ${wallet_rpc_sources}
     ${wallet_rpc_headers}
     ${wallet_rpc_private_headers})
@@ -111,49 +100,8 @@ if(NOT IOS)
       ${EXTRA_LIBRARIES})
   set_property(TARGET wallet_rpc_server
     PROPERTY
-      OUTPUT_NAME "MKEcoin-wallet-rpc")
+      OUTPUT_NAME "mkecoin-wallet-rpc")
   install(TARGETS wallet_rpc_server DESTINATION bin)
-endif()
-
-# build and install libwallet_merged only if we building for GUI
-if (BUILD_GUI_DEPS)
-    set(libs_to_merge
-            wallet_api
-            wallet
-            rpc_base
-            multisig
-            blockchain_db
-            cryptonote_core
-            cryptonote_basic
-            mnemonics
-            common
-            cncrypto
-            device
-            hardforks
-            ringct
-            ringct_basic
-            checkpoints
-            version
-            net
-            device_trezor)
-
-    foreach(lib ${libs_to_merge})
-        list(APPEND objlibs $<TARGET_OBJECTS:obj_${lib}>) # matches naming convention in src/CMakeLists.txt
-    endforeach()
-    add_library(wallet_merged STATIC ${objlibs})
-    if(IOS)
-        set(lib_folder lib-${ARCH})
-    else()
-        set(lib_folder lib)
-    endif()
-    install(TARGETS wallet_merged
-        ARCHIVE DESTINATION ${lib_folder})
-
-    install(FILES ${TREZOR_DEP_LIBS}
-            DESTINATION ${lib_folder})
-    file(WRITE "trezor_link_flags.txt" ${TREZOR_DEP_LINKER})
-    install(FILES "trezor_link_flags.txt"
-            DESTINATION ${lib_folder})
 endif()
 
 add_subdirectory(api)
