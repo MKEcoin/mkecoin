@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-# Copyright (c) 2018-2021, The MKEcoin Project
+# Copyright (c) 2014-2020, The mkecoin Project
 #
 # All rights reserved.
 #

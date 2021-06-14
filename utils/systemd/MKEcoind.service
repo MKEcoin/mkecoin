@@ -1,18 +1,18 @@
 [Unit]
-Description=MKEcoin Full Node
+Description=mkecoin Full Node
 After=network.target
 
 [Service]
-User=MKEcoin
-Group=MKEcoin
+User=mkecoin
+Group=mkecoin
 WorkingDirectory=~
-StateDirectory=MKEcoin
-LogsDirectory=MKEcoin
+StateDirectory=mkecoin
+LogsDirectory=mkecoin
 
 # Clearnet config
 #
 Type=simple
-ExecStart=/usr/bin/MKEcoind --config-file /etc/MKEcoind.conf --non-interactive
+ExecStart=/usr/bin/mkecoind --config-file /etc/mkecoind.conf --non-interactive
 StandardOutput=null
 StandardError=null
 
@@ -21,14 +21,14 @@ StandardError=null
 ## We have to use simple, not forking, because we cannot pass --detach
 ## because stderr/stdout is not available when detached, but torsocks
 ## attempts to write to it, and fails with 'invalid argument', causing
-## MKEcoind to fail.
+## mkecoind to fail.
 #Type=simple
 #Environment=DNS_PUBLIC=tcp
 ## The following is needed only when accessing wallet from a different
 ## host in the LAN, VPN, etc, the RPC must bind to 0.0.0.0, but
 ## by default torsocks only allows binding to localhost.
 #Environment=TORSOCKS_ALLOW_INBOUND=1
-#ExecStart=/usr/bin/torsocks /usr/bin/MKEcoind --config-file /etc/MKEcoind.conf \
+#ExecStart=/usr/bin/torsocks /usr/bin/mkecoind --config-file /etc/mkecoind.conf \
 #    --non-interactive
 
 Restart=always
