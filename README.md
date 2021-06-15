@@ -1,8 +1,7 @@
 # MKEcoin
 
 Copyright (c) 2018-2021 The MKEcoin Project.   
-Portions Copyright (c) 2018-2021 The MKEcoin Project.   
-Portions Copyright (c) 2018-2021 The Cryptonote developers.
+Portions Copyright (c) 2013-2015 The Cryptonote developers.
 
 ## Table of Contents
 
