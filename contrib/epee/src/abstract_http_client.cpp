@@ -1,6 +1,7 @@
 #include "net/abstract_http_client.h"
 #include "net/http_base.h"
 #include "net/net_parse_helpers.h"
+#include "misc_log_ex.h"
 
 #undef MKEcoin_DEFAULT_LOG_CATEGORY
 #define MKEcoin_DEFAULT_LOG_CATEGORY "net.http"
