@@ -44,6 +44,7 @@ N_MKEcoinDS = 4
 N_WALLETS = 5
 
 WALLET_DIRECTORY = builddir + "/functional-tests-directory"
+FUNCTIONAL_TESTS_DIRECTORY = builddir + "/tests/functional_tests"
 DIFFICULTY = 10
 
 MKEcoind_base = [builddir + "/bin/MKEcoind", "--regtest", "--fixed-difficulty", str(DIFFICULTY), "--no-igd", "--p2p-bind-port", "MKEcoind_p2p_port", "--rpc-bind-port", "MKEcoind_rpc_port", "--zmq-rpc-bind-port", "MKEcoind_zmq_port", "--non-interactive", "--disable-dns-checkpoints", "--check-updates", "disabled", "--rpc-ssl", "disabled", "--data-dir", "MKEcoind_data_dir", "--log-level", "1"]
@@ -71,14 +72,14 @@ for i in range(N_MKEcoinDS):
   command_lines.append([str(18180+i) if x == "MKEcoind_rpc_port" else str(18280+i) if x == "MKEcoind_p2p_port" else str(18380+i) if x == "MKEcoind_zmq_port" else builddir + "/functional-tests-directory/MKEcoind" + str(i) if x == "MKEcoind_data_dir" else x for x in MKEcoind_base])
   if i < len(MKEcoind_extra):
     command_lines[-1] += MKEcoind_extra[i]
-  outputs.append(open(builddir + '/tests/functional_tests/MKEcoind' + str(i) + '.log', 'a+'))
+  outputs.append(open(FUNCTIONAL_TESTS_DIRECTORY + '/MKEcoind' + str(i) + '.log', 'a+'))
   ports.append(18180+i)
 
 for i in range(N_WALLETS):
   command_lines.append([str(18090+i) if x == "wallet_port" else x for x in wallet_base])
   if i < len(wallet_extra):
     command_lines[-1] += wallet_extra[i]
-  outputs.append(open(builddir + '/tests/functional_tests/wallet' + str(i) + '.log', 'a+'))
+  outputs.append(open(FUNCTIONAL_TESTS_DIRECTORY + '/wallet' + str(i) + '.log', 'a+'))
   ports.append(18090+i)
 
 print('Starting servers...')
@@ -89,9 +90,11 @@ try:
   PYTHONPATH += srcdir + '/../../utils/python-rpc'
   os.environ['PYTHONPATH'] = PYTHONPATH
   os.environ['WALLET_DIRECTORY'] = WALLET_DIRECTORY
+  os.environ['FUNCTIONAL_TESTS_DIRECTORY'] = FUNCTIONAL_TESTS_DIRECTORY
+  os.environ['SOURCE_DIRECTORY'] = srcdir
   os.environ['PYTHONIOENCODING'] = 'utf-8'
   os.environ['DIFFICULTY'] = str(DIFFICULTY)
-  os.environ['MAKE_TEST_SIGNATURE'] = builddir + '/tests/functional_tests/make_test_signature'
+  os.environ['MAKE_TEST_SIGNATURE'] = FUNCTIONAL_TESTS_DIRECTORY + '/make_test_signature'
   os.environ['SEEDHASH_EPOCH_BLOCKS'] = "8"
   os.environ['SEEDHASH_EPOCH_LAG'] = "4"
 

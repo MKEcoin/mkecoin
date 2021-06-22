@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2021, The MKEcoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -31,6 +31,7 @@
 #include "gtest/gtest.h"
 
 #include <string_tools.h>
+#include <string_tools_lexical.h>
 
 using namespace epee::string_tools;
 
