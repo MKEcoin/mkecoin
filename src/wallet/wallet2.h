@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -72,8 +72,8 @@
 #include "wallet_light_rpc.h"
 #include "wallet_rpc_helpers.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "wallet.wallet2"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "wallet.wallet2"
 
 #define THROW_ON_RPC_RESPONSE_ERROR(r, error, res, method, ...) \
   do { \
@@ -1139,7 +1139,7 @@ private:
     }
 
     BEGIN_SERIALIZE_OBJECT()
-      MAGIC_FIELD("mkecoin wallet cache")
+      MAGIC_FIELD("MKEcoin wallet cache")
       VERSION_FIELD(0)
       FIELD(m_blockchain)
       FIELD(m_transfers)

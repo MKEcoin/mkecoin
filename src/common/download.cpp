@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The mkecoin Project
+// Copyright (c) 2017-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -34,8 +34,8 @@
 #include "net/http_client.h"
 #include "download.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "net.dl"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "net.dl"
 
 namespace tools
 {

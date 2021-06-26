@@ -1,4 +1,4 @@
-// Copyright (c) 2017, The mkecoin Project
+// Copyright (c) 2017, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -38,8 +38,8 @@ extern "C"
 #include "rctOps.h"
 #include "multiexp.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "multiexp"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "multiexp"
 
 //#define MULTIEXP_PERF(x) x
 #define MULTIEXP_PERF(x)

@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The mkecoin Project
+// Copyright (c) 2017-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#ifndef mkecoin_DEVICE_TREZOR_BASE_H
-#define mkecoin_DEVICE_TREZOR_BASE_H
+#ifndef MKEcoin_DEVICE_TREZOR_BASE_H
+#define MKEcoin_DEVICE_TREZOR_BASE_H
 
 
 #include <cstddef>
@@ -242,7 +242,7 @@ namespace trezor {
 
     bool reset();
 
-    // Default derivation path for mkecoin
+    // Default derivation path for MKEcoin
     static const uint32_t DEFAULT_BIP44_PATH[2];
 
     std::shared_ptr<Transport> get_transport(){
@@ -339,4 +339,4 @@ namespace trezor {
 
 }
 }
-#endif //mkecoin_DEVICE_TREZOR_BASE_H
+#endif //MKEcoin_DEVICE_TREZOR_BASE_H

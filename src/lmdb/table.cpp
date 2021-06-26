@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The mkecoin Project
+// Copyright (c) 2018, The MKEcoin Project
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -30,14 +30,14 @@ namespace lmdb
 {
     expect<MDB_dbi> table::open(MDB_txn& write_txn) const noexcept
     {
-        mkecoin_PRECOND(name != nullptr);
+        MKEcoin_PRECOND(name != nullptr);
 
         MDB_dbi out;
-        mkecoin_LMDB_CHECK(mdb_dbi_open(&write_txn, name, flags, &out));
+        MKEcoin_LMDB_CHECK(mdb_dbi_open(&write_txn, name, flags, &out));
         if (key_cmp && !(flags & MDB_INTEGERKEY))
-            mkecoin_LMDB_CHECK(mdb_set_compare(&write_txn, out, key_cmp));
+            MKEcoin_LMDB_CHECK(mdb_set_compare(&write_txn, out, key_cmp));
         if (value_cmp && !(flags & MDB_INTEGERDUP))
-            mkecoin_LMDB_CHECK(mdb_set_dupsort(&write_txn, out, value_cmp));
+            MKEcoin_LMDB_CHECK(mdb_set_dupsort(&write_txn, out, value_cmp));
         return out;
     }
 }

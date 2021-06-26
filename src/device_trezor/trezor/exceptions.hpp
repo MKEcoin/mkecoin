@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The mkecoin Project
+// Copyright (c) 2017-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#ifndef mkecoin_EXCEPTIONS_H
-#define mkecoin_EXCEPTIONS_H
+#ifndef MKEcoin_EXCEPTIONS_H
+#define MKEcoin_EXCEPTIONS_H
 
 #include <exception>
 #include <string>
@@ -190,4 +190,4 @@ namespace proto {
 }
 }
 }
-#endif //mkecoin_EXCEPTIONS_H
+#endif //MKEcoin_EXCEPTIONS_H

@@ -1,6 +1,6 @@
-// Word list created by mkecoin contributor sammy007
+// Word list created by MKEcoin contributor sammy007
 // 
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 

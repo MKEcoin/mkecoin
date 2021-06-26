@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -39,8 +39,8 @@
 #include "cryptonote_config.h"
 #include "difficulty.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "difficulty"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "difficulty"
 
 namespace cryptonote {
 

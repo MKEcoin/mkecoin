@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -35,7 +35,7 @@
 #include <vector>
 
 
-namespace mkecoin {
+namespace MKEcoin {
 
 class WalletImpl;
 class PendingTransactionImpl : public PendingTransaction
@@ -74,4 +74,4 @@ private:
 
 }
 
-namespace Bitmkecoin = mkecoin;
+namespace BitMKEcoin = MKEcoin;

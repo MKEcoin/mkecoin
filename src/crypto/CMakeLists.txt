@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -80,9 +80,9 @@ set(crypto_private_headers
   CryptonightR_JIT.h
   CryptonightR_template.h)
 
-mkecoin_private_headers(cncrypto
+MKEcoin_private_headers(cncrypto
   ${crypto_private_headers})
-mkecoin_add_library(cncrypto
+MKEcoin_add_library(cncrypto
   ${crypto_sources}
   ${crypto_headers}
   ${crypto_private_headers})

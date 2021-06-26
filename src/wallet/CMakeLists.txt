@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -40,11 +40,11 @@ set(wallet_sources
   wallet_rpc_payments.cpp
 )
 
-mkecoin_find_all_headers(wallet_private_headers "${CMAKE_CURRENT_SOURCE_DIR}")
+MKEcoin_find_all_headers(wallet_private_headers "${CMAKE_CURRENT_SOURCE_DIR}")
 
-mkecoin_private_headers(wallet
+MKEcoin_private_headers(wallet
   ${wallet_private_headers})
-mkecoin_add_library(wallet
+MKEcoin_add_library(wallet
   ${wallet_sources}
   ${wallet_private_headers})
 target_link_libraries(wallet
@@ -75,9 +75,9 @@ if(NOT IOS)
   set(wallet_rpc_private_headers
     wallet_rpc_server.h)
 
-  mkecoin_private_headers(wallet_rpc_server
+  MKEcoin_private_headers(wallet_rpc_server
     ${wallet_rpc_private_headers})
-  mkecoin_add_executable(wallet_rpc_server
+  MKEcoin_add_executable(wallet_rpc_server
     ${wallet_rpc_sources}
     ${wallet_rpc_headers}
     ${wallet_rpc_private_headers})
@@ -100,7 +100,7 @@ if(NOT IOS)
       ${EXTRA_LIBRARIES})
   set_property(TARGET wallet_rpc_server
     PROPERTY
-      OUTPUT_NAME "mkecoin-wallet-rpc")
+      OUTPUT_NAME "MKEcoin-wallet-rpc")
   install(TARGETS wallet_rpc_server DESTINATION bin)
 endif()
 

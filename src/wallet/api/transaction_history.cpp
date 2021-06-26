@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -42,7 +42,7 @@
 
 using namespace epee;
 
-namespace mkecoin {
+namespace MKEcoin {
 
 TransactionHistory::~TransactionHistory() {}
 
@@ -267,4 +267,4 @@ void TransactionHistoryImpl::refresh()
 
 } // namespace
 
-namespace Bitmkecoin = mkecoin;
+namespace BitMKEcoin = MKEcoin;

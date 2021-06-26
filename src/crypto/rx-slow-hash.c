@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020, The mkecoin Project
+// Copyright (c) 2019-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -83,7 +83,7 @@ static inline int disabled_flags(void) {
     return flags;
   }
 
-  const char *env = getenv("mkecoin_RANDOMX_UMASK");
+  const char *env = getenv("MKEcoin_RANDOMX_UMASK");
   if (!env) {
     flags = 0;
   }

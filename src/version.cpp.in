@@ -1,13 +1,13 @@
-#define DEF_mkecoin_VERSION_TAG "@VERSIONTAG@"
-#define DEF_mkecoin_VERSION "0.17.0.0"
-#define DEF_mkecoin_RELEASE_NAME "Oxygen Orion"
-#define DEF_mkecoin_VERSION_FULL DEF_mkecoin_VERSION "-" DEF_mkecoin_VERSION_TAG
-#define DEF_mkecoin_VERSION_IS_RELEASE @VERSION_IS_RELEASE@
+#define DEF_MKEcoin_VERSION_TAG "@VERSIONTAG@"
+#define DEF_MKEcoin_VERSION "0.17.0.0"
+#define DEF_MKEcoin_RELEASE_NAME "Oxygen Orion"
+#define DEF_MKEcoin_VERSION_FULL DEF_MKEcoin_VERSION "-" DEF_MKEcoin_VERSION_TAG
+#define DEF_MKEcoin_VERSION_IS_RELEASE @VERSION_IS_RELEASE@
 
 #include "version.h"
 
-const char* const mkecoin_VERSION_TAG = DEF_mkecoin_VERSION_TAG;
-const char* const mkecoin_VERSION = DEF_mkecoin_VERSION;
-const char* const mkecoin_RELEASE_NAME = DEF_mkecoin_RELEASE_NAME;
-const char* const mkecoin_VERSION_FULL = DEF_mkecoin_VERSION_FULL;
-const bool mkecoin_VERSION_IS_RELEASE = DEF_mkecoin_VERSION_IS_RELEASE;
+const char* const MKEcoin_VERSION_TAG = DEF_MKEcoin_VERSION_TAG;
+const char* const MKEcoin_VERSION = DEF_MKEcoin_VERSION;
+const char* const MKEcoin_RELEASE_NAME = DEF_MKEcoin_RELEASE_NAME;
+const char* const MKEcoin_VERSION_FULL = DEF_MKEcoin_VERSION_FULL;
+const bool MKEcoin_VERSION_IS_RELEASE = DEF_MKEcoin_VERSION_IS_RELEASE;

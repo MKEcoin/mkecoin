@@ -1,4 +1,4 @@
-# Copyright (c) 2018, The mkecoin Project
+# Copyright (c) 2018, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -31,6 +31,6 @@ set(net_sources dandelionpp.cpp error.cpp http.cpp i2p_address.cpp parse.cpp res
 set(net_headers dandelionpp.h error.h http.cpp i2p_address.h parse.h socks.h resolve.h
     socks_connect.h tor_address.h zmq.h)
 
-mkecoin_add_library(net ${net_sources} ${net_headers})
+MKEcoin_add_library(net ${net_sources} ${net_headers})
 target_link_libraries(net common epee ${ZMQ_LIB} ${Boost_ASIO_LIBRARY})
 

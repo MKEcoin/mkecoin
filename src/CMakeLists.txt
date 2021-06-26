@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -34,13 +34,13 @@ if (WIN32 OR STATIC)
   add_definitions(-DMINIUPNP_STATICLIB)
 endif ()
 
-function (mkecoin_private_headers group)
+function (MKEcoin_private_headers group)
   source_group("${group}\\Private"
     FILES
       ${ARGN})
 endfunction ()
 
-function (mkecoin_install_headers subdir)
+function (MKEcoin_install_headers subdir)
   install(
     FILES       ${ARGN}
     DESTINATION "include/${subdir}"
@@ -58,7 +58,7 @@ function (enable_stack_trace target)
   endif()
 endfunction()
 
-function (mkecoin_add_executable name)
+function (MKEcoin_add_executable name)
   source_group("${name}"
     FILES
       ${ARGN})
@@ -76,11 +76,12 @@ function (mkecoin_add_executable name)
       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
   enable_stack_trace("${name}")
   
-  mkecoin_set_target_no_relink("${name}")
+  MKEcoin_set_target_no_relink("${name}")
+  MKEcoin_set_target_strip    ("${name}")
 endfunction ()
 
 include(Version)
-mkecoin_add_library(version SOURCES ${CMAKE_BINARY_DIR}/version.cpp DEPENDS genversion)
+MKEcoin_add_library(version SOURCES ${CMAKE_BINARY_DIR}/version.cpp DEPENDS genversion)
 
 add_subdirectory(common)
 add_subdirectory(crypto)

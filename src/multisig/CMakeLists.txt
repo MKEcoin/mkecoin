@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2020, The mkecoin Project
+# Copyright (c) 2017-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -34,10 +34,10 @@ set(multisig_headers)
 set(multisig_private_headers
   multisig.h)
 
-mkecoin_private_headers(multisig
+MKEcoin_private_headers(multisig
   ${multisig_private_headers})
 
-mkecoin_add_library(multisig
+MKEcoin_add_library(multisig
   ${multisig_sources}
   ${multisig_headers}
   ${multisig_private_headers})

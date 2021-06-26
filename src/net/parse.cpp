@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The mkecoin Project
+// Copyright (c) 2018, The MKEcoin Project
 //
 // All rights reserved.
 //

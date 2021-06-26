@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -35,7 +35,7 @@
 
 using namespace std;
 
-namespace mkecoin {
+namespace MKEcoin {
 namespace Utils {
 
 bool isAddressLocal(const std::string &address)
@@ -61,4 +61,4 @@ void onStartup()
 
 } // namespace
 
-namespace Bitmkecoin = mkecoin;
+namespace BitMKEcoin = MKEcoin;

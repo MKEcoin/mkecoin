@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The mkecoin Project
+// Copyright (c) 2018, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -43,9 +43,9 @@ namespace mms
 
 struct transport_message_t
 {
-  cryptonote::account_public_address source_mkecoin_address;
+  cryptonote::account_public_address source_MKEcoin_address;
   std::string source_transport_address;
-  cryptonote::account_public_address destination_mkecoin_address;
+  cryptonote::account_public_address destination_MKEcoin_address;
   std::string destination_transport_address;
   crypto::chacha_iv iv;
   crypto::public_key encryption_public_key;
@@ -60,9 +60,9 @@ struct transport_message_t
   std::string transport_id;
 
   BEGIN_KV_SERIALIZE_MAP()
-    KV_SERIALIZE(source_mkecoin_address)
+    KV_SERIALIZE(source_MKEcoin_address)
     KV_SERIALIZE(source_transport_address)
-    KV_SERIALIZE(destination_mkecoin_address)
+    KV_SERIALIZE(destination_MKEcoin_address)
     KV_SERIALIZE(destination_transport_address)
     KV_SERIALIZE_VAL_POD_AS_BLOB(iv)
     KV_SERIALIZE_VAL_POD_AS_BLOB(encryption_public_key)

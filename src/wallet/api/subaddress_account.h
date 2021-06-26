@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The mkecoin Project
+// Copyright (c) 2017-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -29,7 +29,7 @@
 #include "wallet/api/wallet2_api.h"
 #include "wallet/wallet2.h"
 
-namespace mkecoin {
+namespace MKEcoin {
 
 class WalletImpl;
 

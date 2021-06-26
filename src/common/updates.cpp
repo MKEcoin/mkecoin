@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020, The mkecoin Project
+// Copyright (c) 2017-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -32,8 +32,8 @@
 #include "dns_utils.h"
 #include "updates.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "updates"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "updates"
 
 namespace tools
 {
@@ -44,15 +44,15 @@ namespace tools
 
     MDEBUG("Checking updates for " << buildtag << " " << software);
 
-    // All four mkecoinPulse domains have DNSSEC on and valid
+    // All four MKEcoinPulse domains have DNSSEC on and valid
     static const std::vector<std::string> dns_urls = {
-        "updates.mkecoinpulse.org",
-        "updates.mkecoinpulse.net",
-        "updates.mkecoinpulse.fr",
-        "updates.mkecoinpulse.de",
-        "updates.mkecoinpulse.no",
-        "updates.mkecoinpulse.ch",
-        "updates.mkecoinpulse.se"
+        "updates.MKEcoinpulse.org",
+        "updates.MKEcoinpulse.net",
+        "updates.MKEcoinpulse.fr",
+        "updates.MKEcoinpulse.de",
+        "updates.MKEcoinpulse.no",
+        "updates.MKEcoinpulse.ch",
+        "updates.MKEcoinpulse.se"
     };
 
     if (!tools::dns_utils::load_txt_records_from_dns(records, dns_urls))
@@ -102,11 +102,11 @@ namespace tools
 
   std::string get_update_url(const std::string &software, const std::string &subdir, const std::string &buildtag, const std::string &version, bool user)
   {
-    const char *base = user ? "https://downloads.getmkecoin.org/" : "https://updates.getmkecoin.org/";
+    const char *base = user ? "https://downloads.getMKEcoin.org/" : "https://updates.getMKEcoin.org/";
 #ifdef _WIN32
     static const char *extension = strncmp(buildtag.c_str(), "source", 6) ? (strncmp(buildtag.c_str(), "install-", 8) ? ".zip" : ".exe") : ".tar.bz2";
 #elif defined(__APPLE__)
-    static const char *extension = strncmp(software.c_str(), "mkecoin-gui", 10) ? ".tar.bz2" : ".dmg";
+    static const char *extension = strncmp(software.c_str(), "MKEcoin-gui", 10) ? ".tar.bz2" : ".dmg";
 #else
     static const char extension[] = ".tar.bz2";
 #endif

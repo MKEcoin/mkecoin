@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -303,10 +303,10 @@ namespace nodetool
 
   private:
     const std::vector<std::string> m_seed_nodes_list =
-    { "seeds.mkecoinseeds.se"
-    , "seeds.mkecoinseeds.ae.org"
-    , "seeds.mkecoinseeds.ch"
-    , "seeds.mkecoinseeds.li"
+    { "seeds.MKEcoinseeds.se"
+    , "seeds.MKEcoinseeds.ae.org"
+    , "seeds.MKEcoinseeds.ch"
+    , "seeds.MKEcoinseeds.li"
     };
 
     bool islimitup=false;

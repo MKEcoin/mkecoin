@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020, The mkecoin Project
+// Copyright (c) 2019-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -48,8 +48,8 @@
 #include "net/dandelionpp.h"
 #include "p2p/net_node.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "net.p2p.tx"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "net.p2p.tx"
 
 namespace cryptonote
 {

@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The mkecoin Project
+// Copyright (c) 2018, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -33,8 +33,8 @@
 #include "spawn.h"
 #include "notify.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "notify"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "notify"
 
 namespace tools
 {

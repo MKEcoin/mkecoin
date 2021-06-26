@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -27,15 +27,15 @@
 # THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 cmake_minimum_required (VERSION 3.5)
-project (mkecoin CXX)
+project (MKEcoin CXX)
 
 file(GLOB P2P *)
 source_group(p2p FILES ${P2P})
 
 #add_library(p2p ${P2P})
 
-#mkecoin_private_headers(p2p ${P2P})
-mkecoin_add_library(p2p ${P2P})
+#MKEcoin_private_headers(p2p ${P2P})
+MKEcoin_add_library(p2p ${P2P})
 target_link_libraries(p2p
   PUBLIC
     version

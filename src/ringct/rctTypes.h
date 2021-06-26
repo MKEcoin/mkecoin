@@ -1,4 +1,4 @@
-// Copyright (c) 2016, mkecoin Research Labs
+// Copyright (c) 2016, MKEcoin Research Labs
 //
 // Author: Shen Noether <shen.noether@gmx.com>
 //
@@ -62,7 +62,7 @@ extern "C" {
 #define DP(x)
 #endif
 
-//atomic units of mkecoins
+//atomic units of MKEcoins
 #define ATOMS 64
 
 //for printing large ints

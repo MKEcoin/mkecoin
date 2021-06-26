@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -41,8 +41,8 @@
 
 using namespace epee;
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "checkpoints"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "checkpoints"
 
 namespace cryptonote
 {
@@ -282,23 +282,23 @@ namespace cryptonote
   {
     std::vector<std::string> records;
 
-    // All four mkecoinPulse domains have DNSSEC on and valid
-    static const std::vector<std::string> dns_urls = { "checkpoints.mkecoinpulse.se"
-						     , "checkpoints.mkecoinpulse.org"
-						     , "checkpoints.mkecoinpulse.net"
-						     , "checkpoints.mkecoinpulse.co"
+    // All four MKEcoinPulse domains have DNSSEC on and valid
+    static const std::vector<std::string> dns_urls = { "checkpoints.MKEcoinpulse.se"
+						     , "checkpoints.MKEcoinpulse.org"
+						     , "checkpoints.MKEcoinpulse.net"
+						     , "checkpoints.MKEcoinpulse.co"
     };
 
-    static const std::vector<std::string> testnet_dns_urls = { "testpoints.mkecoinpulse.se"
-							     , "testpoints.mkecoinpulse.org"
-							     , "testpoints.mkecoinpulse.net"
-							     , "testpoints.mkecoinpulse.co"
+    static const std::vector<std::string> testnet_dns_urls = { "testpoints.MKEcoinpulse.se"
+							     , "testpoints.MKEcoinpulse.org"
+							     , "testpoints.MKEcoinpulse.net"
+							     , "testpoints.MKEcoinpulse.co"
     };
 
-    static const std::vector<std::string> stagenet_dns_urls = { "stagenetpoints.mkecoinpulse.se"
-                   , "stagenetpoints.mkecoinpulse.org"
-                   , "stagenetpoints.mkecoinpulse.net"
-                   , "stagenetpoints.mkecoinpulse.co"
+    static const std::vector<std::string> stagenet_dns_urls = { "stagenetpoints.MKEcoinpulse.se"
+                   , "stagenetpoints.MKEcoinpulse.org"
+                   , "stagenetpoints.MKEcoinpulse.net"
+                   , "stagenetpoints.MKEcoinpulse.co"
     };
 
     if (!tools::dns_utils::load_txt_records_from_dns(records, nettype == TESTNET ? testnet_dns_urls : nettype == STAGENET ? stagenet_dns_urls : dns_urls))

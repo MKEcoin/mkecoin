@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -38,9 +38,9 @@ set(blockchain_db_private_headers
   lmdb/db_lmdb.h
   )
 
-mkecoin_private_headers(blockchain_db
+MKEcoin_private_headers(blockchain_db
   ${crypto_private_headers})
-mkecoin_add_library(blockchain_db
+MKEcoin_add_library(blockchain_db
   ${blockchain_db_sources}
   ${blockchain_db_headers}
   ${blockchain_db_private_headers})

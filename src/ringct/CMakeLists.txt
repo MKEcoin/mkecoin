@@ -1,4 +1,4 @@
-# Copyright (c) 2016-2020, The mkecoin Project
+# Copyright (c) 2016-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -39,9 +39,9 @@ set(ringct_basic_private_headers
   multiexp.h
   bulletproofs.h)
 
-mkecoin_private_headers(ringct_basic
+MKEcoin_private_headers(ringct_basic
   ${crypto_private_headers})
-mkecoin_add_library(ringct_basic
+MKEcoin_add_library(ringct_basic
   ${ringct_basic_sources}
   ${ringct_basic_private_headers})
 target_link_libraries(ringct_basic
@@ -62,9 +62,9 @@ set(ringct_private_headers
   rctSigs.h
 )
 
-mkecoin_private_headers(ringct
+MKEcoin_private_headers(ringct
   ${crypto_private_headers})
-mkecoin_add_library(ringct
+MKEcoin_add_library(ringct
   ${ringct_sources}
   ${ringct_headers}
   ${ringct_private_headers})

@@ -1,8 +1,8 @@
 /// @file
-/// @author rfree (current maintainer/user in mkecoin.cc project - most of code is from CryptoNote)
+/// @author rfree (current maintainer/user in MKEcoin.cc project - most of code is from CryptoNote)
 /// @brief This is the original cryptonote protocol network-events handler, modified by us
 
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 

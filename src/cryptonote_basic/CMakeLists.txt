@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -63,9 +63,9 @@ set(cryptonote_basic_private_headers
   tx_extra.h
   verification_context.h)
 
-mkecoin_private_headers(cryptonote_basic
+MKEcoin_private_headers(cryptonote_basic
   ${cryptonote_basic_private_headers})
-mkecoin_add_library(cryptonote_basic
+MKEcoin_add_library(cryptonote_basic
   ${cryptonote_basic_sources}
   ${cryptonote_basic_headers}
   ${cryptonote_basic_private_headers})

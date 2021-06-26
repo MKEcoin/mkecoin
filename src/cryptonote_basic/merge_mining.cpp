@@ -1,4 +1,4 @@
-// Copyright (c) 2020, The mkecoin Project
+// Copyright (c) 2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -35,8 +35,8 @@
 
 using namespace epee;
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "cn.mm"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "cn.mm"
 
 using namespace crypto;
 

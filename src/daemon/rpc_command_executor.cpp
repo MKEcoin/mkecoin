@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2020, The mkecoin Project
+// Copyright (c) 2014-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -43,8 +43,8 @@
 #include <ctime>
 #include <string>
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "daemon"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 
@@ -614,8 +614,8 @@ bool t_rpc_command_executor::mining_status() {
     uint64_t daily = 86400ull / mres.block_target * mres.block_reward * ratio;
     uint64_t monthly = 86400ull / mres.block_target * 30.5 * mres.block_reward * ratio;
     uint64_t yearly = 86400ull / mres.block_target * 356 * mres.block_reward * ratio;
-    tools::msg_writer() << "Expected: " << cryptonote::print_money(daily) << " mkecoin daily, "
-        << cryptonote::print_money(monthly) << " mkecoin monthly, " << cryptonote::print_money(yearly) << " yearly";
+    tools::msg_writer() << "Expected: " << cryptonote::print_money(daily) << " MKEcoin daily, "
+        << cryptonote::print_money(monthly) << " MKEcoin monthly, " << cryptonote::print_money(yearly) << " yearly";
   }
 
   return true;
@@ -1414,8 +1414,8 @@ bool t_rpc_command_executor::stop_daemon()
 //# ifdef WIN32
 //    // Stop via service API
 //    // TODO - this is only temporary!  Get rid of hard-coded constants!
-//    bool ok = windows::stop_service("Bitmkecoin Daemon");
-//    ok = windows::uninstall_service("Bitmkecoin Daemon");
+//    bool ok = windows::stop_service("BitMKEcoin Daemon");
+//    ok = windows::uninstall_service("BitMKEcoin Daemon");
 //    //bool ok = windows::stop_service(SERVICE_NAME);
 //    //ok = windows::uninstall_service(SERVICE_NAME);
 //    if (ok)
@@ -1459,10 +1459,10 @@ bool t_rpc_command_executor::print_status()
   bool daemon_is_alive = m_rpc_client->check_connection();
 
   if(daemon_is_alive) {
-    tools::success_msg_writer() << "mkecoind is running";
+    tools::success_msg_writer() << "MKEcoind is running";
   }
   else {
-    tools::fail_msg_writer() << "mkecoind is NOT running";
+    tools::fail_msg_writer() << "MKEcoind is NOT running";
   }
 
   return true;

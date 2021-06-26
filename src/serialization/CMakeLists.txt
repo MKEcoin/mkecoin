@@ -1,4 +1,4 @@
-# Copyright (c) 2016-2020, The mkecoin Project
+# Copyright (c) 2016-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -34,9 +34,9 @@ set(serialization_headers)
 set(serialization_private_headers
   json_object.h)
 
-mkecoin_private_headers(serialization
+MKEcoin_private_headers(serialization
   ${serialization_private_headers})
-mkecoin_add_library(serialization
+MKEcoin_add_library(serialization
   ${serialization_sources}
   ${serialization_headers}
   ${serialization_private_headers})

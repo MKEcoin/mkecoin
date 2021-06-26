@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2020, The mkecoin Project
+# Copyright (c) 2014-2020, The MKEcoin Project
 #
 # All rights reserved.
 #
@@ -59,10 +59,10 @@ endif()
 set(device_private_headers)
 
 
-mkecoin_private_headers(device
+MKEcoin_private_headers(device
   ${device_private_headers})
 
-mkecoin_add_library(device
+MKEcoin_add_library(device
   ${device_sources}
   ${device_headers}
   ${device_private_headers})

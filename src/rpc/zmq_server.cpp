@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2020, The mkecoin Project
+// Copyright (c) 2016-2020, The MKEcoin Project
 // 
 // All rights reserved.
 // 
@@ -37,8 +37,8 @@
 #include "byte_slice.h"
 #include "rpc/zmq_pub.h"
 
-#undef mkecoin_DEFAULT_LOG_CATEGORY
-#define mkecoin_DEFAULT_LOG_CATEGORY "net.zmq"
+#undef MKEcoin_DEFAULT_LOG_CATEGORY
+#define MKEcoin_DEFAULT_LOG_CATEGORY "net.zmq"
 
 namespace cryptonote
 {
@@ -58,20 +58,20 @@ namespace
     out.reset(zmq_socket(context, type));
     if (!out)
     {
-      mkecoin_LOG_ZMQ_ERROR("Failed to create ZMQ socket");
+      MKEcoin_LOG_ZMQ_ERROR("Failed to create ZMQ socket");
       return nullptr;
     }
 
     if (zmq_setsockopt(out.get(), ZMQ_MAXMSGSIZE, std::addressof(max_message_size), sizeof(max_message_size)) != 0)
     {
-      mkecoin_LOG_ZMQ_ERROR("Failed to set maximum incoming message size");
+      MKEcoin_LOG_ZMQ_ERROR("Failed to set maximum incoming message size");
       return nullptr;
     }
 
     static constexpr const int linger_value = std::chrono::milliseconds{linger_timeout}.count();
     if (zmq_setsockopt(out.get(), ZMQ_LINGER, std::addressof(linger_value), sizeof(linger_value)) != 0)
     {
-      mkecoin_LOG_ZMQ_ERROR("Failed to set linger timeout");
+      MKEcoin_LOG_ZMQ_ERROR("Failed to set linger timeout");
       return nullptr;
     }
 
@@ -79,7 +79,7 @@ namespace
     {
       if (zmq_bind(out.get(), address.c_str()) < 0)
       {
-        mkecoin_LOG_ZMQ_ERROR("ZMQ bind failed");
+        MKEcoin_LOG_ZMQ_ERROR("ZMQ bind failed");
         return nullptr;
       }
       MINFO("ZMQ now listening at " << address);
@@ -101,7 +101,7 @@ ZmqServer::ZmqServer(RpcHandler& h) :
     shared_state(nullptr)
 {
     if (!context)
-        mkecoin_ZMQ_THROW("Unable to create ZMQ context");
+        MKEcoin_ZMQ_THROW("Unable to create ZMQ context");
 }
 
 ZmqServer::~ZmqServer()
@@ -148,23 +148,23 @@ void ZmqServer::serve()
     while (1)
     {
       if (pub)
-        mkecoin_UNWRAP(net::zmq::retry_op(zmq_poll, sockets.data(), sockets.size(), -1));
+        MKEcoin_UNWRAP(net::zmq::retry_op(zmq_poll, sockets.data(), sockets.size(), -1));
 
       if (sockets[0].revents)
         state->relay_to_pub(relay.get(), pub.get());
 
       if (sockets[1].revents)
-        state->sub_request(mkecoin_UNWRAP(net::zmq::receive(pub.get(), ZMQ_DONTWAIT)));
+        state->sub_request(MKEcoin_UNWRAP(net::zmq::receive(pub.get(), ZMQ_DONTWAIT)));
 
       if (!pub || sockets[2].revents)
       {
-        std::string message = mkecoin_UNWRAP(net::zmq::receive(rep.get(), read_flags));
+        std::string message = MKEcoin_UNWRAP(net::zmq::receive(rep.get(), read_flags));
         MDEBUG("Received RPC request: \"" << message << "\"");
         epee::byte_slice response = handler.handle(std::move(message));
 
         const boost::string_ref response_view{reinterpret_cast<const char*>(response.data()), response.size()};
         MDEBUG("Sending RPC reply: \"" << response_view << "\"");
-        mkecoin_UNWRAP(net::zmq::send(std::move(response), rep.get()));
+        MKEcoin_UNWRAP(net::zmq::send(std::move(response), rep.get()));
       }
     }
   }

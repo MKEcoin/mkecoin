@@ -1,6 +1,6 @@
-# mkecoin Blockchain Utilities
+# MKEcoin Blockchain Utilities
 
-Copyright (c) 2014-2020, The mkecoin Project
+Copyright (c) 2014-2020, The MKEcoin Project
 
 ## Introduction
 
@@ -12,16 +12,16 @@ See also each utility's "--help" option.
 
 ### Export an existing blockchain database
 
-`$ mkecoin-blockchain-export`
+`$ MKEcoin-blockchain-export`
 
-This loads the existing blockchain and exports it to `$mkecoin_DATA_DIR/export/blockchain.raw`
+This loads the existing blockchain and exports it to `$MKEcoin_DATA_DIR/export/blockchain.raw`
 
 ### Import the exported file
 
-`$ mkecoin-blockchain-import`
+`$ MKEcoin-blockchain-import`
 
-This imports blocks from `$mkecoin_DATA_DIR/export/blockchain.raw` (exported using the
-`mkecoin-blockchain-export` tool as described above) into the current database.
+This imports blocks from `$MKEcoin_DATA_DIR/export/blockchain.raw` (exported using the
+`MKEcoin-blockchain-export` tool as described above) into the current database.
 
 Defaults: `--batch on`, `--batch size 20000`, `--verify on`
 
@@ -30,14 +30,14 @@ Batch size refers to number of blocks and can be adjusted for performance based 
 Verification should only be turned off if importing from a trusted blockchain.
 
 If you encounter an error like "resizing not supported in batch mode", you can just re-run
-the `mkecoin-blockchain-import` command again, and it will restart from where it left off.
+the `MKEcoin-blockchain-import` command again, and it will restart from where it left off.
 
 ```bash
 ## use default settings to import blockchain.raw into database
-$ mkecoin-blockchain-import
+$ MKEcoin-blockchain-import
 
 ## fast import with large batch size, database mode "fastest", verification off
-$ mkecoin-blockchain-import --batch-size 20000 --database lmdb#fastest --verify off
+$ MKEcoin-blockchain-import --batch-size 20000 --database lmdb#fastest --verify off
 
 ```
 
@@ -80,9 +80,9 @@ LMDB flags (more than one may be specified):
 ## Examples:
 
 ```bash
-$ mkecoin-blockchain-import --database lmdb#fastest
+$ MKEcoin-blockchain-import --database lmdb#fastest
 
-$ mkecoin-blockchain-import --database lmdb#nosync
+$ MKEcoin-blockchain-import --database lmdb#nosync
 
-$ mkecoin-blockchain-import --database lmdb#nosync,nometasync
+$ MKEcoin-blockchain-import --database lmdb#nosync,nometasync
 ```

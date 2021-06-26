@@ -1,7 +1,7 @@
 #assumes you have gnu sed, osx sed might need slight syntax changeo
 #c.f. https://unix.stackexchange.com/questions/112023/how-can-i-replace-a-string-in-a-files
 
-#written by shen-noether mkecoin research labs
+#written by shen-noether MKEcoin research labs
 
 import os #for copying and sed etc.
 import glob #for copy files
@@ -15,7 +15,7 @@ print("maybe someone smart can replace the sed with perl..")
 a = ""
 
 license = textwrap.dedent("""\
-    // Copyright (c) 2014-2020, The mkecoin Project
+    // Copyright (c) 2014-2020, The MKEcoin Project
     // 
     // All rights reserved.
     // 
@@ -168,36 +168,36 @@ if a == "m":
     print(fe_comments)
     fe = glob.glob("fe*.c")
     for g in fe:
-        os.system("cp "+g+" "+g.replace("fe", "fe.mkecoin."))
-    qhasmToC("fe_pow22523.c", "pow22523.h", "fe.mkecoin._pow22523.c")
-    qhasmToC("fe_invert.c", "pow225521.h", "fe.mkecoin._invert.c")
-    os.system("rm fe.mkecoin._isnonzero.c") #since it's modified, it's in xmrSpecificOld
-    os.system("cat fe.mkecoin.*.c | grep -v '^#include' > fe.mkecoin.c")
+        os.system("cp "+g+" "+g.replace("fe", "fe.MKEcoin."))
+    qhasmToC("fe_pow22523.c", "pow22523.h", "fe.MKEcoin._pow22523.c")
+    qhasmToC("fe_invert.c", "pow225521.h", "fe.MKEcoin._invert.c")
+    os.system("rm fe.MKEcoin._isnonzero.c") #since it's modified, it's in xmrSpecificOld
+    os.system("cat fe.MKEcoin.*.c | grep -v '^#include' > fe.MKEcoin.c")
 
     #sc things
     print("\nmaking sc.c")
     print(sc_comments)
     #so you don't get multiple "loads"
-    os.system("tail -n +24 sc_reduce.c > sc.mkecoin._reduce.c") #also good on linux
-    os.system("tail -n +24 sc_muladd.c > sc.mkecoin._muladd.c")
-    os.system("tail -n +31 sc_sub.xmr.c > sc.mkecoin._sub.xmr.c") #careful with the tails if you change these files!
-    os.system("cat sc.mkecoin.*.c | grep -v '^#include' > sc.mkecoin.c")
+    os.system("tail -n +24 sc_reduce.c > sc.MKEcoin._reduce.c") #also good on linux
+    os.system("tail -n +24 sc_muladd.c > sc.MKEcoin._muladd.c")
+    os.system("tail -n +31 sc_sub.xmr.c > sc.MKEcoin._sub.xmr.c") #careful with the tails if you change these files!
+    os.system("cat sc.MKEcoin.*.c | grep -v '^#include' > sc.MKEcoin.c")
 
     #ge stuff
     print("making ge.c")
     ge = glob.glob("ge*.c")
     for g in ge:
-        os.system("cp "+g+" "+g.replace("ge", "ge.mkecoin."))
+        os.system("cp "+g+" "+g.replace("ge", "ge.MKEcoin."))
     print(ge_comments)
     #need to substitute the below lines for their .h files in the appropriate places
-    qhasmToC("ge_add.c", "ge_add.h", "ge.mkecoin._add.c")
-    qhasmToC("ge_madd.c", "ge_madd.h", "ge.mkecoin._madd.c")
-    qhasmToC("ge_sub.c", "ge_sub.h", "ge.mkecoin._sub.c")
-    qhasmToC("ge_msub.c", "ge_msub.h", "ge.mkecoin._msub.c")
-    qhasmToC("ge_p2_dbl.c", "ge_p2_dbl.h", "ge.mkecoin._p2_dbl.c")
-    qhasmToC("ge_frombytes.c", "d.h", "ge.mkecoin._frombytes.c")
-    qhasmToC("ge.mkecoin._frombytes.c", "sqrtm1.h", "ge.mkecoin._frombytes.c")
-    qhasmToC("ge_p3_to_cached.c", "d2.h", "ge.mkecoin._p3_to_cached.c")
+    qhasmToC("ge_add.c", "ge_add.h", "ge.MKEcoin._add.c")
+    qhasmToC("ge_madd.c", "ge_madd.h", "ge.MKEcoin._madd.c")
+    qhasmToC("ge_sub.c", "ge_sub.h", "ge.MKEcoin._sub.c")
+    qhasmToC("ge_msub.c", "ge_msub.h", "ge.MKEcoin._msub.c")
+    qhasmToC("ge_p2_dbl.c", "ge_p2_dbl.h", "ge.MKEcoin._p2_dbl.c")
+    qhasmToC("ge_frombytes.c", "d.h", "ge.MKEcoin._frombytes.c")
+    qhasmToC("ge.MKEcoin._frombytes.c", "sqrtm1.h", "ge.MKEcoin._frombytes.c")
+    qhasmToC("ge_p3_to_cached.c", "d2.h", "ge.MKEcoin._p3_to_cached.c")
 
 
 
@@ -205,11 +205,11 @@ if a == "m":
     #note, base2.h is a large file!
     #also in ge_scalarmult_base ge_precomp base needs base.h included
 
-    qhasmToC("ge_double_scalarmult.c", "base2.h", "ge.mkecoin._double_scalarmult.c")
-    qhasmToC("ge_scalarmult_base.c", "base.h", "ge.mkecoin._scalarmult_base.c")
-    #qhasmToC("ge.mkecoin._scalarmult_base.c", "base.h", "ge.mkecoin._scalarmult_base.c")
-    os.system("sed -i 's/ cmov/ ge_precomp_cmov/g' ge.mkecoin._scalarmult_base.c")
-    os.system("cat ge.mkecoin.*.c | grep -v '^#include' > ge.mkecoin.c")
+    qhasmToC("ge_double_scalarmult.c", "base2.h", "ge.MKEcoin._double_scalarmult.c")
+    qhasmToC("ge_scalarmult_base.c", "base.h", "ge.MKEcoin._scalarmult_base.c")
+    #qhasmToC("ge.MKEcoin._scalarmult_base.c", "base.h", "ge.MKEcoin._scalarmult_base.c")
+    os.system("sed -i 's/ cmov/ ge_precomp_cmov/g' ge.MKEcoin._scalarmult_base.c")
+    os.system("cat ge.MKEcoin.*.c | grep -v '^#include' > ge.MKEcoin.c")
 
 
     print("making crypto-ops.c")
@@ -217,30 +217,30 @@ if a == "m":
     #sqrtm1 things
 
     #comments
-    with open("fe.mkecoin.comments", "w") as text_file:
+    with open("fe.MKEcoin.comments", "w") as text_file:
             text_file.write(fe_comments)
-    with open("ge.mkecoin.comments", "w") as text_file:
+    with open("ge.MKEcoin.comments", "w") as text_file:
             text_file.write(ge_comments)
-    with open("sc.mkecoin.comments", "w") as text_file:
+    with open("sc.MKEcoin.comments", "w") as text_file:
             text_file.write(sc_comments)
-    with open("xmr.mkecoin.comments", "w") as text_file:
+    with open("xmr.MKEcoin.comments", "w") as text_file:
             text_file.write(xmr_comments)
-    with open("xmr.mkecoin.predeclarations", "w") as text_file:
+    with open("xmr.MKEcoin.predeclarations", "w") as text_file:
             text_file.write(predeclarations)
 
 
     #license
-    with open("mkecoin.license", "w") as text_file:
+    with open("MKEcoin.license", "w") as text_file:
             text_file.write(license)
 
     #crypto-ops.c includes
-    with open("crypto-ops.mkecoin.includes", "w") as text_file:
+    with open("crypto-ops.MKEcoin.includes", "w") as text_file:
         text_file.write(crypto_ops_includes)
 
     #note you may have duplicates of load_3, load_4 and possibly some other functions ... 
-    os.system("cat mkecoin.license crypto-ops.mkecoin.includes xmr.mkecoin.predeclarations fe.mkecoin.comments fe.mkecoin.c sc.mkecoin.comments sc.mkecoin.c ge.mkecoin.comments ge.mkecoin.c xmr.mkecoin.comments xmrSpecificOld.c > crypto-ops.c")
+    os.system("cat MKEcoin.license crypto-ops.MKEcoin.includes xmr.MKEcoin.predeclarations fe.MKEcoin.comments fe.MKEcoin.c sc.MKEcoin.comments sc.MKEcoin.c ge.MKEcoin.comments ge.MKEcoin.c xmr.MKEcoin.comments xmrSpecificOld.c > crypto-ops.c")
 
-    #mkecoin specific header files
+    #MKEcoin specific header files
     #print("making crypto-ops-tmp.h")
     #os.system("cat fe.h ge.h sc.h |grep -v crypto_sign_ed25519 |grep -v fe.h > crypto-ops-tmp.h")
     #we'll just use the old header crypto-ops.h
@@ -252,10 +252,10 @@ if a == "m":
     os.system("sed -i 's/crypto_uint64/uint64_t/g' crypto-ops.c")
 
     #cleaning up 
-    os.system("rm *mkecoin*")
+    os.system("rm *MKEcoin*")
 
-    #mkecoin specific c files
+    #MKEcoin specific c files
 if a == "c":
     #turn the directory back into ref10
-    os.system("rm *mkecoin*")
+    os.system("rm *MKEcoin*")
     os.system("rm crypto-ops.c")

@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, The mkecoin Project
+// Copyright (c) 2017-2018, The MKEcoin Project
 //
 // All rights reserved.
 //
@@ -27,8 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#ifndef mkecoin_DEBUG_LINK_H
-#define mkecoin_DEBUG_LINK_H
+#ifndef MKEcoin_DEBUG_LINK_H
+#define MKEcoin_DEBUG_LINK_H
 
 #include "transport.hpp"
 #include "messages/messages-debug.pb.h"
@@ -90,4 +90,4 @@ namespace trezor {
 }
 }
 
-#endif //mkecoin_DEBUG_LINK_H
+#endif //MKEcoin_DEBUG_LINK_H
