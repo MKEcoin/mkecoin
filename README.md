@@ -568,35 +568,35 @@ More info and versions in the [Debian package tracker](https://tracker.debian.or
     guix package -i MKEcoin
     ```
 
-* Gentoo [MKEcoin overlay](https://github.com/gentoo-MKEcoin/gentoo-MKEcoin)
+* Gentoo [mkecoin overlay](https://github.com/gentoo-MKEcoin/gentoo-MKEcoin)
 
     ```bash
     emerge --noreplace eselect-repository
-    eselect repository enable MKEcoin
-    emaint sync -r MKEcoin
+    eselect repository enable mkecoin
+    emaint sync -r mkecoin
     echo '*/*::MKEcoin ~amd64' >> /etc/portage/package.accept_keywords
-    emerge net-p2p/MKEcoin
+    emerge net-p2p/mkecoin
     ```
 
 * macOS (homebrew)
     ```bash
-    brew install MKEcoin
+    brew install mkecoin
     ```
 
 * Docker
 
     ```bash
     # Build using all available cores
-    docker build -t MKEcoin .
+    docker build -t mkecoin .
 
     # or build using a specific number of cores (reduce RAM requirement)
-    docker build --build-arg NPROC=1 -t MKEcoin .
+    docker build --build-arg NPROC=1 -t mkecoin .
 
     # either run in foreground
-    docker run -it -v /MKEcoin/chain:/root/.bitMKEcoin -v /MKEcoin/wallet:/wallet -p 18080:18080 MKEcoin
+    docker run -it -v /MKEcoin/chain:/root/.bitMKEcoin -v /MKEcoin/wallet:/wallet -p 18080:18080 mkecoin
 
     # or in background
-    docker run -it -d -v /MKEcoin/chain:/root/.bitMKEcoin -v /MKEcoin/wallet:/wallet -p 18080:18080 MKEcoin
+    docker run -it -d -v /MKEcoin/chain:/root/.bitMKEcoin -v /MKEcoin/wallet:/wallet -p 18080:18080 mkecoin
     ```
 
 * The build needs 3 GB space.
@@ -604,17 +604,17 @@ More info and versions in the [Debian package tracker](https://tracker.debian.or
 
 Packaging for your favorite distribution would be a welcome contribution!
 
-## Running MKEcoind
+## Running mkecoind
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in the
 foreground:
 
 ```bash
-./bin/MKEcoind
+./bin/mkecoind
 ```
 
-To list all available options, run `./bin/MKEcoind --help`.  Options can be
+To list all available options, run `./bin/mkecoind --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -623,18 +623,18 @@ of the argument without the leading dashes, for example, `log-level=1`.
 To run in background:
 
 ```bash
-./bin/MKEcoind --log-file MKEcoind.log --detach
+./bin/mkecoind --log-file mkecoind.log --detach
 ```
 
 To run as a systemd service, copy
-[MKEcoind.service](utils/systemd/MKEcoind.service) to `/etc/systemd/system/` and
-[MKEcoind.conf](utils/conf/MKEcoind.conf) to `/etc/`. The [example
+[mkecoind.service](utils/systemd/MKEcoind.service) to `/etc/systemd/system/` and
+[mkecoind.conf](utils/conf/MKEcoind.conf) to `/etc/`. The [example
 service](utils/systemd/MKEcoind.service) assumes that the user `MKEcoin` exists
 and its home is the data directory specified in the [example
 config](utils/conf/MKEcoind.conf).
 
 If you're on Mac, you may need to add the `--max-concurrency 1` option to
-MKEcoin-wallet-cli, and possibly MKEcoind, if you get crashes refreshing.
+mkecoin-wallet-cli, and possibly MKEcoind, if you get crashes refreshing.
 
 ## Internationalization
 
@@ -666,14 +666,14 @@ setting the following configuration parameters and environment variables:
    connect from remote hosts. On other systems, it may be needed for local wallets
    as well.
 * Do NOT pass `--detach` when running through torsocks with systemd, (see
-  [utils/systemd/MKEcoind.service](utils/systemd/MKEcoind.service) for details).
+  [utils/systemd/mkecoind.service](utils/systemd/mkecoind.service) for details).
 * If you use the wallet with a Tor daemon via the loopback IP (eg, 127.0.0.1:9050),
   then use `--untrusted-daemon` unless it is your own hidden service.
 
-Example command line to start MKEcoind through Tor:
+Example command line to start mkecoind through Tor:
 
 ```bash
-DNS_PUBLIC=tcp torsocks MKEcoind --p2p-bind-ip 127.0.0.1 --no-igd
+DNS_PUBLIC=tcp torsocks mkecoind --p2p-bind-ip 127.0.0.1 --no-igd
 ```
 
 A helper script is in contrib/tor/MKEcoin-over-tor.sh. It assumes Tor is installed
@@ -687,7 +687,7 @@ allow inbound connections. Full example:
 
 ```bash
 sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 18081 -j ACCEPT
-DNS_PUBLIC=tcp torsocks ./MKEcoind --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
+DNS_PUBLIC=tcp torsocks ./mkecoind --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
     --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain
 ```
 
@@ -718,7 +718,7 @@ Run the build.
 Once it stalls, enter the following command:
 
 ```bash
-gdb /path/to/MKEcoind `pidof MKEcoind`
+gdb /path/to/mkecoind `pidof MKEcoind`
 ```
 
 Type `thread apply all bt` within gdb in order to obtain the stack trace
@@ -736,7 +736,7 @@ When it terminates with an output along the lines of "Segmentation fault (core d
 You can now analyse this core dump with `gdb` as follows:
 
 ```bash
-gdb /path/to/MKEcoind /path/to/dumpfile`
+gdb /path/to/mkecoind /path/to/dumpfile`
 ```
 
 Print the stack trace with `bt`
@@ -749,11 +749,11 @@ coredumpctl -1 gdb
 
 #### To run MKEcoin within gdb:
 
-Type `gdb /path/to/MKEcoind`
+Type `gdb /path/to/mkecoind`
 
 Pass command-line options with `--args` followed by the relevant arguments
 
-Type `run` to run MKEcoind
+Type `run` to run mkecoind
 
 ### Analysing memory corruption
 
@@ -780,7 +780,7 @@ Instructions for debugging suspected blockchain corruption as per @HYC
 There is an `mdb_stat` command in the LMDB source that can print statistics about the database but it's not routinely built. This can be built with the following command:
 
 ```bash
-cd ~/MKEcoin/external/db_drivers/liblmdb && make
+cd ~/mkecoin/external/db_drivers/liblmdb && make
 ```
 
 The output of `mdb_stat -ea <path to blockchain dir>` will indicate inconsistencies in the blocks, block_heights and block_info table.
@@ -795,10 +795,10 @@ These records are dumped as hex data, where the first line is the key and the se
 
 ### Socket-based
 
-Because of the nature of the socket-based protocols that drive MKEcoin, certain protocol weaknesses are somewhat unavoidable at this time. While these weaknesses can theoretically be fully mitigated, the effort required (the means) may not justify the ends. As such, please consider taking the following precautions if you are a MKEcoin node operator:
+Because of the nature of the socket-based protocols that drive mkecoin, certain protocol weaknesses are somewhat unavoidable at this time. While these weaknesses can theoretically be fully mitigated, the effort required (the means) may not justify the ends. As such, please consider taking the following precautions if you are a MKEcoin node operator:
 
-- Run `MKEcoind` on a "secured" machine. If operational security is not your forte, at a very minimum, have a dedicated a computer running `MKEcoind` and **do not** browse the web, use email clients, or use any other potentially harmful apps on your `MKEcoind` machine. **Do not click links or load URL/MUA content on the same machine**. Doing so may potentially exploit weaknesses in commands which accept "localhost" and "127.0.0.1".
-- If you plan on hosting a public "remote" node, start `MKEcoind` with `--restricted-rpc`. This is a must.
+- Run `mkecoind` on a "secured" machine. If operational security is not your forte, at a very minimum, have a dedicated a computer running `mkecoind` and **do not** browse the web, use email clients, or use any other potentially harmful apps on your mkecoind` machine. **Do not click links or load URL/MUA content on the same machine**. Doing so may potentially exploit weaknesses in commands which accept "localhost" and "127.0.0.1".
+- If you plan on hosting a public "remote" node, start `mkecoind` with `--restricted-rpc`. This is a must.
 
 ### Blockchain-based
 
