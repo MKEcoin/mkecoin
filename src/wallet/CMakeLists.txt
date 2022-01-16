@@ -44,7 +44,7 @@ MKEcoin_find_all_headers(wallet_private_headers "${CMAKE_CURRENT_SOURCE_DIR}")
 
 MKEcoin_private_headers(wallet
   ${wallet_private_headers})
-MKEcoin_add_library(wallet
+mkecoin_add_library(wallet
   ${wallet_sources}
   ${wallet_private_headers})
 target_link_libraries(wallet

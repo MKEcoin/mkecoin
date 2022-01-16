@@ -36,7 +36,7 @@ set(hardforks_private_headers)
 
 MKEcoin_private_headers(hardforks
   ${hardforks_private_headers})
-MKEcoin_add_library(hardforks
+mkecoin_add_library(hardforks
   ${hardforks_sources}
   ${hardforks_headers}
   ${hardforks_private_headers})

@@ -60,7 +60,7 @@ endif()
 
 MKEcoin_private_headers(daemonizer
   ${daemonizer_private_headers})
-MKEcoin_add_library(daemonizer
+mkecoin_add_library(daemonizer
   ${daemonizer_sources}
   ${daemonizer_headers}
   ${daemonizer_private_headers})

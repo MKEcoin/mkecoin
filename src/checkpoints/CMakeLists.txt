@@ -46,7 +46,7 @@ set(checkpoints_private_headers
 
 MKEcoin_private_headers(checkpoints
   ${checkpoints_private_headers})
-MKEcoin_add_library(checkpoints
+mkecoin_add_library(checkpoints
   ${checkpoints_sources}
   ${checkpoints_headers}
   ${checkpoints_private_headers})

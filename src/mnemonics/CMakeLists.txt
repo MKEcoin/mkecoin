@@ -51,7 +51,7 @@ set(mnemonics_private_headers
 
 MKEcoin_private_headers(mnemonics
   ${mnemonics_private_headers})
-MKEcoin_add_library(mnemonics
+mkecoin_add_library(mnemonics
   ${mnemonics_sources}
   ${mnemonics_headers}
   ${mnemonics_private_headers})

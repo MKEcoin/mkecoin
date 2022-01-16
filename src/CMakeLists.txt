@@ -76,12 +76,35 @@ function (MKEcoin_add_executable name)
       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
   enable_stack_trace("${name}")
   
-  MKEcoin_set_target_no_relink("${name}")
-  MKEcoin_set_target_strip    ("${name}")
+  mkecoin_set_target_no_relink("${name}")
+endfunction ()
+
+function (mkecoin_add_library name)
+    mkecoin_add_library_with_deps(NAME "${name}" SOURCES ${ARGN})
+endfunction()
+
+function (mkecoin_add_library_with_deps)
+  cmake_parse_arguments(MKECOIN_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
+  source_group("${MKECOIN_ADD_LIBRARY_NAME}" FILES ${MKECOIN_ADD_LIBRARY_SOURCES})
+
+  # Define a ("virtual") object library and an actual library that links those
+  # objects together. The virtual libraries can be arbitrarily combined to link
+  # any subset of objects into one library archive. This is used for releasing
+  # libwallet, which combines multiple components.
+  set(objlib obj_${MKECOIN_ADD_LIBRARY_NAME})
+  add_library(${objlib} OBJECT ${MKECOIN_ADD_LIBRARY_SOURCES})
+  add_library("${MKECOIN_ADD_LIBRARY_NAME}" $<TARGET_OBJECTS:${objlib}>)
+  mkecoin_set_target_no_relink("${MKECOIN_ADD_LIBRARY_NAME}")
+  if (MKECOIN_ADD_LIBRARY_DEPENDS)
+    add_dependencies(${objlib} ${MKECOIN_ADD_LIBRARY_DEPENDS})
+  endif()
+  set_property(TARGET "${MKECOIN_ADD_LIBRARY_NAME}" PROPERTY FOLDER "libs")
+  target_compile_definitions(${objlib}
+    PRIVATE $<TARGET_PROPERTY:${MKECOIN_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
 endfunction ()
 
 include(Version)
-MKEcoin_add_library(version SOURCES ${CMAKE_BINARY_DIR}/version.cpp DEPENDS genversion)
+mkecoin_add_library(version SOURCES ${CMAKE_BINARY_DIR}/version.cpp DEPENDS genversion)
 
 add_subdirectory(common)
 add_subdirectory(crypto)

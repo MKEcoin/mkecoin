@@ -33,7 +33,7 @@ file(GLOB CRYPTONOTE_PROTOCOL *)
 source_group(cryptonote_protocol FILES ${CRYPTONOTE_PROTOCOL})
 
 #MKEcoin_private_headers(cryptonote_protocol ${CRYPTONOTE_PROTOCOL})
-MKEcoin_add_library(cryptonote_protocol ${CRYPTONOTE_PROTOCOL})
+mkecoin_add_library(cryptonote_protocol ${CRYPTONOTE_PROTOCOL})
 target_link_libraries(cryptonote_protocol
   PUBLIC
     p2p

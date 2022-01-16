@@ -65,7 +65,7 @@ set(cryptonote_basic_private_headers
 
 MKEcoin_private_headers(cryptonote_basic
   ${cryptonote_basic_private_headers})
-MKEcoin_add_library(cryptonote_basic
+mkecoin_add_library(cryptonote_basic
   ${cryptonote_basic_sources}
   ${cryptonote_basic_headers}
   ${cryptonote_basic_private_headers})

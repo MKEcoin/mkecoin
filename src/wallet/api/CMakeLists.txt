@@ -59,7 +59,7 @@ set(wallet_api_private_headers
 
 MKEcoin_private_headers(wallet_api
   ${wallet_api_private_headers})
-MKEcoin_add_library(wallet_api
+mkecoin_add_library(wallet_api
   ${wallet_api_sources}
   ${wallet_api_headers}
   ${wallet_api_private_headers})

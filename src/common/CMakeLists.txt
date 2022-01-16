@@ -91,7 +91,7 @@ set(common_private_headers
 
 MKEcoin_private_headers(common
   ${common_private_headers})
-MKEcoin_add_library(common
+mkecoin_add_library(common
   ${common_sources}
   ${common_headers}
   ${common_private_headers}

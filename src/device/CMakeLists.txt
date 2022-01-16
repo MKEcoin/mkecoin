@@ -62,7 +62,7 @@ set(device_private_headers)
 MKEcoin_private_headers(device
   ${device_private_headers})
 
-MKEcoin_add_library(device
+mkecoin_add_library(device
   ${device_sources}
   ${device_headers}
   ${device_private_headers})

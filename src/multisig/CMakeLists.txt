@@ -37,7 +37,7 @@ set(multisig_private_headers
 MKEcoin_private_headers(multisig
   ${multisig_private_headers})
 
-MKEcoin_add_library(multisig
+mkecoin_add_library(multisig
   ${multisig_sources}
   ${multisig_headers}
   ${multisig_private_headers})

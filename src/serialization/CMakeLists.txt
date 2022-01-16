@@ -36,7 +36,7 @@ set(serialization_private_headers
 
 MKEcoin_private_headers(serialization
   ${serialization_private_headers})
-MKEcoin_add_library(serialization
+mkecoin_add_library(serialization
   ${serialization_sources}
   ${serialization_headers}
   ${serialization_private_headers})
