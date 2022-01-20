@@ -154,7 +154,7 @@ function (MKEcoin_set_target_no_relink target)
   endif()
 endfunction()
 
-function (MKEcoin_add_minimal_executable name)
+function (mkecoin_add_minimal_executable name)
   source_group("${name}"
     FILES
       ${ARGN})
