@@ -63,9 +63,9 @@ if (USE_COMPILATION_TIME_PROFILER)
 endif()
 
 if (${CMAKE_VERSION} VERSION_GREATER "3.0.0" AND CMAKE_MAKE_PROGRAM MATCHES "ninja")
-  set(MKEcoin_PARALLEL_COMPILE_JOBS "" CACHE STRING "The maximum number of concurrent compilation jobs.")
-  if (MKEcoin_PARALLEL_COMPILE_JOBS)
-    set_property(GLOBAL APPEND PROPERTY JOB_POOLS compile_job_pool=${MKEcoin_PARALLEL_COMPILE_JOBS})
+  set(MKECOIN_PARALLEL_COMPILE_JOBS "" CACHE STRING "The maximum number of concurrent compilation jobs.")
+  if (MKECOIN_PARALLEL_COMPILE_JOBS)
+    set_property(GLOBAL APPEND PROPERTY JOB_POOLS compile_job_pool=${MKECOIN_PARALLEL_COMPILE_JOBS})
     set(CMAKE_JOB_POOL_COMPILE compile_job_pool)
   endif ()
 
