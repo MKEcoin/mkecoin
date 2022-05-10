@@ -31,13 +31,13 @@
 # CMAKE_C_CLANG_TIDY
 # CMAKE_CXX_CLANG_TIDY
 # when clang-tidy is found in PATH. Afterwards, the code is being linted by the tool.
-# The checks to be enabled can be manipulated with the variable MKEcoin_CLANG_TIDY_CHECKS
+# The checks to be enabled can be manipulated with the variable MKECOIN_CLANG_TIDY_CHECKS
 
-macro (MKEcoin_clang_tidy LANGUAGE)
+macro (mkecoin_clang_tidy LANGUAGE)
 	set(TOOL_NAME "clang-tidy")
-	set(MKEcoin_CLANG_TIDY_MIN_VERSION "3.6")
-	if(${CMAKE_VERSION} VERSION_LESS "${MKEcoin_CLANG_TIDY_MIN_VERSION}")
-		message(FATAL_ERROR "Sorry, ${TOOL_NAME} is available for CMake from version ${MKEcoin_CLANG_TIDY_MIN_VERSION}")
+	set(MKECOIN_CLANG_TIDY_MIN_VERSION "3.6")
+	if(${CMAKE_VERSION} VERSION_LESS "${MKECOIN_CLANG_TIDY_MIN_VERSION}")
+		message(FATAL_ERROR "Sorry, ${TOOL_NAME} is available for CMake from version ${MKECOIN_CLANG_TIDY_MIN_VERSION}")
 	else()
 		message(STATUS "Trying to enable ${TOOL_NAME}")
 		find_program(MKEcoin_CLANG_BIN ${TOOL_NAME})
@@ -45,7 +45,7 @@ macro (MKEcoin_clang_tidy LANGUAGE)
 			message(FATAL_ERROR "${TOOL_NAME} not found! Try running: sudo apt install ${TOOL_NAME}")
 		else()
 			message(STATUS "Found ${MKEcoin_CLANG_BIN}")
-			set(MKEcoin_CLANG_TIDY_CHECKS
+			set(MKECOIN_CLANG_TIDY_CHECKS
 			    -header-filter=.; 	# By default the headers are excluded. This line enables them.
 			    -checks=*; 		# Currently enabling all checks
 			    # An example of selectively enabling checks:
@@ -56,12 +56,12 @@ macro (MKEcoin_clang_tidy LANGUAGE)
 			if (${LANGUAGE} STREQUAL "C")
 				set(CMAKE_C_CLANG_TIDY
 					${MKEcoin_CLANG_BIN}; # Mind the semicolon
-					${MKEcoin_CLANG_TIDY_CHECKS}
+					${MKECOIN_CLANG_TIDY_CHECKS}
 				)
 			elseif (${LANGUAGE} STREQUAL "CXX")
 				set(CMAKE_CXX_CLANG_TIDY
 					${MKEcoin_CLANG_BIN}; # Mind the semicolon
-					${MKEcoin_CLANG_TIDY_CHECKS}
+					${MKECOIN_CLANG_TIDY_CHECKS}
 				)
 			else()
 				message(FATAL_ERROR "${TOOL_NAME}: Unsupported language: ${LANGUAGE}")
