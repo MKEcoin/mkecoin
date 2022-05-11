@@ -57,7 +57,6 @@
 #include "common/notify.h"
 #include "common/varint.h"
 #include "common/pruning.h"
-#include "time_helper.h"
 
 #undef MKEcoin_DEFAULT_LOG_CATEGORY
 #define MKEcoin_DEFAULT_LOG_CATEGORY "blockchain"
